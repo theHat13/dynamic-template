@@ -9,6 +9,12 @@
     <title>{{ title }}</title>
     <meta name="title" content="{{ title }}">
     <meta name="description" content="{{ description }}">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Decap CMS -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -28,9 +34,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700..900&family=Roboto:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="/style.css">
-
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -47,6 +50,19 @@
         {{ content | safe }}
     </main>
     {% include 'footer.njk' %}
+
+    <!-- Decap CMS - redirect user back to the /admin/ path -->
+    <script>
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on("init", (user) => {
+            if (!user) {
+              window.netlifyIdentity.on("login", () => {
+                document.location.href = "/admin/";
+              });
+            }
+          });
+        }
+    </script>
 
 </body>
 </html>
