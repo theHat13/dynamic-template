@@ -10,6 +10,7 @@ description: Lorem ipsum dolor sit amet consectetur adipisicing elit.
   aliquam?
 tags:
   - featured
+  - science
 ---
 ## Heading h2 test
 
