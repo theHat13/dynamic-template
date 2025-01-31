@@ -1,6 +1,6 @@
 ---
 title: Testing attention please
-author: Eminem
+author: Marshall
 date: 2025-01-31T14:06:00.000Z
 image: /assets/blog/article-2.jpg
 imageAlt: This is a test
