@@ -28,7 +28,7 @@ collections:
         file: "src/_data/hero.json"  # Create this file
         fields:
           - { label: "Title", name: "title", widget: "string" }
-          - { label: "Description", name: "description", widget: "text" }
-          - { label: "Sub Description", name: "subDescription", widget: "text" }
+          - { label: "Paragraph 01", name: "paragraph01", widget: "text" }
+          - { label: "Paragraph 02", name: "paragraph02", widget: "text" }
           - { label: "Image", name: "image", widget: "image" }
           - { label: "Image Alt Text", name: "imageAlt", widget: "string" }
