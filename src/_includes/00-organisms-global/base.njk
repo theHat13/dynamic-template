@@ -45,11 +45,11 @@
 </head>
 <body>
 
-    {% include 'header.njk' %}
+    {% include '00-organisms-global/header.njk' %}
     <main>
         {{ content | safe }}
     </main>
-    {% include 'footer.njk' %}
+    {% include '00-organisms-global/footer.njk' %}
 
     <!-- Decap CMS - redirect user back to the /admin/ path -->
     <script>

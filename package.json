@@ -20,5 +20,8 @@
   "homepage": "https://github.com/Raphael-Regnier/11ty-blog#readme",
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0"
+  },
+  "dependencies": {
+    "nunjucks": "^3.2.4"
   }
 }

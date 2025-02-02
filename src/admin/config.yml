@@ -20,3 +20,22 @@ collections:
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Tags", name: "tags", widget: "list", default: ["post"] }
+  - name: "settings"
+    label: "Settings"
+    files:
+      - name: "hero"
+        label: "Hero Section"
+        file: "src/_data/hero.json"  # Create this file
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Sub Description", name: "subDescription", widget: "text" }
+          - label: "Buttons"
+            name: "buttons"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "Style", name: "style", widget: "select", options: ["primary", "neutral"] }
+          - { label: "Image", name: "image", widget: "image" }
+          - { label: "Image Alt Text", name: "imageAlt", widget: "string" }
