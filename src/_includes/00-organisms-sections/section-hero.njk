@@ -5,12 +5,15 @@
             <p>{{ hero.description }}</p>
             <p>{{ hero.subDescription }}</p>
             <div class="flex-group">
-                {% for button in hero.buttons %}
-                    {% set btnHref = button.url %}
-                    {% set btnLabel = button.label %}
-                    {% set btnStyle = button.style %}
-                    {% include "02-atoms-buttons/button-link.njk" %}
-                {% endfor %}
+                {% set btnHref = '/featured-articles' %}
+                {% set btnLabel = 'Featured articles' %}
+                {% set btnStyle = 'primary' %}
+                {% include "02-atoms-buttons/button-link.njk" %}
+
+                {% set btnHref = './blog' %}
+                {% set btnLabel = 'Most recent articles' %}
+                {% set btnStyle = 'neutral' %}
+                {% include "02-atoms-buttons/button-link.njk" %}
             </div>
         </div>
         <div>
