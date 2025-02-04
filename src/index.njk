@@ -3,7 +3,8 @@ title: RRR dynamic site
 layout: '00-organisms-global/base.njk'
 ---
 
-
+{# For blog page, use hero.json #}
+{% set pageData = hero %}
 {% include '00-organisms-sections/section-hero.njk' %}
 
 <section id="featured-articles" class="featured-articles">
