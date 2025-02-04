@@ -1,0 +1,18 @@
+<section class="hero">
+    <div class="container flow">
+        <div class="hero__content flow">
+            <h2 class="section-title">{{ about.title }}</h2>
+            <p>{{ about.paragraph01 }}</p>
+            <p>{{ about.paragraph02 }}</p>
+            <div class="flex-group">
+                {% set btnHref = '#' %}
+                {% set btnLabel = 'Contact me' %}
+                {% set btnStyle = 'primary' %}
+                {% include "02-atoms-buttons/button-link.njk" %}
+            </div>
+        </div>
+        <div>
+            <img src="{{ about.image }}" alt="{{ about.imageAlt }}" class="about__image">
+        </div>
+    </div>
+</section>

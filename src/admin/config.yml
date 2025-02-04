@@ -15,7 +15,28 @@ collections:
         fields:
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Paragraph 01", name: "paragraph01", widget: "text" }
-          - { label: "Paragraph 02", name: "paragraph02", widget: "text" }
+          - { label: "Paragraph 02", name: "paragraph02", widget: "text", required: false }
+          - { label: "Image", name: "image", widget: "image" }
+          - { label: "Image Alt Text", name: "imageAlt", widget: "string" }
+      - name: "about"
+        label: "About Section"
+        file: "src/_data/about.json"  # Create this file
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Paragraph 01", name: "paragraph01", widget: "text"}
+          - { label: "Paragraph 02", name: "paragraph02", widget: "text", required: false }
+          - { label: "Image", name: "image", widget: "image" }
+          - { label: "Image Alt Text", name: "imageAlt", widget: "string" }
+  - name: "blog-hero"
+    label: "Blog hero section"
+    files:
+      - name: "blog_hero"
+        label: "Blog hero section"
+        file: "src/_data/hero_blog.json"  # Create this file
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Paragraph 01", name: "paragraph01", widget: "text" }
+          - { label: "Paragraph 02", name: "paragraph02", widget: "text", required: false }
           - { label: "Image", name: "image", widget: "image" }
           - { label: "Image Alt Text", name: "imageAlt", widget: "string" }
   - name: "blog"
@@ -31,4 +52,15 @@ collections:
       - { label: "Image Alt", name: "imageAlt", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Body", name: "body", widget: "markdown" }
-      - { label: "Tags", name: "tags", widget: "list", default: ["post"] }
+  - name: "contact"
+    label: "Contact page"
+    files:
+      - name: "contact"
+        label: "Contact Section"
+        file: "src/_data/hero_contact.json"  # Create this file
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Paragraph 01", name: "paragraph01", widget: "text" }
+          - { label: "Paragraph 02", name: "paragraph02", widget: "text", required: false }
+          - { label: "Image", name: "image", widget: "image" }
+          - { label: "Image Alt Text", name: "imageAlt", widget: "string" }

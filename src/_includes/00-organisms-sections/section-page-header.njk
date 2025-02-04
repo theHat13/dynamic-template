@@ -1,0 +1,14 @@
+<section class="hero">
+    <div class="container flow">
+        <div class="hero__content flow">
+            <h1 class="section-title">{{ pageData.title }}</h1>
+            <p>{{ pageData.paragraph01 }}</p>
+            {% if pageData.paragraph02 %}
+                <p>{{ pageData.paragraph02 }}</p>
+            {% endif %}
+        </div>
+        <div>
+            <img src="{{ pageData.image }}" alt="{{ pageData.imageAlt }}" class="hero__image">
+        </div>
+    </div>
+</section>
