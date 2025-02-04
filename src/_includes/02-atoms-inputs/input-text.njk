@@ -1,0 +1,21 @@
+<div class="form-group">
+    <label for="{{ id }}" class="form-label">{{ label }}</label>
+    <input 
+        type="text"
+        id="{{ id }}"
+        name="{{ name }}"
+        class="form-input"
+        {% if required %}required{% endif %}
+        {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+        {% if value %}value="{{ value }}"{% endif %}
+        {% if pattern %}pattern="{{ pattern }}"{% endif %}
+        {% if minlength %}minlength="{{ minlength }}"{% endif %}
+        {% if maxlength %}maxlength="{{ maxlength }}"{% endif %}
+        aria-describedby="{{ id }}-help"
+        aria-required="{{ required | default(false) }}"
+        aria-invalid="false"
+    >
+    {% if helpText %}
+        <div id="{{ id }}-help" class="form-help">{{ helpText }}</div>
+    {% endif %}
+</div>
