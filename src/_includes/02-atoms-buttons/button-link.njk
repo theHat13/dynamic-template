@@ -1,0 +1,11 @@
+<a href="{{ btnHref }}" 
+   class="btn px-4 py-2 rounded-lg transition duration-300
+          {% if btnStyle == 'primary' %}bg-blue-500 text-black border border-blue-500 hover:bg-blue-700{% endif %}
+          {% if btnStyle == 'neutral' %}bg-gray-500 text-black border border-gray-500 hover:bg-gray-700{% endif %}
+          {% if btnStyle == 'default' %}bg-white text-black border border-black hover:bg-gray-100{% endif %}
+          ">
+    {{ btnLabel }}
+</a>
+
+
+
