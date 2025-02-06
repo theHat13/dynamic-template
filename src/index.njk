@@ -7,16 +7,17 @@ layout: '00-organisms-global/base.njk'
 {% set pageData = hero %}
 {% include '00-organisms-sections/section-hero.njk' %}
 
-<section id="featured-articles" class="featured-articles">
-    <div class="container flow">
-        <h2 class="section-title text-center ">Featured articles</h2>
-        <p class="text-center">Here is a sample of articles which I feel give you a good idea of what this site is all about.</p>
-        <ul role="list" class="articles__list flow">
-            {%- for post in collections.featured | reverse -%}
-                {% include '01-molecules-cards/card-post.njk' %}
-            {%- endfor -%}
-        </ul>
-    </div>
+<section id="featured-articles" class="featured-articles py-12 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="section-title text-3xl font-semibold text-center text-gray-800 mb-4">Featured articles</h2>
+    <p class="text-center text-lg text-gray-600 mb-8">Here is a sample of articles which I feel give you a good idea of what this site is all about.</p>
+    <ul role="list" class="articles__list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {%- for post in collections.featured | reverse -%}
+        {% include '01-molecules-cards/card-post.njk' %}
+      {%- endfor -%}
+    </ul>
+  </div>
 </section>
+
 
 {% include '00-organisms-sections/section-about.njk' %}
