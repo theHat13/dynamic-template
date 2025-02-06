@@ -2,24 +2,25 @@
 layout: '00-organisms-global/base.njk'
 ---
 
-   
-    <article class="main-article">
+<article class="main-article py-12 bg-gray-50">
 
-        <div class="container container--narrow flow">
-        
-            <h1 class="article-title">
+    <div class="container container--narrow mx-auto px-4">
+
+        <h1 class="article-title text-4xl font-bold text-gray-900 mb-6">
             {{ title }}
-            </h1>
-            <figure class="main-article__figure">
-                <img src="{{ image }}" alt="{{ imageAlt }}">
-                <figcaption>
-                    {{ imageAlt }}
-                </figcaption>
+        </h1>
 
-            </figure>
-            
+        <figure class="main-article__figure mb-8">
+            <img src="{{ image }}" alt="{{ imageAlt }}" class="w-full h-auto rounded-lg shadow-lg">
+            <figcaption class="text-center text-sm text-gray-500 mt-2">
+                {{ imageAlt }}
+            </figcaption>
+        </figure>
+
+        <div class="article-content text-gray-800">
             {{ content | safe }}
-        
         </div>
-        
-    </article>
+
+    </div>
+
+</article>
