@@ -9,12 +9,11 @@ layout: '00-organisms-global/base.njk'
 {% include '00-organisms-sections/section-page-header.njk' %}
 
 <div class="section container mx-auto py-8 px-4">
-    <h1 class="text-3xl font-semibold text-center text-gray-900 mb-6">{{ pageData.title }}</h1>
-    <p class="text-lg text-center text-gray-700 mb-8">{{ pageData.description }}</p>
 
     <!-- Contact form or content will go here -->
     <div class="flex flex-col items-center space-y-6">
         <!-- Example of contact form or additional sections could go here -->
+        {% include '01-molecules-forms/form-contact.njk' %}
     </div>
 </div>
 
