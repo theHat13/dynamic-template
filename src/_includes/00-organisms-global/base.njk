@@ -44,10 +44,10 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#ffffff">
 </head>
-<body>
+<body class="min-h-screen flex flex-col">
 
     {% include '00-organisms-global/header.njk' %}
-    <main>
+    <main class="flex-grow">
         {{ content | safe }}
     </main>
     {% include '00-organisms-global/footer.njk' %}
