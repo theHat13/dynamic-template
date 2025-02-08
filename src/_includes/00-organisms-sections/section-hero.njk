@@ -3,18 +3,22 @@
 
         <div class="flex flex-col md:flex-row justify-between items-center w-full">
 
+            {# <h1 class=">{{ title }}</h1>
+            <p class="">{{ paragraph01 }}</p>
+            <p class="text-sm text-gray-500 mt-4">{{ paragraph02 }}</p> #}
+
             <!-- Left column: Title, Paragraph, Buttons -->
             <div class="w-1/2 flex flex-col m-6 justify-center items-center">
 
-                <h1 class="text-3xl font-bold text-hero-title bg-hero-bg-color mb-6">
+                <h1 class="text-gray-800 text-3xl font-bold"">
                     {{ hero.title }}
                 </h1>
 
-                <p class="text-lg text-center mb-4">
+                <p class="text-sm text-gray-500 mt-4">
                     {{ pageData.paragraph01 }}
                 </p>
 
-                <p class="text-lg text-center mb-6">
+                <p class="text-sm text-gray-500 mt-4">
                     {{ pageData.paragraph02 }}
                 </p>
 
@@ -26,7 +30,7 @@
 
                     {% set btnHref = './blog' %}
                     {% set btnLabel = 'Most recent articles' %}
-                    {% set btnStyle = 'neutral' %}
+                    {% set btnStyle = 'primary' %}
                     {% include "02-atoms-buttons/button-link.njk" %}
                 </div>
             </div>
