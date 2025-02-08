@@ -1,1 +1,1 @@
-# HAT dynamic template - starter files
+# HAT dynamic template
