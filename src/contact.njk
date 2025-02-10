@@ -10,9 +10,11 @@ layout: '00-organisms-global/base.njk'
 <div class="mt-6">
     <div class="grid sm:grid-cols-2 items-start gap-12 p-8 mx-auto max-w-4xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md font-[sans-serif]">
         <div>
+
+            {# Include section page hero #}
             {% include '00-organisms-sections/section-page-hero.njk' %}
 
-            <!-- Email contact -->
+            <!-- Email contact section -->
             <div class="mt-12">
                 <h2 class="text-gray-800 text-base font-bold">Email</h2>
                 <ul class="mt-4">
@@ -30,7 +32,7 @@ layout: '00-organisms-global/base.njk'
                 </ul>
             </div>
 
-            <!-- Social links -->
+            <!-- Social media links -->
             <div class="mt-12">
                 <h2 class="text-gray-800 text-base font-bold">Socials</h2>
 
@@ -60,9 +62,9 @@ layout: '00-organisms-global/base.njk'
             </div>
         </div>
 
-        <!-- Contact form or content will go here -->
+        <!-- Contact form section -->
         <div class="flex flex-col items-center space-y-6">
-            <!-- Example of contact form or additional sections could go here -->
+
             {% include '01-molecules-forms/form-contact.njk' %}
         </div>
 

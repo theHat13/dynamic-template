@@ -1,10 +1,15 @@
 <div class="p-4 mx-auto max-w-xl bg-gray-200 font-[sans-serif]">
+
+    <!-- Form title -->
     <h1 class="text-2xl text-gray-800 font-bold text-center">Contact us</h1>
+
+    <!-- Form action -->
     <form action="/submit-form" name="contact" method="POST" data-netlify="true" class="ml-auto space-y-4">
 
         <!-- Honeypot hidden input -->
         <input type="text" name="bot-field" style="display: none;">
 
+        <!-- Form inputs -->
         {% for input in contact.inputs %}
             {% set id = input.id %}
             {% set name = input.name %}
@@ -28,6 +33,7 @@
         <!-- Google reCAPTCHA -->
         <div data-netlify-recaptcha="true"></div>
 
+        <!-- Include submit button -->
         {% include '02-atoms-buttons/button-submit.njk' %}
     </form>
 </div>

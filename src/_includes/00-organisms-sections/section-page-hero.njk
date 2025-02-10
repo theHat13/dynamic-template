@@ -1,6 +1,9 @@
+<!-- Section hero for pages-->
 <section class="hero">
     <div class="container flow">
         <div class="hero__content flow">
+
+            <!-- Hero page title & paraghs-->
             <h1 class="section-title">{{ pageData.title }}</h1>
             <p>{{ pageData.paragraph01 }}</p>
             {% if pageData.paragraph02 %}
@@ -8,6 +11,7 @@
             {% endif %}
         </div>
         <div>
+            <!-- Hero image (option)-->
             {% if pageData.image %}
                 <img src="{{ pageData.image }}" alt="{{ pageData.imageAlt }}" class="hero__image">
             {% endif %}
