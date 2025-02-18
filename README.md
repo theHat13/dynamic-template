@@ -58,7 +58,7 @@ Once the project is set up, you can start developing your web application. Use t
 
 ```sh
 cd new-hat-project
-npm run dev
+npm start
 ```
 
 ## Contributing
