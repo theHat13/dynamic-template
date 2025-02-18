@@ -6,7 +6,7 @@ PROJECT_DIR="new-hat-project"
 
 # Function to display error messages
 function error_exit {
-    echo "\\$1" 1>&2
+    echo "$1" 1>&2
     exit 1
 }
 
@@ -52,10 +52,10 @@ fi
 
 # Clone the GitHub repository
 echo "Cloning the GitHub repository..."
-git clone \\$REPO_URL \\$PROJECT_DIR || error_exit "Error cloning the repository."
+git clone "$REPO_URL" "$PROJECT_DIR" || error_exit "Error cloning the repository."
 
 # Navigate to the project directory
-cd \\$PROJECT_DIR || error_exit "Error navigating to the project directory."
+cd "$PROJECT_DIR" || error_exit "Error navigating to the project directory."
 
 # Install dependencies
 echo "Installing dependencies..."
