@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx @tailwindcss/cli -i ./src/_css/input.css -o ./public/output.css --watch & eleventy --serve",
-    "build": "eleventy",
-    "dev": "npx @tailwindcss/cli -i ./src/_css/input.css -o ./public/output.css --watch & eleventy --serve"
+    "build": "eleventy"
   },
   "repository": {
     "type": "git",
