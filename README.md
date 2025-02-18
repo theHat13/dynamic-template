@@ -57,7 +57,7 @@ Welcome to Hat Dynamic Template ! This project is a web application built using 
 Once the project is set up, you can start developing your web application. Use the following commands to run the development server:
 
 ```sh
-cd my-web-project
+cd new-hat-project
 npm run dev
 ```
 

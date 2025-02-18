@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-REPO_URL="https://git@github.com:theHat13/dynamic-template.git"
+REPO_URL="https://github.com/theHat13/dynamic-template.git"
 PROJECT_DIR="new-hat-project"
 
 # Function to display error messages
