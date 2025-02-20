@@ -1,0 +1,39 @@
+<div
+  class="label-container relative w-[72px] h-[52px] focus:outline focus:outline-[#0759FF]"
+  tabindex="0"
+>
+  <span class="label text-left text-base font-normal text-[#1A1A1A] leading-[16px]">Label</span>
+  <div class="indicator-nav absolute left-0 bottom-[-8px] w-1 h-1 bg-[#0759FF] hidden"></div>
+</div>
+
+<script>
+  const labelContainer = document.querySelector('.label-container');
+  const indicatorNav = document.querySelector('.indicator-nav');
+
+  // Hover state
+  labelContainer.addEventListener('mouseenter', () => {
+    indicatorNav.classList.remove('hidden');
+  });
+
+  labelContainer.addEventListener('mouseleave', () => {
+    indicatorNav.classList.add('hidden');
+  });
+
+  // Focus state
+  labelContainer.addEventListener('focus', () => {
+    labelContainer.classList.add('focus:outline');
+  });
+
+  labelContainer.addEventListener('blur', () => {
+    labelContainer.classList.remove('focus:outline');
+  });
+
+  // Active state
+  labelContainer.addEventListener('mousedown', () => {
+    indicatorNav.classList.remove('hidden');
+  });
+
+  labelContainer.addEventListener('mouseup', () => {
+    indicatorNav.classList.add('hidden');
+  });
+</script>

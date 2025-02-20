@@ -61,6 +61,12 @@ cd new-hat-project
 npm start
 ```
 
+To build only the CSS, run:
+
+```sh
+npm run build:css
+```
+
 ## Contributing
 
 We welcome contributions from the community! If you'd like to contribute, please follow these steps:

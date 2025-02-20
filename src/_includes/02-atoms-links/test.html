@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Composant</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div id="component-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/nunjucks/browser/nunjucks.min.js"></script>
+  <script>
+    fetch('link-navigation-main.njk')
+      .then(response => response.text())
+      .then(template => {
+        const env = nunjucks.configure();
+        const rendered = env.renderString(template);
+        document.getElementById('component-container').innerHTML = rendered;
+      })
+      .catch(error => console.error('Erreur lors du chargement du template:', error));
+  </script>
+</body>
+</html>
+

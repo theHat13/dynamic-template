@@ -4,9 +4,10 @@
   "description": "These are the starting files used by [HAT](https://#) to create a dynamic site.",
   "main": "index.js",
   "scripts": {
-    "start": "npx @tailwindcss/cli -i ./src/_css/input.css -o ./public/output.css --watch & eleventy --serve",
-    "build": "eleventy"
-  },
+  "start": "npx @tailwindcss/cli -i ./src/_css/input.css -o ./public/output.css --watch & eleventy --serve",
+  "build": "eleventy",
+  "build:css": "npx tailwindcss -i ./src/_css/input.css -o ./public/output.css --watch"
+},
   "repository": {
     "type": "git",
     "url": "git+https://git@github.com:theHat13/dynamic-template.git"
