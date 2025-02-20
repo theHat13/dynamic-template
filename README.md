@@ -22,26 +22,33 @@ Welcome to Hat Dynamic Template ! This project is a web application built using 
 
 3. **Navigate to the Script's Directory**
    - Use the `cd` command to navigate to the directory where you saved the script. For example, if the script is on your desktop, type:
+
      ```sh
      cd ~/Desktop
      ```
+
      or
+
      ```sh
      cd C:\Users\YourName\Desktop
      ```
+
      on Windows.
 
 4. **Make the Script Executable**
    - Type the following command to make the script executable:
+
      ```sh
      chmod +x setup-project.sh
      ```
 
 5. **Run the Script**
    - Type the following command to run the script:
+  
      ```sh
      ./setup-project.sh
      ```
+
    - Follow the instructions displayed in the terminal. The script will:
      - Check if the necessary tools (Git, Node.js, npm) are installed and install them if needed.
      - Clone the specified GitHub repository.
