@@ -4,11 +4,8 @@
   "description": "These are the starting files used by [HAT](https://#) to create a dynamic site.",
   "main": "index.js",
   "scripts": {
-    "start": "npx @tailwindcss/cli -i ./src/_css/input.css -o ./public/output.css --watch & eleventy --serve",
-    "build": "npm run build-tokens && eleventy",
-    "build:css": "npx tailwindcss -i ./src/_css/input.css -o ./public/output.css --watch",
-  
-    "convert-tokens": "node src/scripts/convert-tokens.js"
+    "start": "eleventy --serve",
+    "dev": "eleventy --serve"
   },
   "repository": {
     "type": "git",
@@ -23,13 +20,10 @@
   "homepage": "https://github.com/theHat13/dynamic-template#readme",
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.5.1",
-    "tailwindcss": "^4.0.4"
+    "@tailwindcss/vite": "^4.0.7",
+    "tailwindcss": "^4.0.7"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.0.3",
-    "@tailwindcss/vite": "^4.0.4",
     "nunjucks": "^3.2.4"
   }
 }
