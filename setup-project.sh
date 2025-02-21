@@ -65,13 +65,14 @@ npm install || error_exit "Error installing dependencies."
 echo "Initializing Eleventy..."
 npx eleventy --serve || error_exit "Error initializing Eleventy."
 
-# Initialize TailwindCSS
-echo "Initializing TailwindCSS..."
-npx tailwindcss init || error_exit "Error initializing TailwindCSS."
+# Install TailwindCSS and CLI
+echo "Installing TailwindCSS..."
+npm install -D tailwindcss @tailwindcss/cli || error_exit "Error installing TailwindCSS."
 
-# Initialize Vite
-echo "Initializing Vite..."
-npm run dev || error_exit "Error initializing Vite."
+# Ensure Tailwind compiles styles
+echo "Building TailwindCSS..."
+npx tailwindcss -i ./src/input.css -o ./public/css/output.css --watch || error_exit "Error building TailwindCSS."
+
 
 # Initialize Netlify
 echo "Initializing Netlify..."
