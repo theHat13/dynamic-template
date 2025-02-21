@@ -74,55 +74,6 @@ To build only the CSS, run:
 npm run build:css
 ```
 
-## Design Tokens Conversion
-
-### Overview
-
-This project processes design tokens exported from Figma and transforms them into a format compatible with TailwindCSS.
-
-### How It Works
-
-The script reads a single `variables.json` file, extracts relevant tokens, and formats them for Tailwind.
-
-#### Steps':'
-
-1. Reads the `variables.json` file from `./src/design-tokens/variables.json`.
-2. Extracts design tokens from collections, filtering out alias values.
-3. Formats token names by replacing `/` with `-` and handling numeric values properly.
-4. Outputs a JSON file compatible with Tailwind in `./src/design-tokens/tailwind-tokens.json`.
-
-### Script Usage
-
-Run the transformation script with:
-
-```sh
-npm run convert-tokens
-```
-
-### Output Format
-
-The transformed tokens will be saved in `tailwind-tokens.json` with the following structure:
-
-```json
-{
-  "color-vanilla-gray-warm-900": "#231F15",
-  "spacing-1": 4,
-  "typography-font-family-ff-vanilla-01": "PT Serif"
-}
-```
-
-These can then be used in Tailwind via the `theme.extend` configuration.
-
-### Requirements
-
-- Node.js installed
-- The `variables.json` file correctly exported from Figma
-
-### Next Steps
-
-- Integrate this into a Tailwind configuration file automatically.
-- Support additional token types if needed.
-
 ## Contributing
 
 We welcome contributions from the community! If you'd like to contribute, please follow these steps:

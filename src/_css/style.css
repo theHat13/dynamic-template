@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+@theme {
+    --color-tomato: #ff1111;
+}
