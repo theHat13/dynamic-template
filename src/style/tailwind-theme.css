@@ -1,0 +1,361 @@
+@import "tailwindcss";
+
+@theme {
+
+/* =============================================== */
+/* ================ TYPOGRAPHY =================== */
+/* =============================================== */
+
+/* ============== FONT PROPERTIES ================ */
+/* =============================================== */
+
+  /* Font weight for display text */
+  --display-font-weight: var(--font-weight-bold);
+
+/* ================== DISPLAY ==================== */
+
+  /* Font weight for display text */
+  --display-font-weight: var(--font-weight-bold);
+
+  /* Display large bold */
+  --display-l-font-size: var(--text-7xl);
+  --display-l-line-height: var(--text-7xl--line-height);
+  --display-l-letter-spacing: 0;
+  --display-l-paragraph-spacing: 3rem;
+
+  /* Display small bold */
+  --display-s-font-size: var(--text-5xl);
+  --display-s-line-height: var(--text-5xl--line-height);
+  --display-s-letter-spacing: 0;
+  --display-s-paragraph-spacing: 2.5rem;
+
+  /* Display mobile large bold */
+  --display-mobile-l-font-size: var(--text-5xl);
+  --display-mobile-l-line-height: var(--text-5xl--line-height);
+  --display-mobile-l-letter-spacing: 0;
+  --display-mobile-l-paragraph-spacing: 3rem;
+
+  /* Display mobile small bold */
+  --display-mobile-s-font-size: var(--text-4xl);
+  --display-mobile-s-line-height: var(--text-4xl--line-height);
+  --display-mobile-s-letter-spacing: 0;
+  --display-mobile-s-paragraph-spacing: 2.5rem;
+
+/* =============================================== */
+
+  /* Font weight for heading text */
+  --heading-font-weight: var(--font-weight-bold);
+
+  /* ================== HEADING ==================== */
+  
+    /* Heading h1 */
+    --h1-font-size: var(--text-4xl);  /* Correspond à la taille Tailwind text-4xl */
+    --h1-line-height: var(--line-height-10); /* Utilisation d'une valeur standard de Tailwind */
+    --h1-letter-spacing: -0.05em;
+  
+    /* Heading h2 */
+    --h2-font-size: var(--text-3xl);  
+    --h2-line-height: var(--line-height-9); 
+    --h2-letter-spacing: -0.025em;
+  
+    /* Heading h3 */
+    --h3-font-size: var(--text-2xl);  
+    --h3-line-height: var(--line-height-8);  
+    --h3-letter-spacing: -0.05em;
+  
+    /* Heading h4 */
+    --h4-font-size: var(--text-xl);  
+    --h4-line-height: var(--line-height-7);  
+    --h4-letter-spacing: -0.05em;
+  
+    /* Heading h5 */
+    --h5-font-size: var(--text-lg);  
+    --h5-line-height: var(--line-height-6);  
+    --h5-letter-spacing: -0.05em;
+  
+    /* Heading h6 */
+    --h6-font-size: var(--text-base);  
+    --h6-line-height: var(--line-height-5);  
+    --h6-letter-spacing: -0.05em;
+
+/* =============================================== */
+
+    /* Font weight for heading text */
+    --body-font-weight: var(--font-weight-regular);
+
+  /* ================== BODY ===================== */
+  
+    /* Body large regular */
+    --body-l-font-size: var(--text-base); /* Tailwind text-base */
+    --body-l-line-height: var(--line-height-6); /* Tailwind line-height-6 */
+    --body-l-paragraph-spacing: 3rem;
+  
+    /* Body small regular */
+    --body-s-font-size: var(--text-sm);  /* Tailwind text-sm */
+    --body-s-line-height: var(--line-height-5);  /* Tailwind line-height-5 */
+    --body-s-paragraph-spacing: 2.5rem;
+
+/* =============================================== */
+
+    /* Font weight for heading text */
+    --label-font-weight: var(--font-weight-medium);
+
+  /* =================== LABEL ===================== */
+  
+    /* Label large regular */
+    --label-l-font-size: var(--text-base);
+    --label-l-letter-spacing: -0.05em;
+  
+    /* Label small regular */
+    --label-s-font-size: var(--text-sm);
+    --label-s-letter-spacing: -0.025em;
+  
+    /* Component xsmall tag */
+    --label-xs-font-size: var(--text-xs);  /* Tailwind text-xs */
+    --label-xs-line-height: var(--line-height-4); /* Tailwind line-height-4 */
+    --label-xs-letter-spacing: 0.025em;
+  
+  /* ================== PLACEHOLDER ================== */
+    --placeholder-font-size: var(--text-base);
+    --placeholder-letter-spacing: -0.05em;
+
+/* =============================================== */
+/* =================== COLORS ==================== */
+/* =============================================== */
+
+/* ================ PRIMITIVES =================== */
+/* =============================================== */
+
+/* =============== BRAND COLORS ================== */
+
+  /* Primary Colors */
+
+  --color-primary-000: #070414;
+  --color-primary-200: #3f3927;
+  --color-primary-300: #514c3f;
+  --color-primary-400: #6d6755;
+  --color-primary-500: #8c846e;
+  --color-primary-600: #a39d8b;
+  --color-primary-700: #beb9ac;
+  --color-primary-800: #d6d2cb;
+  --color-primary-900: #f3f0ea;
+
+  /* Neutral Colors */
+
+  --color-neutral-000: #000000;
+  --color-neutral-050: #1a1a1a;
+  --color-neutral-100: #333333;
+  --color-neutral-120: #4d4d4d;
+  --color-neutral-140: #5c5c5c;
+  --color-neutral-200: #666666;
+  --color-neutral-300: #707070;
+  --color-neutral-320: #808080;
+  --color-neutral-360: #999999;
+  --color-neutral-400: #b2b2b2;
+  --color-neutral-500: #c2c2c2;
+  --color-neutral-550: #b8b8b8;
+  --color-neutral-600: #cccccc;
+  --color-neutral-640: #d6d6d6;
+  --color-neutral-700: #e0e0e0;
+  --color-neutral-800: #e5e5e5;
+  --color-neutral-900: #f2f2f2;
+  --color-neutral-1000: #ffffff;
+
+  /* ============= UTILITY COLORS =============== */
+
+  /* Information */
+
+  --color-information-100: #000e29;
+  --color-information-110: #001133;
+  --color-information-120: #002266;
+  --color-information-200: #003aad;
+  --color-information-270: #0047d3;
+  --color-information-300: #0759ff;
+  --color-information-400: #3377ff;
+  --color-information-500: #578fff;
+  --color-information-600: #669bff;
+  --color-information-700: #99bcff;
+  --color-information-800: #d0e2ff;
+  --color-information-900: #ebf7ff;
+
+  /* Success */
+
+  --color-success-100: #001c0d;
+  --color-success-110: #005122;
+  --color-success-120: #00692a;
+  --color-success-200: #0d823c;
+  --color-success-300: #1e9850;
+  --color-success-400: #16df67;
+  --color-success-500: #4fed8f;
+  --color-success-600: #74f1a7;
+  --color-success-700: #a2f6c4;
+  --color-success-800: #dafbe7;
+  --color-success-900: #f7fdfa;
+
+  /* Warning */
+
+  --color-warning-100: #290f00;
+  --color-warning-110: #331300;
+  --color-warning-120: #662500;
+  --color-warning-200: #a43c00;
+  --color-warning-300: #c74900;
+  --color-warning-400: #ee5800;
+  --color-warning-500: #ff711f;
+  --color-warning-600: #ff995c;
+  --color-warning-700: #ffceae;
+  --color-warning-800: #ffe0cc;
+  --color-warning-900: #ffefe4;
+
+  /* Critical */
+
+  --color-critical-100: #290004;
+  --color-critical-110: #3d0006;
+  --color-critical-120: #72000c;
+  --color-critical-200: #9c0010;
+  --color-critical-300: #d20319;
+  --color-critical-400: #e8132a;
+  --color-critical-500: #f0384b;
+  --color-critical-600: #f4717e;
+  --color-critical-700: #ffb1b9;
+  --color-critical-800: #ffd6db;
+  --color-critical-900: #fff0f1;
+
+/* =================== TOKENS ==================== */
+/* =============================================== */
+
+  /* ============= GLOBAL COLORS ================= */
+
+  --color-default: #0D0E14;
+  --color-white: #FFFFFF;
+  --color-heading: #373C59;
+  --color-accent: #514C3F;
+  
+  /* Contrast */
+
+  --color-contrast-light-01: #4C537C;
+  --color-contrast-light-02: #777FB0;
+  --color-contrast-light-03: #C8CDEC;
+  --color-contrast-light-04: #E5E5E5;
+
+  /* =========== BUTTON PRIMARY COLORS ========= */
+
+  --color-button-prim: #8C846E;
+  --color-button-prim-hover: #6D6755;
+  --color-button-prim-contrast-high: #FFFFFF;
+
+  /* ========= BUTTON SECONDARY COLORS ======== */
+
+  --color-button-sec: #8C846E;
+  --color-button-sec-hover: #6D6755;
+  --color-button-sec-active: #8C846E;
+  --color-button-sec-hover-light: #F5F6FF;
+  --color-button-sec-contrast-high: #FFFFFF;
+
+  /* ========= BUTTON TERTIARY COLORS ======== */
+
+  --color-button-ter: #0D4123;
+  --color-button-ter-hover: #0E670B;
+
+  /* ============== FORM COLORS ============== */
+
+  --color-form: #4C537C;
+  --color-form-hover: #222437;
+  --color-form-active: #0D0E14;
+  --color-control-checked: #8C846E;
+
+  /* ============ DISABLED COLORS ============ */
+
+  --color-disabled: #61699E;
+  --color-disabled-contrast-light: #EEF0FC;
+
+  /* ============ SEMANTIC COLORS ============ */
+
+  /* Information */
+
+  --color-information: #0047D3;
+  --color-information-contrast-light-01: #D0E2FF;
+  --color-information-contrast-light-02: #EBF7FF;
+  --color-information-focus: #0759FF;
+
+  /* Success */
+
+  --color-success: #00692A;
+  --color-success-contrast-light-01: #A2F6C4;
+  --color-success-contrast-light-02: #DAFBE7;
+
+  /* Warning */
+
+  --color-warning: #C74900;
+  --color-warning-contrast-light-01: #FFE0CC;
+  --color-warning-contrast-light-02: #FFEFE4;
+  --color-warning-contrast-dark: #A43C00;
+
+  /* Critical */
+
+  --color-critical: #D20319;
+  --color-critical-contrast-light-01: #FFD6DB;
+  --color-critical-contrast-light-02: #FFF0F1;
+
+  /* =========== GRADIENTS COLORS =========== */
+
+  --color-gradient-header: linear-gradient(0deg, var(--color-utility-primary-30), var(--color-utility-primary-10));
+  --color-gradient-delet-cell: linear-gradient(-90deg, var(--color-utility-critical-100), #fff0f100);
+
+/* =============================================== */
+/* ================ ELEVATION ==================== */
+/* =============================================== */
+
+/* =============================================== */
+/* =============== BORDER RADIUS ================= */
+/* =============================================== */
+  --radius-r-0: 0rem;
+  --radius-r-1: 0.0625rem;
+  --radius-r-2: 0.125rem;
+  --radius-r-4: 0.25rem;
+  --radius-r-6: 0.375rem;
+  --radius-r-8: 0.5rem;
+  --radius-r-10: 0.625rem;
+  --radius-r-12: 0.75rem;
+  --radius-r-14: 0.875rem;
+  --radius-r-16: 1rem;
+  --radius-r-20: 1.25rem;
+  --radius-r-24: 1.5rem;
+  --radius-r-32: 2rem;
+
+/* =============================================== */
+/* ================== SPACING ==================== */
+/* =============================================== */
+  --spacing-0\.5: 0.125rem;
+  --spacing-1: 0.25rem;
+  --spacing-1\.5: 0.375rem;
+  --spacing-2: 0.5rem;
+  --spacing-2\.5: 0.625rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-7: 1.75rem;
+  --spacing-8: 2rem;
+  --spacing-9: 2.25rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-14: 3.5rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+
+/* =============================================== */
+/* ================== LAYOUT ===================== */
+/* =============================================== */
+
+  /* Widths */
+  --widths-001: 5rem;
+  --widths-002: 12rem;
+  --widths-003: 19rem;
+  --widths-004: 26rem;
+  --widths-006: 40rem;
+  --widths-008: 54rem;
+  --widths-009: 61rem;
+  --widths-010: 68rem;
+  --widths-012: 82rem;
+}
