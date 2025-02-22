@@ -1,0 +1,20 @@
+@import "./tailwind-theme.css";
+
+/* Display Large Bold */
+.typography-display-l {
+    font-size: var(--display-l-font-size);
+    line-height: var(--display-l-line-height);
+    letter-spacing: var(--display-l-letter-spacing);
+    margin-bottom: var(--display-l-paragraph-spacing);
+    font-weight: var(--font-weight-bold);
+  }
+  
+  /* Display Small Bold */
+  .typography-display-s {
+    font-size: var(--display-s-font-size);
+    line-height: var(--display-s-line-height);
+    letter-spacing: var(--display-s-letter-spacing);
+    margin-bottom: var(--display-s-paragraph-spacing);
+    font-weight: var(--font-weight-bold);
+  }
+  

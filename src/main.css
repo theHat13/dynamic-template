@@ -1,1 +1,9 @@
-@import "tailwind-theme.css";
+/* Import TailwindCSS first */
+@import "tailwindcss";
+
+/* Import theme variables (colors, typography, spacing, etc.) */
+@import "./style/tailwind-theme.css";
+
+/* Import typography styles using the defined theme variables */
+@import "./style/typography.css";
+

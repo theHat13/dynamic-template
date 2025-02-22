@@ -11,19 +11,18 @@
 
 /* ================== DISPLAY ==================== */
 
-  /* Display large bold */
+/* Display large bold */
+--display-l-font-size: var(--text-7xl);
+--display-l-line-height: var(--text-7xl--line-height);
+--display-l-letter-spacing: 0; /* Tailwind ne définit pas de letter-spacing par défaut */
+--display-l-paragraph-spacing: 3rem; /* Valeur arbitraire, à ajuster selon tes besoins */
 
-  --display-l-font-size: var(--typography-font-size-fs-68);
-  --display-l-line-height: var(--typography-line-height-lh-76);
-  --display-l-letter-spacing: var(--typography-letter-spacing-nul);
-  --display-l-paragraph-spacing: var(--typography-paragraph-spacing-ps-48);
+/* Display small bold */
+--display-s-font-size: var(--text-5xl);
+--display-s-line-height: var(--text-5xl--line-height);
+--display-s-letter-spacing: 0; /* Pas de valeur par défaut dans Tailwind */
+--display-s-paragraph-spacing: 2.5rem; /* Valeur ajustable */
 
-  /* Display small bold */
-
-  --display-s-font-size: var(--typography-fon-size-fs-56);
-  --display-s-line-height: var(--typography-line-height-lh-68);
-  --display-s-letter-spacing: var(--typography-letter-spacing-nul);
-  --display-s-paragraph-spacing: var(--typography-paragraph-spacing-ps-40);
 
 
 
