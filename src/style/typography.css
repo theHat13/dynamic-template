@@ -108,7 +108,7 @@
   margin-bottom: var(--body-s-paragraph-spacing);
 }
 
-/* =================== LABEL ===================== */
+/* =================== LABEL ==================== */
 
 /* Label large regular */
 .typography-label-l {
@@ -124,7 +124,7 @@
   font-weight: var(--label-font-weight);
 }
 
-/* Label extra small */
+/* Label small caps */
 .typography-label-xs {
   font-size: var(--label-xs-font-size);
   line-height: var(--label-xs-line-height);

@@ -9,6 +9,10 @@
 /* ============== FONT PROPERTIES ================ */
 /* =============================================== */
 
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
   /* Font weight for display text */
   --display-font-weight: var(--font-weight-bold);
 
@@ -305,57 +309,31 @@
 /* ================ ELEVATION ==================== */
 /* =============================================== */
 
+  --drop-shadow-short: var(--drop-shadow-sm);
+  --drop-shadow-medium: var(--drop-shadow-md);
+  --drop-shadow-tall: var(--drop-shadow-lg);
+
 /* =============================================== */
 /* =============== BORDER RADIUS ================= */
 /* =============================================== */
-  --radius-r-0: 0rem;
-  --radius-r-1: 0.0625rem;
-  --radius-r-2: 0.125rem;
-  --radius-r-4: 0.25rem;
-  --radius-r-6: 0.375rem;
-  --radius-r-8: 0.5rem;
-  --radius-r-10: 0.625rem;
-  --radius-r-12: 0.75rem;
-  --radius-r-14: 0.875rem;
-  --radius-r-16: 1rem;
-  --radius-r-20: 1.25rem;
-  --radius-r-24: 1.5rem;
-  --radius-r-32: 2rem;
+
+  --radius-2: var(--radius-xs);  /* 0.125rem */
+  --radius-4: var(--radius-sm);  /* 0.25rem */
+  --radius-6: var(--radius-md);  /* 0.375rem */
+  --radius-8: var(--radius-lg);  /* 0.5rem */
+  --radius-12: var(--radius-xl); /* 0.75rem */
+  --radius-16: var(--radius-2xl); /* 1rem */
+  --radius-24: var(--radius-3xl); /* 1.5rem */
+  --radius-32: var(--radius-4xl); /* 2rem */
+
 
 /* =============================================== */
 /* ================== SPACING ==================== */
 /* =============================================== */
-  --spacing-0\.5: 0.125rem;
-  --spacing-1: 0.25rem;
-  --spacing-1\.5: 0.375rem;
-  --spacing-2: 0.5rem;
-  --spacing-2\.5: 0.625rem;
-  --spacing-3: 0.75rem;
-  --spacing-4: 1rem;
-  --spacing-5: 1.25rem;
-  --spacing-6: 1.5rem;
-  --spacing-7: 1.75rem;
-  --spacing-8: 2rem;
-  --spacing-9: 2.25rem;
-  --spacing-10: 2.5rem;
-  --spacing-12: 3rem;
-  --spacing-14: 3.5rem;
-  --spacing-16: 4rem;
-  --spacing-20: 5rem;
-  --spacing-24: 6rem;
+
 
 /* =============================================== */
 /* ================== LAYOUT ===================== */
 /* =============================================== */
 
-  /* Widths */
-  --widths-001: 5rem;
-  --widths-002: 12rem;
-  --widths-003: 19rem;
-  --widths-004: 26rem;
-  --widths-006: 40rem;
-  --widths-008: 54rem;
-  --widths-009: 61rem;
-  --widths-010: 68rem;
-  --widths-012: 82rem;
 }
