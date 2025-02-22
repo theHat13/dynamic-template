@@ -9,79 +9,115 @@
 /* ============== FONT PROPERTIES ================ */
 /* =============================================== */
 
+  /* Font weight for display text */
+  --display-font-weight: var(--font-weight-bold);
+
 /* ================== DISPLAY ==================== */
 
-/* Display large bold */
---display-l-font-size: var(--text-7xl);
---display-l-line-height: var(--text-7xl--line-height);
---display-l-letter-spacing: 0; /* Tailwind ne définit pas de letter-spacing par défaut */
---display-l-paragraph-spacing: 3rem; /* Valeur arbitraire, à ajuster selon tes besoins */
+  /* Font weight for display text */
+  --display-font-weight: var(--font-weight-bold);
 
-/* Display small bold */
---display-s-font-size: var(--text-5xl);
---display-s-line-height: var(--text-5xl--line-height);
---display-s-letter-spacing: 0; /* Pas de valeur par défaut dans Tailwind */
---display-s-paragraph-spacing: 2.5rem; /* Valeur ajustable */
+  /* Display large bold */
+  --display-l-font-size: var(--text-7xl);
+  --display-l-line-height: var(--text-7xl--line-height);
+  --display-l-letter-spacing: 0;
+  --display-l-paragraph-spacing: 3rem;
 
+  /* Display small bold */
+  --display-s-font-size: var(--text-5xl);
+  --display-s-line-height: var(--text-5xl--line-height);
+  --display-s-letter-spacing: 0;
+  --display-s-paragraph-spacing: 2.5rem;
 
+  /* Display mobile large bold */
+  --display-mobile-l-font-size: var(--text-5xl);
+  --display-mobile-l-line-height: var(--text-5xl--line-height);
+  --display-mobile-l-letter-spacing: 0;
+  --display-mobile-l-paragraph-spacing: 3rem;
 
+  /* Display mobile small bold */
+  --display-mobile-s-font-size: var(--text-4xl);
+  --display-mobile-s-line-height: var(--text-4xl--line-height);
+  --display-mobile-s-letter-spacing: 0;
+  --display-mobile-s-paragraph-spacing: 2.5rem;
 
-  --display-font-weight: var(--typography-font-weight-bold-700);
-  --display-mobile-l-font-size: var(--typography-fon-size-fs-56);
-  --display-mobile-l-line-height: var(--typography-line-height-lh-64);
-  --display-mobile-l-letter-spacing: var(--typography-letter-spacing-nul);
-  --display-mobile-l-paragraph-spacing: var(--typography-paragraph-spacing-ps-48);
-  --display-mobile-s-font-size: var(--typography-fon-size-fs-48);
-  --display-mobile-s-line-height: var(--typography-line-height-lh-56);
-  --display-mobile-s-letter-spacing: var(--typography-letter-spacing-nul);
-  --display-mobile-s-paragraph-spacing: var(--typography-paragraph-spacing-ps-40);
+/* =============================================== */
 
-  /* Heading */
-  --h1-font-size: var(--typography-fon-size-fs-48);
-  --h1-line-height: var(--typography-line-height-lh-56);
-  --h1-letter-spacing: var(--typography-letter-spacing-neg-0,5);
-  --h2-font-size: var(--typography-fon-size-fs-40);
-  --h2-line-height: var(--typography-line-height-lh-48);
-  --h2-letter-spacing: var(--typography-letter-spacing-neg-0,25);
-  --h3-font-size: var(--typography-fon-size-fs-34);
-  --h3-line-height: var(--typography-line-height-lh-36);
-  --h3-letter-spacing: var(--typography-letter-spacing-neg-0,5);
-  --h4-font-size: var(--typography-fon-size-fs-28);
-  --h4-line-height: var(--typography-line-height-lh-32);
-  --h4-letter-spacing: var(--typography-letter-spacing-neg-0,5);
-  --h5-font-size: var(--typography-fon-size-fs-24);
-  --h5-line-height: var(--typography-line-height-lh-28);
-  --h5-letter-spacing: var(--typography-letter-spacing-neg-0,5);
-  --h6-font-size: var(--typography-fon-size-fs-20);
-  --h6-line-height: var(--typography-line-height-lh-24);
-  --h6-letter-spacing: var(--typography-letter-spacing-neg-0,5);
-  --heading-font-weight: var(--typography-font-weight-bold-700);
+  /* Font weight for heading text */
+  --heading-font-weight: var(--font-weight-bold);
 
-  /* Body */
-  --body-l-font-size: var(--typography-fon-size-fs-16);
-  --body-l-line-height: var(--typography-line-height-lh-24);
-  --body-l-paragraph-spacing: var(--typography-paragraph-spacing-ps-48);
-  --body-s-font-size: var(--typography-fon-size-fs-14);
-  --body-s-line-height: var(--typography-line-height-lh-20);
-  --body-s-paragraph-spacing: var(--typography-paragraph-spacing-ps-40);
-  --body-font-weight: var(--typography-font-weight-regular-400);
-  --body-letter-spacing: var(--typography-letter-spacing-nul);
+  /* ================== HEADING ==================== */
+  
+    /* Heading h1 */
+    --h1-font-size: var(--text-4xl);  /* Correspond à la taille Tailwind text-4xl */
+    --h1-line-height: var(--line-height-10); /* Utilisation d'une valeur standard de Tailwind */
+    --h1-letter-spacing: -0.05em;
+  
+    /* Heading h2 */
+    --h2-font-size: var(--text-3xl);  
+    --h2-line-height: var(--line-height-9); 
+    --h2-letter-spacing: -0.025em;
+  
+    /* Heading h3 */
+    --h3-font-size: var(--text-2xl);  
+    --h3-line-height: var(--line-height-8);  
+    --h3-letter-spacing: -0.05em;
+  
+    /* Heading h4 */
+    --h4-font-size: var(--text-xl);  
+    --h4-line-height: var(--line-height-7);  
+    --h4-letter-spacing: -0.05em;
+  
+    /* Heading h5 */
+    --h5-font-size: var(--text-lg);  
+    --h5-line-height: var(--line-height-6);  
+    --h5-letter-spacing: -0.05em;
+  
+    /* Heading h6 */
+    --h6-font-size: var(--text-base);  
+    --h6-line-height: var(--line-height-5);  
+    --h6-letter-spacing: -0.05em;
 
-  /* Label */
-  --label-xs-font-size: var(--typography-fon-size-fs-12);
-  --label-xs-line-height: var(--typography-line-height-lh-12);
-  --label-xs-letter-spacing: var(--typography-letter-spacing-pos-0,4);
-  --label-s-font-size: var(--typography-fon-size-fs-14);
-  --label-s-letter-spacing: var(--typography-letter-spacing-neg-0,25);
-  --label-l-font-size: var(--typography-fon-size-fs-16);
-  --label-l-letter-spacing: var(--typography-letter-spacing-neg-0,5);
-  --label-line-height: var(--typography-line-height-lh-16);
-  --label-paragraph-spacing: var(--typography-paragraph-spacing-ps-0);
-  --label-font-weight: var(--typography-font-weight-medium-500);
+/* =============================================== */
 
-  /* Placeholder */
-  --placeholder-font-size: var(--typography-fon-size-fs-16);
-  --placeholder-letter-spacing: var(--typography-letter-spacing-neg-0,5);
+    /* Font weight for heading text */
+    --body-font-weight: var(--font-weight-regular);
+
+  /* ================== BODY ===================== */
+  
+    /* Body large regular */
+    --body-l-font-size: var(--text-base); /* Tailwind text-base */
+    --body-l-line-height: var(--line-height-6); /* Tailwind line-height-6 */
+    --body-l-paragraph-spacing: 3rem;
+  
+    /* Body small regular */
+    --body-s-font-size: var(--text-sm);  /* Tailwind text-sm */
+    --body-s-line-height: var(--line-height-5);  /* Tailwind line-height-5 */
+    --body-s-paragraph-spacing: 2.5rem;
+
+/* =============================================== */
+
+    /* Font weight for heading text */
+    --label-font-weight: var(--font-weight-medium);
+
+  /* =================== LABEL ===================== */
+  
+    /* Label large regular */
+    --label-l-font-size: var(--text-base);
+    --label-l-letter-spacing: -0.05em;
+  
+    /* Label small regular */
+    --label-s-font-size: var(--text-sm);
+    --label-s-letter-spacing: -0.025em;
+  
+    /* Component xsmall tag */
+    --label-xs-font-size: var(--text-xs);  /* Tailwind text-xs */
+    --label-xs-line-height: var(--line-height-4); /* Tailwind line-height-4 */
+    --label-xs-letter-spacing: 0.025em;
+  
+  /* ================== PLACEHOLDER ================== */
+    --placeholder-font-size: var(--text-base);
+    --placeholder-letter-spacing: -0.05em;
 
 /* =============================================== */
 /* =================== COLORS ==================== */
