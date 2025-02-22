@@ -1,1 +1,63 @@
 @import "tailwindcss";
+
+@theme {
+  /* ============================== */
+  /* ========== TOKENS ============ */
+  /* ============================== */
+
+  /* ======= GLOBAL COLORS ======= */
+  --color-default: #0D0E14;
+  --color-white: #FFFFFF;
+  --color-heading: #373C59;
+  --color-accent: #514C3F;
+  
+  /* Contrast */
+  --color-contrast-light-01: #4C537C;
+  --color-contrast-light-02: #777FB0;
+  --color-contrast-light-03: #C8CDEC;
+  --color-contrast-light-04: #E5E5E5;
+
+  /* ======= FORM COLORS ======= */
+  --color-form: #4C537C;
+  --color-form-hover: #222437;
+  --color-form-active: #0D0E14;
+  --color-control-checked: #8C846E;
+
+  /* ======= SEMANTIC COLORS ======= */
+  /* Information */
+  --color-information: #0047D3;
+  --color-information-contrast-light-01: #D0E2FF;
+  --color-information-contrast-light-02: #EBF7FF;
+  --color-information-focus: #0759FF;
+
+  /* Success */
+  --color-success: #00692A;
+  --color-success-contrast-light-01: #A2F6C4;
+  --color-success-contrast-light-02: #DAFBE7;
+
+  /* Warning */
+  --color-warning: #C74900;
+  --color-warning-contrast-light-01: #FFE0CC;
+  --color-warning-contrast-light-02: #FFEFE4;
+  --color-warning-contrast-dark: #A43C00;
+
+  /* Critical */
+  --color-critical: #D20319;
+  --color-critical-contrast-light-01: #FFD6DB;
+  --color-critical-contrast-light-02: #FFF0F1;
+
+  /* ======= BUTTON PRIMARY ======= */
+  --color-button-prim: #8C846E;
+  --color-button-prim-hover: #6D6755;
+  --color-button-prim-contrast-high: #FFFFFF;
+
+  /* ======= BUTTON SECONDARY ======= */
+  --color-button-sec: #8C846E;
+  --color-button-sec-hover: #6D6755;
+  --color-button-sec-active: #8C846E;
+  --color-button-sec-hover-light: #F5F6FF;
+  --color-button-sec-contrast-high: #FFFFFF;
+
+  /* ======= BUTTON TERTIARY ======= */
+  /* Ajoute ici les variables si tu en as pour les boutons tertiaires */
+}
