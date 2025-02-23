@@ -245,6 +245,7 @@
 
   --color-button-prim: #8C846E;
   --color-button-prim-hover: #6D6755;
+  --color-button-prim-active: #8C846E;
   --color-button-prim-contrast-high: #FFFFFF;
 
   /* ========= BUTTON SECONDARY COLORS ======== */
@@ -418,7 +419,7 @@
   --layout-column-desktop-01: var(--container-7xs); /* 1 column */
 
   /* Column widths for mobile layout */
-  --layout-column-mobile-target: var(--breakpoint-sm); /* Target width for mobile */
+  --layout-mobile-target: var(--breakpoint-sm); /* Target width for mobile */
   --layout-column-mobile-02: var(--container-6xs); /* 2 columns */
   --layout-column-mobile-01: var(--container-7xs); /* 1 column */
 

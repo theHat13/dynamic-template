@@ -7,3 +7,6 @@
 /* Import typography styles using the defined theme variables */
 @import "./style/typography.css";
 
+/* Import components styles using the defined theme variables */
+@import "./style/components.css";
+
