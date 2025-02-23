@@ -53,17 +53,17 @@
 }
 
   /* Hover */
-  .button-primary:hover {
+  .form:hover {
     background: var(--color-form-hover);
   }
   
   /* Active */
-  .button-primary:active {
+  .form:active {
     background: var(--color-form-active);
   }
 
   /* Checked */
-  .button-primary:hover {
+  .form:hover {
     background: var(--color-control-checked);
     }
 
