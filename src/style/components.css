@@ -90,18 +90,26 @@
 /* ================== LINK ==================== */
 
 /* Link Default */
-/* .link-default {
-  font-size: var(#);
-  line-height: var(#);
-  letter-spacing: var(#);
-  font-weight: var(#);
-} */
+.link {
+  text-decoration: underline;
+}
 
 /* Link Hover */
-/* .link-hover {
-  font-size: var(#);
-  line-height: var(#);
-  letter-spacing: var(#);
-  font-weight: var(#);
-  text-decoration: var(#);
-} */
+.link:hover {
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Link Focus */
+.link:focus {
+  text-decoration: none;
+  border: 2px solid var(--color-information); 
+  border-radius: var(--radius-sm);
+}
+
+/* Link Disabled */
+.link:disabled {
+  text-decoration: underline;
+  color: var(--color-neutral-100);
+  pointer-events: none;
+}
