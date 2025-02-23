@@ -9,9 +9,9 @@
 /* ============== FONT PROPERTIES ================ */
 /* =============================================== */
 
-  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; */
 
   /* Font weight for display text */
   --display-font-weight: var(--font-weight-bold);
@@ -327,12 +327,12 @@
   --radius-32: var(--radius-4xl); /* 2rem */
 
   /* Button border radius */
---radius-button: var(--radius-radius-6);
---radius-button-s: var(--radius-radius-4);
+  --radius-button: var(--radius-md);  /* 0.375rem */
+  --radius-button-s: var(--radius-sm);  /* 0.25rem */
 
   /* Form border radius */
-  --radius-form: var(--radius-radius-6);
-  --radius-form-s: var(--radius-radius-4);
+  --radius-form: var(--radius-md);  /* 0.375rem */
+  --radius-form-s: var(--radius-sm);  /* 0.25rem */
 
 
 /* =============================================== */
@@ -359,68 +359,75 @@
   --spacing-24: 6rem;
 
   /* Global shape labels */
-  --gap-global-shape-label-l: var(--spacing-spacing-2);
-  --gap-global-shape-label-s: var(--spacing-spacing-1_5);
+  --gap-global-shape-label-l: var(--spacing-2); /* 0.5rem */
+  --gap-global-shape-label-s: var(--spacing-1\.5); /* 0.375rem */
 
   /* Form spacing */
-  --gap-form-label-field: var(--spacing-spacing-2);
-  --gap-form-group-label: var(--spacing-spacing-0_5);
-  --gap-form-group-field: var(--spacing-spacing-1_5);
+  --gap-form-label-field: var(--spacing-2); /* 0.5rem */
+  --gap-form-group-label: var(--spacing-0\.5); /* 0.125rem */
+  --gap-form-group-field: var(--spacing-1\.5); /* 0.375rem */
 
   /* Button spacing */
-  --gap-button-action-l: var(--spacing-spacing-4);
-  --gap-button-action-s: var(--spacing-spacing-2);
+  --gap-button-action-l: var(--spacing-4); /* 1rem */
+  --gap-button-action-s: var(--spacing-2); /* 0.5rem */
 
   /* Form button padding */
-  --padding-form-button-h: var(--spacing-spacing-3);
-  --padding-form-button-v-l: var(--spacing-spacing-3);
-  --padding-form-button-v-s: var(--spacing-spacing-2);
+  --padding-form-button-h: var(--spacing-3); /* 0.75rem */
+  --padding-form-button-v-l: var(--spacing-3); /* 0.75rem */
+  --padding-form-button-v-s: var(--spacing-2); /* 0.5rem */
 
   /* Heading bottom padding */
-  --padding-heading-bottom-h1: var(--spacing-spacing-10);
-  --padding-heading-bottom-h2: var(--spacing-spacing-6);
-  --padding-heading-bottom-h3: var(--spacing-spacing-4);
-  --padding-heading-bottom-h4: var(--spacing-spacing-3);
-  --padding-heading-bottom-h5: var(--spacing-spacing-2);
-  --padding-heading-bottom-h6: var(--spacing-spacing-1_5);
+  --padding-heading-bottom-h1: var(--spacing-10); /* 2.5rem */
+  --padding-heading-bottom-h2: var(--spacing-6); /* 1.5rem */
+  --padding-heading-bottom-h3: var(--spacing-4); /* 1rem */
+  --padding-heading-bottom-h4: var(--spacing-3); /* 0.75rem */
+  --padding-heading-bottom-h5: var(--spacing-2); /* 0.5rem */
+  --padding-heading-bottom-h6: var(--spacing-1\.5); /* 0.375rem */
 
 
 /* =============================================== */
 /* ================== LAYOUT ===================== */
 /* =============================================== */
 
-  --widths-001: 5rem;
-  --widths-002: 12rem;
-  --widths-003: 19rem;
-  --widths-004: 26rem;
-  --widths-006: 40rem;
-  --widths-008: 54rem;
-  --widths-009: 61rem;
-  --widths-010: 68rem;
-  --widths-012: 82rem;
+  /* Container widths */
+  --container-7xs: 5rem;
+  --container-6xs: 12rem;
+  --container-5xs: 19rem;
+  --container-4xs: 26rem;
+  --container-3xs: 40rem;
+  --container-2xs: 54rem;
+  --container-xs: 61rem;
+  --container-sm: 68rem;
+  --container-md: 82rem;
+  --container-lg: 90rem;
 
-/* Column widths for desktop layout */
-  --layout-column-desktop-01: var(--widths-001);
-  --layout-column-desktop-02: var(--widths-002);
-  --layout-column-desktop-03: var(--widths-003);
-  --layout-column-desktop-04: var(--widths-004);
-  --layout-column-desktop-06: var(--widths-006);
-  --layout-column-desktop-08: var(--widths-008);
-  --layout-column-desktop-09: var(--widths-009);
-  --layout-column-desktop-10: var(--widths-010);
-  --layout-column-desktop-12: var(--widths-012);
-  --layout-column-desktop-target: 90rem; /* Target width for desktop */
+  /* Breakpoints */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 90rem;
+
+  /* Column widths for desktop layout */
+  --layout-desktop-target: var(--breakpoint-2xl); /* Target width for desktop */
+  --layout-desktop-workzone: var(--container-md); /* 12 columns */
+  --layout-column-desktop-06: var(--container-3xs); /* 6 columns */
+  --layout-column-desktop-04: var(--container-4xs); /* 4 columns */
+  --layout-column-desktop-03: var(--container-5xs); /* 3 columns */
+  --layout-column-desktop-02: var(--container-6xs); /* 2 columns */
+  --layout-column-desktop-01: var(--container-7xs); /* 1 column */
 
   /* Column widths for mobile layout */
-  --layout-column-mobile-01: var(--widths-m001);
-  --layout-column-mobile-02: var(--widths-m002);
-  --layout-column-mobile-small: var(--widths-m-s);
-  --layout-column-mobile-large: var(--widths-m-l);
-  --layout-column-mobile-target: 24.375rem; /* Target width for mobile */
+  --layout-column-mobile-01: var(--container-7xs);
+  --layout-column-mobile-02: var(--container-6xs);
+  --layout-column-mobile-small: var(--container-5xs);
+  --layout-column-mobile-large: var(--container-4xs);
+  --layout-column-mobile-target: var(--breakpoint-sm); /* Target width for mobile */
 
-  --layout-margin-main: var(--spacing-16); /* Main margin */
-  --layout-margin-main-mob: var(--spacing-4); /* Main margin for mobile */
-  --layout-gutter: var(--spacing-8);
+  /* Margins and gutters */
+  --layout-margin-main: var(--spacing-16); /* Main margin for desktop (64px) */
+  --layout-margin-main-mob: var(--spacing-4); /* Main margin for mobile (16px) */
+  --layout-gutter: var(--spacing-8); /* Spacing between columns (32px) */
   
 
 }
