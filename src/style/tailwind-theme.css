@@ -418,16 +418,14 @@
   --layout-column-desktop-01: var(--container-7xs); /* 1 column */
 
   /* Column widths for mobile layout */
-  --layout-column-mobile-01: var(--container-7xs);
-  --layout-column-mobile-02: var(--container-6xs);
-  --layout-column-mobile-small: var(--container-5xs);
-  --layout-column-mobile-large: var(--container-4xs);
   --layout-column-mobile-target: var(--breakpoint-sm); /* Target width for mobile */
+  --layout-column-mobile-02: var(--container-6xs); /* 2 columns */
+  --layout-column-mobile-01: var(--container-7xs); /* 1 column */
 
   /* Margins and gutters */
-  --layout-margin-main: var(--spacing-16); /* Main margin for desktop (64px) */
-  --layout-margin-main-mob: var(--spacing-4); /* Main margin for mobile (16px) */
-  --layout-gutter: var(--spacing-8); /* Spacing between columns (32px) */
+  --layout-margin-main: var(--spacing-16); /* Main margin for desktop */
+  --layout-margin-main-mob: var(--spacing-4); /* Main margin for mobile */
+  --layout-gutter: var(--spacing-8); /* Spacing between columns */
   
 
 }
