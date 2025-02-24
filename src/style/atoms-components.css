@@ -18,6 +18,7 @@
     text-decoration: none;
     border: 2px solid var(--color-information); 
     border-radius: var(--radius-sm);
+    padding: var(--spacing-1);
   }
   
   /* Link Disabled */
@@ -29,7 +30,7 @@
   
   /* ============== NOTIFICATION CHIP ================ */
   
-  /* .notification-chip {
+  /* .chip {
       display: inline-flex;
       align-items: center;
       padding: 0.25rem 0.75rem;
@@ -43,13 +44,8 @@
   } */
   
   /* Icon (optional) */
-  /* .notification-chip .icon {
+  /* .chip .icon {
       margin-right: 0.5rem;
-  } */
-  
-  /* Text */
-  /* .notification-chip span {
-      display: inline-block;
   } */
   
   /* ====================== TAG ======================= */
@@ -160,11 +156,10 @@
 
   /* Select default */
   .select {
-    appearance: none;
-    width: 100%;
-    padding: 8px 12px;
+    width: var(--container-5xs);
+    padding: var(--spacing-2); 
     border: 1px solid var(--color-neutral-000);
-    border-radius: 6px;
+    border-radius: var(--radius-md);
     background: var(--color-neutral-1000);
     cursor: pointer;
     position: relative;

@@ -1,8 +1,10 @@
 {
-    "label": "Label 10",
-    "options": [
-      { "value": "option1", "label": "Option 1" },
-      { "value": "option2", "label": "Option 2" },
-      { "value": "option3", "label": "Option 3" }
-    ]
-  }
+  "categories": [
+      { "value": "bateau", "label": "Bateau" },
+      { "value": "voilier", "label": "Voilier" }
+  ],
+  "locations": [
+      { "value": "ajaccio", "label": "Ajaccio" },
+      { "value": "bastia", "label": "Bastia" }
+  ]
+}
