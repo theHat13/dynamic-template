@@ -10,3 +10,5 @@
 /* Import components styles using the defined theme variables */
 @import "./style/components.css";
 
+/* Import atoms-components styles using the defined theme variables */
+@import "./style/atoms-components.css";
