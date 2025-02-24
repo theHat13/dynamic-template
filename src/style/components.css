@@ -113,3 +113,94 @@
   color: var(--color-neutral-100);
   pointer-events: none;
 }
+
+/* ============== NOTIFICATION CHIP ================ */
+
+/* .notification-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    background-color: #;
+    color: #;
+    font-size: 0.875rem;
+    font-weight: bold;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0.25rem;
+} */
+
+/* Icon (optional) */
+/* .notification-chip .icon {
+    margin-right: 0.5rem;
+} */
+
+/* Text */
+/* .notification-chip span {
+    display: inline-block;
+} */
+
+/* ====================== TAG ======================= */
+
+.tag {
+    display: inline-block;
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--radius-md);
+    text-transform: uppercase;
+    margin: var(--spacing-1);
+    font-weight: var(--heading-font-weight);
+}
+
+/* Tag Default */
+.tag-default {
+    background-color: var(--color-neutral-000);
+    color: var(--color-neutral-1000);
+}
+.tag-default-gray {
+    background-color: var(--color-neutral-360);
+    color: var(--color-neutral-000);
+    border: solid var(--color-neutral-100); 
+}
+
+/* Tag Information */
+.tag-information {
+    background-color: var(--color-information);
+    color: var(--color-neutral-1000);
+}
+.tag-information-gray {
+    background-color: var(--color-information-contrast-light-02);
+    color: var(--color-information);
+    border: solid var(--color-information-contrast-light-01);
+}
+
+/* Tag Success */
+.tag-success {
+    background-color: var(--color-success);
+    color: var(--color-neutral-1000);
+}
+.tag-success-gray {
+    background-color: var(--color-success-contrast-light-02);
+    color: var(--color-success);
+    border: solid var(--color-success-contrast-light-01); 
+}
+
+/* Tag Warning */
+.tag-warning {
+    background-color: var(--color-warning);
+    color: var(--color-neutral-1000);
+}
+.tag-warning-gray {
+    background-color: var(--color-warning-contrast-light-02);
+    color: var(--color-warning);
+    border: solid var(--color-warning-contrast-light-01); 
+}
+
+/* Tag Critical */
+.tag-critical {
+    background-color: var(--color-critical);
+    color: var(--color-neutral-1000);
+}
+.tag-critical-gray {
+    background-color: var(--color-critical-contrast-light-02);
+    color: var(--color-critical);
+    border: solid var(--color-critical-contrast-light-01); 
+}
