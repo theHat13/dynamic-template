@@ -163,7 +163,7 @@
 
 /* Base */
 .select {
-    width: var(--container-5xs);
+    width: 100%;
     padding: var(--spacing-2); 
     border-radius: var(--radius-md);
     border: 1px solid var(--color-neutral-000);
@@ -184,4 +184,58 @@
     color: var(--color-information-contrast-light-01);
     cursor: not-allowed;
     border-color: var(--color-information-contrast-light-01);
+}
+
+/* ===================== INPUT ===================== */
+
+/* Base */
+.input {
+    width: 100%;
+    padding: var(--spacing-2);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-form);
+    color: var(--color-form);
+    background: var(--color-neutral-1000);
+    font-size: var(--text-sm);
+    box-shadow: var(--shadow-xs);
+    transition: border-color 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+/* States */
+.input:hover {
+    border-color: var(--color-form-hover);
+}
+
+.input:focus {
+    outline: 2px solid var(--color-information);
+    border-color: var(--color-information);
+}
+
+.input:active {
+    border-color: var(--color-information);
+    color: var(--color-form-active);
+}
+
+/* Filled */
+.input:not(:placeholder-shown) {
+    border-color: var(--color-form);
+    color: var(--color-neutral-000);
+}
+
+/* Critical */
+.input.critical {
+    border-color: var(--color-critical);
+    color: var(--color-neutral-000);
+}
+
+.input.critical:focus {
+    outline: 2px solid var(--color-critical);
+}
+
+/* Disabled state */
+.input:disabled {
+    color: var(--color-disabled);
+    background: var(--color-disabled-contrast-light);
+    cursor: not-allowed;
+    border-color: var(--color-disabled);
 }
