@@ -1,7 +1,27 @@
+<!-- ========================= -->
+<!--    CHIP NOTIFICATION     -->
+<!-- ========================= -->
 
-<!-- Chip notification -->
+<!-- Default -->
+<span class="chip">1</span>
+<span class="chip">10</span>
+<span class="chip">999</span>
 
-{# <span class="chip">1</span>
-   <span class="chip">10</span>
-   <span class="chip">999</span>
-</div> #}
+<!-- ========================= -->
+<!-- HOW TO USE THIS COMPONENT -->
+<!-- ========================= -->
+
+<!-- 1. Insert a <span> element with the "chip" class -->
+<!-- 2. Replace the content with the number to display -->
+<!-- 3. Recommended usage:
+     - Indicate the number of unread notifications
+     - Display a quantity (e.g., items in stock, unread messages)
+     - Limit to a maximum value (e.g., "99+" if necessary) -->
+<!-- 4. This component can be combined with other UI elements (e.g., icons, buttons) -->
+
+{# Example integration with an icon:
+   <button class="btn">
+       <i class="icon-bell"></i>
+       <span class="chip">3</span>
+   </button>
+#}

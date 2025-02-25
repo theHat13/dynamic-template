@@ -1,10 +1,20 @@
 {
   "categories": [
-      { "value": "bateau", "label": "Bateau" },
-      { "value": "voilier", "label": "Voilier" }
-  ],
+    { "value": "warrior", "label": "Warrior" },
+    { "value": "rogue", "label": "Rogue" },
+    { "value": "sorcerer", "label": "Sorcerer" },
+    { "value": "paladin", "label": "Paladin of Justice" },
+    { "value": "necromancer", "label": "Necromancer" },
+    { "value": "bard", "label": "Bard (Loot Included)" },
+    { "value": "beastmaster", "label": "Beastmaster" }
+],
   "locations": [
-      { "value": "ajaccio", "label": "Ajaccio" },
-      { "value": "bastia", "label": "Bastia" }
-  ]
+    { "value": "stormhold", "label": "Stormhold Citadel" },
+    { "value": "shadowmere", "label": "Shadowmere Swamps" },
+    { "value": "eldoria", "label": "Eldoria, the Ancient Kingdom" },
+    { "value": "dragonspire", "label": "Dragonspire Peak" },
+    { "value": "mysthaven", "label": "Mysthaven Village" },
+    { "value": "darkhollow", "label": "Darkhollow Dungeon" },
+    { "value": "arcane-sanctum", "label": "Arcane Sanctum" }
+]
 }

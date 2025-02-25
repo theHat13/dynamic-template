@@ -1,19 +1,49 @@
----
-title: Test
-description: This is the component test page.
-layout: '00-organisms-global/base.njk'
+--- 
+title: Test 
+description: This is the component test page. 
+layout: '00-organisms-global/base.njk' 
 ---
 
-{% from "02-atoms-form/select.njk" import selectBox %}
+{% from "02-atoms-inputs/select.njk" import renderSelect %}
 
 <div class="mt-6 p-4 mx-auto max-w-xl">
     <h1 class="typography-h1 text-center">Component Test Page</h1>
 
     <section class="mt-6 mb-6 w-1/2 mx-auto">
+        <h2 class="typography-h2">Link</h2>
+
+        {% include "02-atoms-navigation/link.njk" %}
+
+    </section>
+
+    <section class="mt-6 mb-6 w-1/2 mx-auto">
+        <h2 class="typography-h2">Tag</h2>
+
+        {% include "02-atoms-notifications/tag.njk" %}
+
+    </section>
+
+    <section class="mt-6 mb-6 w-1/2 mx-auto">
+
+    <h2 class="typography-h2">Chip</h2>
+
+        {% include "02-atoms-notifications/chip.njk" %}
+
+    </section>
+
+    <section class="mt-6 mb-6 w-1/2 mx-auto">
+
+    <h2 class="typography-h2">Tooltip</h2>
+
+        {% include "02-atoms-notifications/tooltip.njk" %}
+
+    </section>
+
+    <section class="mt-6 mb-6 w-1/2 mx-auto">
         <h2 class="typography-h2">Select</h2>
 
-        {{ selectBox("categories", select.categories) }}
-        {{ selectBox("locations", select.locations) }}
+        {{ renderSelect("locations", select.locations) }}
+
     </section>
 </div>
 
