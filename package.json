@@ -4,8 +4,8 @@
   "description": "These are the starting files used by [HAT](https://#) to create a dynamic site.",
   "main": "index.js",
   "scripts": {
-    "start": "npx @tailwindcss/cli -i ./src/main.css -o ./public/css/output.css --watch & eleventy --serve --watch",
-    "build": "eleventy"
+    "start": "rm -rf .cache && npx @tailwindcss/cli -i ./src/main.css -o ./public/css/output.css --watch & eleventy --serve",
+    "build": "rm -rf .cache && eleventy"
   },
   "repository": {
     "type": "git",

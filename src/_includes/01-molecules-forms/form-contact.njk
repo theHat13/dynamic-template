@@ -10,7 +10,7 @@
         <input type="text" name="bot-field" style="display: none;">
 
         <!-- Form inputs -->
-        {% for input in contact.inputs %}
+        {# {% for input in contact.inputs %}
             {% set id = input.id %}
             {% set name = input.name %}
             {% set label = input.label %}
@@ -22,7 +22,7 @@
             {% set maxlength = input.maxlength %}
 
             {% include "02-atoms-inputs/input-text.njk" %}
-        {% endfor %}
+        {% endfor %} #}
 
         <!-- Message textarea -->
         <div class="form-group">
