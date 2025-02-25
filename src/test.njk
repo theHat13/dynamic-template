@@ -4,7 +4,7 @@ description: This is the component test page.
 layout: '00-organisms-global/base.njk' 
 ---
 
-{% from "02-atoms-inputs/select.njk" import renderSelect %}
+{% from "02-atoms-form/select.njk" import renderSelect %}
 
 <div class="mt-6 p-4 mx-auto max-w-xl">
     <h1 class="typography-h1 text-center">Component Test Page</h1>
@@ -43,6 +43,13 @@ layout: '00-organisms-global/base.njk'
         <h2 class="typography-h2">Select</h2>
 
         {{ renderSelect("locations", select.locations) }}
+
+    </section>
+
+    <section class="mt-6 mb-6 w-1/2 mx-auto">
+        <h2 class="typography-h2">Input-text</h2>
+
+        {% include "02-atoms-form/input-text.njk" %}
 
     </section>
 </div>

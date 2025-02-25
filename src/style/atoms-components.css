@@ -185,3 +185,60 @@
     cursor: not-allowed;
     border-color: var(--color-information-contrast-light-01);
 }
+
+/* ===================== INPUT TEXT ===================== */
+
+/* ===================== INPUT TEXT ===================== */
+
+/* Base */
+.input-text {
+    width: 100%;
+    padding: var(--spacing-2);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-neutral-300);
+    color: var(--color-neutral-300);
+    background: var(--color-neutral-1000);
+    font-size: var(--text-sm);
+    box-shadow: var(--shadow-xs);
+    transition: border-color 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+/* States */
+.input-text:hover {
+    border-color: var(--color-neutral-500);
+}
+
+.input-text:focus {
+    outline: 2px solid var(--color-information);
+    border-color: var(--color-information);
+}
+
+.input-text:active {
+    border-color: var(--color-information);
+}
+
+/* Filled */
+.input-text:not(:placeholder-shown) {
+    border-color: var(--color-success);
+    color: var(--color-neutral-000);
+}
+
+/* Critical */
+.input-text.critical {
+    border-color: var(--color-danger);
+    background: var(--color-danger-contrast-light-01);
+    color: var(--color-neutral-000);
+}
+
+.input-text.critical:focus {
+    outline: 2px solid var(--color-danger);
+}
+
+/* Disabled state */
+.input-text:disabled {
+    color: var(--color-neutral-000);
+    background: var(--color-neutral-900);
+    cursor: not-allowed;
+    border-color: var(--color-neutral-600);
+}
+

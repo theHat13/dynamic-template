@@ -1,0 +1,42 @@
+<!-- ========================= -->
+<!--        INPUT TEXT        -->
+<!-- ========================= -->
+
+<!-- Default email input field -->
+
+
+<div class="space-y-4 max-w-xs">
+  
+  <!-- Default -->
+  <div>
+    <label for="Label" class="block typography-label-l">Label * </label>
+    <input type="placeholder" id="Placeholder" placeholder="Placeholder" class="input-text"/>
+  </div>
+
+  <!-- Filled -->
+  <div>
+    <label for="input-filled" class="block typography-label-l">Filled *</label>
+    <input type="text" id="input-filled" value="Filled value" class="input-text"/>
+  </div>
+
+  <!-- Critical (Error) -->
+  <div>
+    <label for="input-critical" class="block typography-label-l text-danger">Error *</label>
+    <input type="text" id="input-critical" placeholder="Placeholder" class="input-text critical"/>
+  </div>
+
+  <!-- Disabled -->
+  <div>
+    <label for="input-disabled" class="block typography-label-l">Disabled *</label>
+    <input type="text" id="input-disabled" placeholder="Placeholder" class="input-text" disabled/>
+  </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- HOW TO USE THIS COMPONENT -->
+<!-- ========================= -->
+
+<!-- 1. Wrap the input inside a <div> -->
+<!-- 2. Use <label> for accessibility -->
+<!-- 3. Customize styles with utility classes -->
