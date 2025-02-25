@@ -5,6 +5,7 @@ layout: '00-organisms-global/base.njk'
 ---
 
 {% from "02-atoms-form/select.njk" import renderSelect %}
+{% from "02-atoms-form/input-select.njk" import renderInput %}
 
 <div class="mt-6 p-4 mx-auto max-w-xl">
     <h1 class="typography-h1 text-center">Component Test Page</h1>
@@ -50,6 +51,13 @@ layout: '00-organisms-global/base.njk'
         <h2 class="typography-h2">Input-text</h2>
 
         {% include "02-atoms-form/input-text.njk" %}
+
+    </section>
+
+    <section class="mt-6 mb-6 w-1/2 mx-auto">
+        <h2 class="typography-h2">Input-select</h2>
+
+        {{ renderInput("fools_of_fate", select.fools_of_fate) }}
 
     </section>
 </div>

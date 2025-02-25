@@ -163,7 +163,7 @@
 
 /* Base */
 .select {
-    width: var(--container-5xs);
+    width: 100%;
     padding: var(--spacing-2); 
     border-radius: var(--radius-md);
     border: 1px solid var(--color-neutral-000);
@@ -186,17 +186,15 @@
     border-color: var(--color-information-contrast-light-01);
 }
 
-/* ===================== INPUT TEXT ===================== */
-
-/* ===================== INPUT TEXT ===================== */
+/* ===================== INPUT ===================== */
 
 /* Base */
-.input-text {
+.input {
     width: 100%;
     padding: var(--spacing-2);
     border-radius: var(--radius-md);
-    border: 1px solid var(--color-neutral-300);
-    color: var(--color-neutral-300);
+    border: 1px solid var(--color-form);
+    color: var(--color-form);
     background: var(--color-neutral-1000);
     font-size: var(--text-sm);
     box-shadow: var(--shadow-xs);
@@ -204,41 +202,40 @@
 }
 
 /* States */
-.input-text:hover {
-    border-color: var(--color-neutral-500);
+.input:hover {
+    border-color: var(--color-form-hover);
 }
 
-.input-text:focus {
+.input:focus {
     outline: 2px solid var(--color-information);
     border-color: var(--color-information);
 }
 
-.input-text:active {
+.input:active {
     border-color: var(--color-information);
+    color: var(--color-form-active);
 }
 
 /* Filled */
-.input-text:not(:placeholder-shown) {
-    border-color: var(--color-success);
+.input:not(:placeholder-shown) {
+    border-color: var(--color-form);
     color: var(--color-neutral-000);
 }
 
 /* Critical */
-.input-text.critical {
-    border-color: var(--color-danger);
-    background: var(--color-danger-contrast-light-01);
+.input.critical {
+    border-color: var(--color-critical);
     color: var(--color-neutral-000);
 }
 
-.input-text.critical:focus {
-    outline: 2px solid var(--color-danger);
+.input.critical:focus {
+    outline: 2px solid var(--color-critical);
 }
 
 /* Disabled state */
-.input-text:disabled {
-    color: var(--color-neutral-000);
-    background: var(--color-neutral-900);
+.input:disabled {
+    color: var(--color-disabled);
+    background: var(--color-disabled-contrast-light);
     cursor: not-allowed;
-    border-color: var(--color-neutral-600);
+    border-color: var(--color-disabled);
 }
-

@@ -1,0 +1,30 @@
+<!-- ========================= -->
+<!--       INPUT SELECT        -->
+<!-- ========================= -->
+
+{% macro renderInput(name, options) %}
+<div>
+    <label for="input" class="block typography-label-l"> Label * </label>
+
+    <div class="relative mt-1.5">
+      <input type="text" list="RPGCharacterList" id="RPGCharacters" class="input" placeholder="Placeholder"/>
+
+    <datalist name="RPGCharacters" id="RPGCharacterList">
+        {% for option in options %}
+          <option value="{{ option.value }}">{{ option.label }}</option>
+        {% endfor %}
+  </datalist>
+</div>
+{% endmacro %}
+
+<!-- ========================= -->
+<!-- HOW TO USE THIS COMPONENT -->
+<!-- ========================= -->
+
+<!-- 1. Import the macro at the top of your page -->
+{# {% from "02-atoms-form/input-select.njk" import renderInput %} #}
+
+<!-- 2. Insert the component in your template -->
+{# {{ renderSelect("categories", select.categories) }} #}
+
+<!-- 3. Replace "categories" with your actual key from select.json -->
