@@ -56,7 +56,7 @@ npm install tailwindcss @tailwindcss/cli || error_exit "Error installing Tailwin
 
 # Initialize Eleventy
 echo "Initializing Eleventy..."
-npx eleventy --serve || error_exit "Error initializing Eleventy."
+npx eleventy || error_exit "Error initializing Eleventy."
 
 # Ensure TailwindCSS compiles styles
 echo "Building TailwindCSS..."
