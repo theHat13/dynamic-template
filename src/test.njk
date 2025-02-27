@@ -5,6 +5,7 @@ layout: '00-organisms-global/base.njk'
 ---
 
 <!-- Import macros for components -->
+{% from "02-atoms-navigation/link.njk" import renderLink %}
 {% from "02-atoms-form/select.njk" import renderSelect %}
 {% from "02-atoms-form/input-select.njk" import renderInput %}
 {# {% from "02-atoms-form/input-multi-select.njk" import renderMultiSelect %} #}
@@ -13,10 +14,17 @@ layout: '00-organisms-global/base.njk'
     <!-- Page title -->
     <h1 class="typography-h1 text-center">Component Test Page</h1>
 
+    <!-- Rotate icon on hover -->
+    {# <button class="p-2 bg-blue-500 text-white rounded hover:rotate-180 transition-transform duration-300">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+    </button> #}
+
     <!-- Link component test -->
     <section class="mt-6 mb-6 w-1/2 mx-auto">
         <h2 class="typography-h2">link</h2>
-        {% include "02-atoms-navigation/link.njk" %}
+        {{ renderLink("link_home", links.link_home) }}
     </section>
 
     <!-- Tag component test -->
@@ -27,14 +35,14 @@ layout: '00-organisms-global/base.njk'
 
     <!-- Chip component test -->
     <section class="mt-6 mb-6 w-1/2 mx-auto">
-    <h2 class="typography-h2">chip</h2>
+        <h2 class="typography-h2">chip</h2>
         {% include "02-atoms-notifications/chip.njk" %}
 
     </section>
 
     <!-- Tooltip component test -->
     <section class="mt-6 mb-6 w-1/2 mx-auto">
-    <h2 class="typography-h2">tooltip</h2>
+        <h2 class="typography-h2">tooltip</h2>
         {% include "02-atoms-notifications/tooltip.njk" %}
     </section>
 
@@ -63,4 +71,3 @@ layout: '00-organisms-global/base.njk'
         {% include "02-atoms-form/input-multi-select.njk" %}
     </section>
 </div>
-
