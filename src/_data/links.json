@@ -1,0 +1,28 @@
+{
+    "link_home": {
+      "name": "home",
+      "href": "/",
+      "text": "Accueil"
+    },
+    "link_services": {
+      "name": "services",
+      "href": "/services",
+      "text": "Nos Services"
+    },
+    "link_portfolio": {
+      "name": "portfolio",
+      "href": "/portfolio",
+      "text": "Portfolio"
+    },
+    "link_about": {
+      "name": "about",
+      "href": "/about",
+      "text": "À propos"
+    },
+    "link_contact": {
+      "name": "contact",
+      "href": "/contact",
+      "text": "Contact"
+    }
+  }
+  

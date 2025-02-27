@@ -9,17 +9,14 @@
 /* ============== FONT PROPERTIES ================ */
 /* =============================================== */
 
-  /* Default font */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+/* Default font */
+--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-
-  /* Font weight for display text */
-  --display-font-weight: var(--font-weight-bold);
 
 /* ================== DISPLAY ==================== */
 
-  /* Font weight for display text */
-  --display-font-weight: var(--font-weight-bold);
+/* Font weight for display text */
+--display-font-weight: var(--font-weight-bold);
 
   /* Display large bold */
   --display-l-font-size: var(--text-7xl);
@@ -45,67 +42,64 @@
   --display-mobile-s-letter-spacing: 0;
   --display-mobile-s-paragraph-spacing: 2.5rem;
 
-/* =============================================== */
-
-  /* Font weight for heading text */
-  --heading-font-weight: var(--font-weight-bold);
 
   /* ================== HEADING ==================== */
   
+  /* Font weight for heading text */
+  --heading-font-weight: var(--font-weight-bold);
+
     /* Heading h1 */
-    --h1-font-size: var(--text-4xl);  /* Correspond à la taille Tailwind text-4xl */
-    --h1-line-height: var(--line-height-10); /* Utilisation d'une valeur standard de Tailwind */
+    --h1-font-size: var(--text-4xl);
+    --h1-line-height: var(--text-4xl--line-height);
     --h1-letter-spacing: -0.05em;
   
     /* Heading h2 */
     --h2-font-size: var(--text-3xl);  
-    --h2-line-height: var(--line-height-9); 
+    --h2-line-height: var(--text-3xl--line-height); 
     --h2-letter-spacing: -0.025em;
   
     /* Heading h3 */
     --h3-font-size: var(--text-2xl);  
-    --h3-line-height: var(--line-height-8);  
+    --h3-line-height: var(--text-2xl--line-height); 
     --h3-letter-spacing: -0.05em;
   
     /* Heading h4 */
     --h4-font-size: var(--text-xl);  
-    --h4-line-height: var(--line-height-7);  
+    --h4-line-height: var(--text-xl--line-height); 
     --h4-letter-spacing: -0.05em;
   
     /* Heading h5 */
     --h5-font-size: var(--text-lg);  
-    --h5-line-height: var(--line-height-6);  
+    --h5-line-height: var(--text-lg--line-height);  
     --h5-letter-spacing: -0.05em;
   
     /* Heading h6 */
     --h6-font-size: var(--text-base);  
-    --h6-line-height: var(--line-height-5);  
+    --h6-line-height: var(--text-base--line-height);  
     --h6-letter-spacing: -0.05em;
 
-/* =============================================== */
-
-    /* Font weight for heading text */
-    --body-font-weight: var(--font-weight-regular);
 
   /* ================== BODY ===================== */
   
+  /* Font weight for body text */
+  --body-font-weight: var(--font-weight-regular);
+
     /* Body large regular */
-    --body-l-font-size: var(--text-base); /* Tailwind text-base */
-    --body-l-line-height: var(--line-height-6); /* Tailwind line-height-6 */
+    --body-l-font-size: var(--text-base);
+    --body-l-line-height: var(--text-base--line-height);
     --body-l-paragraph-spacing: 3rem;
   
     /* Body small regular */
-    --body-s-font-size: var(--text-sm);  /* Tailwind text-sm */
-    --body-s-line-height: var(--line-height-5);  /* Tailwind line-height-5 */
+    --body-s-font-size: var(--text-sm);
+    --body-s-line-height: var(--text-sm--line-height);
     --body-s-paragraph-spacing: 2.5rem;
 
-/* =============================================== */
-
-    /* Font weight for heading text */
-    --label-font-weight: var(--font-weight-medium);
 
   /* =================== LABEL ===================== */
   
+    /* Font weight for label text */
+    --label-font-weight: var(--font-weight-medium);
+
     /* Label large regular */
     --label-l-font-size: var(--text-base);
     --label-l-letter-spacing: -0.05em;
@@ -115,11 +109,13 @@
     --label-s-letter-spacing: -0.025em;
   
     /* Component xsmall tag */
-    --label-xs-font-size: var(--text-xs);  /* Tailwind text-xs */
-    --label-xs-line-height: var(--line-height-4); /* Tailwind line-height-4 */
+    --label-xs-font-size: var(--text-xs);
+    --label-xs-line-height: var(--text-xs--line-height);
     --label-xs-letter-spacing: 0.025em;
-  
+
+
   /* ================== PLACEHOLDER ================== */
+
     --placeholder-font-size: var(--text-base);
     --placeholder-letter-spacing: -0.05em;
 
@@ -224,6 +220,10 @@
   --color-critical-800: #ffd6db;
   --color-critical-900: #fff0f1;
 
+/* =============================================== */
+/* =================== COLORS ==================== */
+/* =============================================== */
+
 /* =================== TOKENS ==================== */
 /* =============================================== */
 
@@ -239,72 +239,73 @@
   --color-contrast-light-01: #4C537C;
   --color-contrast-light-02: #777FB0;
   --color-contrast-light-03: #C8CDEC;
-  --color-contrast-light-04: #E5E5E5;
+  --color-contrast-light-04: var(--color-neutral-800);
 
   /* =========== BUTTON PRIMARY COLORS ========= */
 
-  --color-button-prim: #8C846E;
-  --color-button-prim-hover: #6D6755;
-  --color-button-prim-active: #8C846E;
-  --color-button-prim-contrast-high: #FFFFFF;
+  --color-button-prim: var(--color-primary-500);
+  --color-button-prim-hover: var(--color-primary-400);
+  --color-button-prim-active: var(--color-primary-500);
+  --color-button-prim-contrast-high: var(--color-neutral-1000);
 
   /* ========= BUTTON SECONDARY COLORS ======== */
 
-  --color-button-sec: #8C846E;
-  --color-button-sec-hover: #6D6755;
-  --color-button-sec-active: #8C846E;
-  --color-button-sec-hover-light: #F5F6FF;
-  --color-button-sec-contrast-high: #FFFFFF;
+  --color-button-sec: var(--color-primary-500);
+  --color-button-sec-hover: var(--color-primary-400);
+  --color-button-sec-active: var(--color-primary-500);
+  --color-button-sec-hover-light: var(--color-neutral-100);
+  --color-button-sec-contrast-high: var(--color-neutral-1000);
 
   /* ========= BUTTON TERTIARY COLORS ======== */
 
-  --color-button-ter: #0D4123;
-  --color-button-ter-hover: #0E670B;
+  --color-button-ter: var(--color-success-900);
+  --color-button-ter-hover: var(--color-success-700);
 
   /* ============== FORM COLORS ============== */
 
   --color-form: #4C537C;
   --color-form-hover: #222437;
-  --color-form-active: #0D0E14;
-  --color-control-checked: #8C846E;
+  --color-form-active: var(--color-default);
+  --color-control-checked: var(--color-primary-500);
 
   /* ============ DISABLED COLORS ============ */
 
   --color-disabled: #61699E;
-  --color-disabled-contrast-light: #EEF0FC;
+  --color-disabled-contrast-light: var(--color-neutral-200);
 
   /* ============ SEMANTIC COLORS ============ */
 
   /* Information */
 
-  --color-information: #0047D3;
-  --color-information-contrast-light-01: #D0E2FF;
-  --color-information-contrast-light-02: #EBF7FF;
-  --color-information-focus: #0759FF;
+  --color-information: var(--color-information-270);
+  --color-information-contrast-light-01: var(--color-information-800);
+  --color-information-contrast-light-02: var(--color-information-900);
+  --color-information-focus: var(--color-information-300);
 
   /* Success */
 
-  --color-success: #00692A;
-  --color-success-contrast-light-01: #A2F6C4;
-  --color-success-contrast-light-02: #DAFBE7;
+  --color-success: var(--color-success-120);
+  --color-success-contrast-light-01: var(--color-success-700);
+  --color-success-contrast-light-02: var(--color-success-800);
 
   /* Warning */
 
-  --color-warning: #C74900;
-  --color-warning-contrast-light-01: #FFE0CC;
-  --color-warning-contrast-light-02: #FFEFE4;
-  --color-warning-contrast-dark: #A43C00;
+  --color-warning: var(--color-warning-300);
+  --color-warning-contrast-light-01: var(--color-warning-800);
+  --color-warning-contrast-light-02: var(--color-warning-900);
+  --color-warning-contrast-dark: var(--color-warning-200);
 
   /* Critical */
 
-  --color-critical: #D20319;
-  --color-critical-contrast-light-01: #FFD6DB;
-  --color-critical-contrast-light-02: #FFF0F1;
+  --color-critical: var(--color-critical-300);
+  --color-critical-contrast-light-01: var(--color-critical-800);
+  --color-critical-contrast-light-02: var(--color-critical-900);
+
 
   /* =========== GRADIENTS COLORS =========== */
 
   --color-gradient-header: linear-gradient(0deg, var(--color-utility-primary-30), var(--color-utility-primary-10));
-  --color-gradient-delet-cell: linear-gradient(-90deg, var(--color-utility-critical-100), #fff0f100);
+  --color-gradient-delet-cell: linear-gradient(-90deg, var(--color-utility-critical-100), var(--color-utility-critical-00));
 
 /* =============================================== */
 /* ================ ELEVATION ==================== */
