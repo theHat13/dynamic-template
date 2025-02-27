@@ -1,0 +1,29 @@
+<!-- ========================= -->
+<!--    INPUT MULTI SELECT     -->
+<!-- ========================= -->
+
+{# {% macro renderMultiSelect(name, options) %}
+    <label>Multi-select
+        <input mbsc-input id="input-multi" data-dropdown="true" />
+    </label>
+    <div class="mt-6 mb-6 mx-auto">
+        <select class="select" id="multiple-group-select">
+            {% for option in options %}
+                <option value="{{ option.value }}">{{ option.label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endmacro %} #}
+
+
+<!-- ========================= -->
+<!-- HOW TO USE THIS COMPONENT -->
+<!-- ========================= -->
+
+<!-- 1. Import the macro at the top of your page -->
+{# {% from "02-atoms-form/input-multi-select.njk" import renderInput %} #}
+
+<!-- 2. Insert the component in your template -->
+{# {{ renderMultiSelect("categories", select.categories) }} #}
+
+<!-- 3. Replace "categories" with your actual key from select.json -->

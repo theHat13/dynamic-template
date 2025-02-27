@@ -4,61 +4,63 @@ description: This is the component test page.
 layout: '00-organisms-global/base.njk' 
 ---
 
+<!-- Import macros for components -->
 {% from "02-atoms-form/select.njk" import renderSelect %}
 {% from "02-atoms-form/input-select.njk" import renderInput %}
+{# {% from "02-atoms-form/input-multi-select.njk" import renderMultiSelect %} #}
 
 <div class="mt-6 p-4 mx-auto max-w-xl">
+    <!-- Page title -->
     <h1 class="typography-h1 text-center">Component Test Page</h1>
 
+    <!-- Link component test -->
     <section class="mt-6 mb-6 w-1/2 mx-auto">
-        <h2 class="typography-h2">Link</h2>
-
+        <h2 class="typography-h2">link</h2>
         {% include "02-atoms-navigation/link.njk" %}
-
     </section>
 
+    <!-- Tag component test -->
     <section class="mt-6 mb-6 w-1/2 mx-auto">
-        <h2 class="typography-h2">Tag</h2>
-
+        <h2 class="typography-h2">tag</h2>
         {% include "02-atoms-notifications/tag.njk" %}
-
     </section>
 
+    <!-- Chip component test -->
     <section class="mt-6 mb-6 w-1/2 mx-auto">
-
-    <h2 class="typography-h2">Chip</h2>
-
+    <h2 class="typography-h2">chip</h2>
         {% include "02-atoms-notifications/chip.njk" %}
 
     </section>
 
+    <!-- Tooltip component test -->
     <section class="mt-6 mb-6 w-1/2 mx-auto">
-
-    <h2 class="typography-h2">Tooltip</h2>
-
+    <h2 class="typography-h2">tooltip</h2>
         {% include "02-atoms-notifications/tooltip.njk" %}
-
     </section>
 
+    <!-- Select component test -->
     <section class="mt-6 mb-6 w-1/2 mx-auto">
-        <h2 class="typography-h2">Select</h2>
-
+        <h2 class="typography-h2">select</h2>
         {{ renderSelect("locations", select.locations) }}
-
     </section>
 
+    <!-- Input text component test -->
     <section class="mt-6 mb-6 w-1/2 mx-auto">
-        <h2 class="typography-h2">Input-text</h2>
-
+        <h2 class="typography-h2">input-text</h2>
         {% include "02-atoms-form/input-text.njk" %}
-
     </section>
 
+    <!-- Input select component test -->
     <section class="mt-6 mb-6 w-1/2 mx-auto">
-        <h2 class="typography-h2">Input-select</h2>
-
+        <h2 class="typography-h2">input-select</h2>
         {{ renderInput("fools_of_fate", select.fools_of_fate) }}
+    </section>
 
+    <!-- Input multi-select component test -->
+    <section class="mt-6 mb-6 w-1/2 mx-auto">
+        <h2 class="typography-h2">input-multi-select</h2>
+        {# {{ renderMultiSelect("potion_tags", select.potion_tags) }} #}
+        {% include "02-atoms-form/input-multi-select.njk" %}
     </section>
 </div>
 

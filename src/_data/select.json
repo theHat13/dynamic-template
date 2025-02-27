@@ -36,13 +36,22 @@
     { "value": "zara-oathbreaker", "label": "Zara Oathbreaker (Ex-Paladin, Has Regrets)" },
     { "value": "wren-ironfoot", "label": "Wren Ironfoot (Dwarven Blacksmith, Hates Elves)" }
   ],
-  "shadows_and_mysteries": [
-    { "value": "malfizar-doom", "label": "Malfizar Doom (Edgy Necromancer)" },
-    { "value": "vex-ravenwood", "label": "Vex Ravenwood (Brooding Elf Dark Mage)" },
-    { "value": "tilda-fireheart", "label": "Tilda Fireheart (Paladin with an Attitude)" },
-    { "value": "zug-krak", "label": "Zug Krak (Orc with Anger Issues)" },
-    { "value": "dark-velka", "label": "Dark Velka (Mysterious Witch, Possibly Cursed)" },
-    { "value": "felix-shadow", "label": "Felix Shadow (Master Thief, Hates the Sun)" },
-    { "value": "sable-nightwhisper", "label": "Sable Nightwhisper (Silent Assassin, Never Smiles)" }
-  ]
+  "potion_tags": [
+    { "value": "bardvoice", "label": "BardVoice" },
+    { "value": "mimicbait", "label": "MimicBait" },
+    { "value": "goblindew", "label": "GoblinDew" },
+    { "value": "vampirekiss", "label": "VampireKiss" },
+    { "value": "sleepydrop", "label": "SleepyDrop" },
+    { "value": "truthserum", "label": "TruthSerum" },
+    { "value": "cursedelixir", "label": "CurseElixir" }
+],
+  "weapon_tags": [
+    { "value": "bonksaber", "label": "BonkSaber" },
+    { "value": "doomstick", "label": "DoomStick" },
+    { "value": "stabby", "label": "Stabby" },
+    { "value": "orcbeater", "label": "OrcBeater" },
+    { "value": "dragonboop", "label": "DragonBoop" },
+    { "value": "yeetbow", "label": "YeetBow" },
+    { "value": "sneakyblade", "label": "SneakyBlade" }
+]
 }
