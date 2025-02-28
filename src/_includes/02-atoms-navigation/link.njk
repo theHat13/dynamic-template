@@ -2,12 +2,10 @@
 <!--          LINK            -->
 <!-- ========================= -->
 
-{% macro renderLink(options) %}
-  {% for option in options %}
-    <a href="{{ option.href }}" class="typography-label-l link">
-      {{ option.text }}
-    </a>
-  {% endfor %}
+{% macro renderLink(option) %}
+  <a href="{{ option.href }}" class="typography-label-l link">
+    {{ option.text }}
+  </a>
 {% endmacro %}
 
 <!-- ========================= -->
@@ -18,6 +16,6 @@
 {# {% from "02-atoms-navigation/link.njk" import renderLink %} #}
 
 <!-- 2. Insert the component in your template -->
-{# {{ renderLink("links", links.link_home) }} #}
+{# {{ renderLink(links.link_home) }} #}
 
-<!-- 3. Replace "categories" with your actual key from select.json -->
+<!-- 3. Replace "link_home" with your actual key from select.json corresponding to the desired options (e.g., "link_home", "link_services", etc.) -->
