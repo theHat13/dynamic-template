@@ -4,16 +4,17 @@
 
 {% macro renderInput(name, options) %}
 <div>
-    <label for="input" class="block typography-label-l"> Label * </label>
+    <label for="{{ name }}" class="block typography-label-l"> Label * </label>
 
     <div class="relative mt-1.5">
-      <input type="text" list="RPGCharacterList" id="RPGCharacters" class="input" placeholder="Placeholder"/>
+        <input type="text" list="{{ name }}List" id="{{ name }}" name="{{ name }}" class="input" placeholder="Placeholder"/>
 
-    <datalist name="RPGCharacters" id="RPGCharacterList">
-        {% for option in options %}
-          <option value="{{ option.value }}">{{ option.label }}</option>
-        {% endfor %}
-  </datalist>
+        <datalist id="{{ name }}List">
+            {% for option in options %}
+                <option value="{{ option.value }}">{{ option.label }}</option>
+            {% endfor %}
+        </datalist>
+    </div>
 </div>
 {% endmacro %}
 
@@ -25,6 +26,8 @@
 {# {% from "02-atoms-form/input-select.njk" import renderInput %} #}
 
 <!-- 2. Insert the component in your template -->
-{# {{ renderSelect("categories", select.categories) }} #}
+{# {{ renderInput("RPGCharacters", select.categories) }} #}
 
-<!-- 3. Replace "categories" with your actual key from select.json -->
+<!-- 3. Replace :
+  1. "RPGCharacters" with the desired name attribute for the input field (e.g., "characterClass", "selectedRole", etc.)
+  2. "categories" with the actual key from select.json corresponding to the desired options (e.g., "locations", "weapons", etc.) -->

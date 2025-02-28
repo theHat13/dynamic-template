@@ -4,7 +4,7 @@
 
 {% macro renderSelect(name, options) %}
     <div class="mt-6 mb-6 mx-auto">
-        <select class="select">
+        <select name="{{ name }}" class="select">
             {% for option in options %}
                 <option value="{{ option.value }}">{{ option.label }}</option>
             {% endfor %}
