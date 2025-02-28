@@ -7,6 +7,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('./src');
   // Copy admin interface files to output
   eleventyConfig.addPassthroughCopy('./src/admin');
+  // Copy docs files to output
+  eleventyConfig.addPassthroughCopy('./src/docs');
   // Add shortcode to display current year dynamically
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
   // Add filter to format post date
