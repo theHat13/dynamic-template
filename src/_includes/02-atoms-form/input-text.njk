@@ -2,40 +2,50 @@
 <!--        INPUT TEXT        -->
 <!-- ========================= -->
 
-<div class="space-y-4 max-w-xs">
+{% macro renderInputText(id, name, label, required = false, placeholder = "", value = "", type = "text", className = "", disabled = false, critical = false) %}
+<div>
+  <label for="{{ id }}" class="block typography-label-l {% if critical %}text-danger{% endif %}">
+    {{ label }} {% if required %}*{% endif %}
+  </label>
   
-  <!-- Default -->
-  <div>
-    <label for="Label" class="block typography-label-l">Label * </label>
-    <input type="placeholder" id="Placeholder" placeholder="Placeholder" class="input"/>
-  </div>
-
-  <!-- Filled -->
-  <div>
-    <label for="input-filled" class="block typography-label-l">Filled *</label>
-    <input type="text" id="input-filled" value="Filled value" class="input"/>
-  </div>
-
-  <!-- Critical -->
-  <div>
-    <label for="input-critical" class="block typography-label-l text-danger">Critical *</label>
-    <input type="text" id="input-critical" placeholder="Placeholder" class="input critical"/>
-  </div>
-
-  <!-- Disabled -->
-  <div>
-    <label for="input-disabled" class="block typography-label-l">Disabled *</label>
-    <input type="text" id="input-disabled" placeholder="Placeholder" class="input" disabled/>
-  </div>
-
+  <input 
+    type="{{ type }}" 
+    id="{{ id }}" 
+    name="{{ name }}"
+    placeholder="{{ placeholder }}" 
+    value="{{ value }}"
+    class="input {% if critical %}critical{% endif %} {{ className }}"
+    {% if disabled %}disabled{% endif %}
+  />
 </div>
+{% endmacro %}
 
 <!-- ========================= -->
 <!-- HOW TO USE THIS COMPONENT -->
 <!-- ========================= -->
 
-<!-- 1. Wrap the input inside a <div> -->
-<!-- 2. Add a <label> element above the input for accessibility -->
-<!-- 3. Use the "input" class for default styling -->
+<!-- 1. Import the macro at the top of your page -->
+{# {% from "02-atoms-form/input-text.njk" import renderInputText %} #}
 
+<!-- 2. Insert the component in your template -->
+{# {{ renderInputText(
+  id="username",
+  name="username", 
+  label="Username", 
+  required=true, 
+  placeholder="Enter your username", 
+  type="text"
+) }} #}
 
+<!-- 3. Options:
+  - id: ID attribute for the input (required)
+  - name: Name attribute for the input (required)
+  - label: Label text (required)
+  - required: Whether the field is required (default: false)
+  - placeholder: Placeholder text (default: "")
+  - value: Initial value (default: "")
+  - type: Input type (default: "text")
+  - className: Additional CSS classes (default: "")
+  - disabled: Whether the input is disabled (default: false)
+  - critical: Whether to show in error state (default: false)
+-->

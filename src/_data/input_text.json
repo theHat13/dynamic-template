@@ -1,0 +1,64 @@
+{
+    "examples": [
+      {
+        "id": "character_name",
+        "name": "character_name",
+        "label": "Hero Name",
+        "required": true,
+        "placeholder": "e.g., Zorgblast the Reckless",
+        "type": "text",
+        "description": "Choose a name worthy of the greatest legends!"
+      },
+      {
+        "id": "secret_password",
+        "name": "secret_password",
+        "label": "Guild Password",
+        "required": true,
+        "placeholder": "Speak friend and enter...",
+        "type": "password",
+        "description": "Don't share it with orcs"
+      },
+      {
+        "id": "invisibility_range",
+        "name": "invisibility_range",
+        "label": "Invisibility Power",
+        "required": false,
+        "type": "range",
+        "min": "1",
+        "max": "100",
+        "description": "At 100, even elves can't see you!"
+      },
+      {
+        "id": "critical_health",
+        "name": "critical_health",
+        "label": "Health Points",
+        "required": true,
+        "placeholder": "You're in danger!",
+        "type": "number",
+        "critical": true,
+        "description": "ALERT! Dangerously low health points!"
+      }
+    ],
+    "states": [
+      {
+        "name": "default",
+        "label": "Default",
+        "description": "Standard text field state"
+      },
+      {
+        "name": "filled",
+        "label": "Filled",
+        "description": "Field already contains a value"
+      },
+      {
+        "name": "critical",
+        "label": "Critical (Error)",
+        "description": "Used to signal an error or danger"
+      },
+      {
+        "name": "disabled",
+        "label": "Disabled",
+        "description": "Field is not available"
+      }
+    ]
+  }
