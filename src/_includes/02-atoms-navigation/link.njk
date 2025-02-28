@@ -16,6 +16,18 @@
 {# {% from "02-atoms-navigation/link.njk" import renderLink %} #}
 
 <!-- 2. Insert the component in your template -->
-{# {{ renderLink(links.link_home) }} #}
+{# {{ renderLink(links.link_data.link_home) }} #}
 
-<!-- 3. Replace "link_home" with your actual key from select.json corresponding to the desired options (e.g., "link_home", "link_services", etc.) -->
+<!-- 3. Replace "link_home" with the name of your specific link -->
+<!-- Available links are defined in src/_data/links.json -->
+<!-- To add new links, edit the link_data section in links.json:
+{
+  "link_data": {
+    "your_new_link_name": {
+      "name": "unique_identifier",
+      "href": "/your-path",
+      "text": "Link Text"
+    }
+  }
+}
+-->
