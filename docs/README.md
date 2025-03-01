@@ -6,8 +6,8 @@ Hat Dynamic Template is a front-end development framework based on **Eleventy**,
 
 ## Prerequisites
 
-- **Node.js** (v18.0.0 or newer)
-- **npm** (v8.0.0 or newer)
+- **Node.js** (v20.0.0 or newer recommended, v18.0.0 minimum)
+- **npm** (latest version)
 - **Git**
 
 ## Installation via script (recommended)
@@ -59,23 +59,32 @@ If you prefer to install components manually:
    cd your-project
    ```
 
-2. **Update npm to a compatible version**
+2. **Install latest Node.js**
+
+   We recommend Node.js 20+ for the best experience:
 
    ```sh
-   # For Node.js 18:
-   npm install -g npm@latest-9
-   
-   # For Node.js 20:
-   npm install -g npm@latest-10
+   # For macOS with Homebrew:
+   brew install node
+
+   # For Linux:
+   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+   sudo apt-get install -y nodejs
    ```
 
-3. **Install dependencies**
+3. **Update npm to latest version**
+
+   ```sh
+   npm install -g npm@latest
+   ```
+
+4. **Install dependencies**
 
    ```sh
    npm install
    ```
 
-4. **Install Storybook**
+5. **Install Storybook**
 
    ```sh
    npm install --save-dev @storybook/html @storybook/addon-essentials @storybook/addon-interactions @storybook/addon-a11y @storybook/addon-links @storybook/addon-viewport
@@ -83,22 +92,22 @@ If you prefer to install components manually:
    npm install --save-dev simple-nunjucks-loader
    ```
 
-5. **Start the development server**
+6. **Start the development server**
 
    ```sh
    npm start
    ```
 
-6. **Access the site**  
+7. **Access the site**  
    The site is available at [http://localhost:8080](http://localhost:8080)
 
-7. **Start Storybook**
+8. **Start Storybook**
 
    ```sh
    npm run storybook
    ```
 
-8. **Access Storybook**  
+9.  **Access Storybook**  
    Storybook is available at [http://localhost:6006](http://localhost:6006)
 
 ## Troubleshooting Installation
@@ -107,31 +116,34 @@ If you encounter errors during installation:
 
 ### Node.js Issues
 
+We recommend using Node.js 20+ for the best compatibility with all tools:
+
 ```sh
 # Check Node.js version
 node -v
 
-# If version is lower than v18, update Node.js:
+# Update to Node.js 20:
 # For macOS with Homebrew:
-brew install node@18
+brew install node
 
 # For Linux:
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
 ### npm Issues
 
+If you encounter npm compatibility errors:
+
 ```sh
-# Update npm to a compatible version
-# For Node.js 18:
-npm install -g npm@latest-9
+# First try latest version
+npm install -g npm@latest
 
-# For Node.js 20:
-npm install -g npm@latest-10
+# If that fails and you're using Node.js 18:
+npm install -g npm@9.8.1
 
-# If you encounter npm ERR! code EBADENGINE errors, use a compatible version
-# as described above rather than the latest npm version
+# If you're using Node.js 20:
+npm install -g npm@10.2.4
 
 # Clean npm cache if needed
 npm cache clean --force
@@ -141,7 +153,7 @@ npm cache clean --force
 
 ```sh
 # Install Eleventy globally
-npm install -g @11ty/eleventy
+npm install -g @11ty/eleventy@latest
 
 # Verify installation
 eleventy --version
@@ -151,7 +163,7 @@ eleventy --version
 
 ```sh
 # Install TailwindCSS dependencies explicitly
-npm install tailwindcss @tailwindcss/cli
+npm install tailwindcss@latest @tailwindcss/cli@latest
 ```
 
 ### Storybook Issues

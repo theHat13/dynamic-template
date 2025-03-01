@@ -79,21 +79,15 @@ else
     success_message "Git is already installed."
 fi
 
-# Install Node.js if not installed or version is too old
-NODE_VERSION_REQUIRED="18"
+# Install latest Node.js or check version
+NODE_VERSION_PREFERRED="20"
+NODE_VERSION_MINIMUM="18"
 if ! command -v node &>/dev/null; then
-    warning_message "Node.js not found. Installing..."
+    warning_message "Node.js not found. Installing latest version..."
     if [[ "$OS" == "macOS" ]]; then
-        brew install node@18 || error_exit "Could not install Node.js via Homebrew."
-        # Add node to PATH if needed
-        if ! command -v node &>/dev/null; then
-            warning_message "Adding Node.js to PATH..."
-            echo 'export PATH="/usr/local/opt/node@18/bin:$PATH"' >> ~/.zshrc
-            echo 'export PATH="/usr/local/opt/node@18/bin:$PATH"' >> ~/.bash_profile
-            source ~/.zshrc 2>/dev/null || source ~/.bash_profile 2>/dev/null || true
-        fi
+        brew install node || error_exit "Could not install Node.js via Homebrew."
     elif [[ "$OS" == "Linux" ]]; then
-        curl -fsSL https://deb.nodesource.com/setup_18.x | bash - || error_exit "Could not set up Node.js repository."
+        curl -fsSL https://deb.nodesource.com/setup_20.x | bash - || error_exit "Could not set up Node.js repository."
         apt-get install -y nodejs || error_exit "Could not install Node.js. Try running with sudo."
     elif [[ "$OS" == "Windows" ]]; then
         error_exit "Node.js is not installed. Please install it manually from https://nodejs.org/"
@@ -104,37 +98,43 @@ if ! command -v node &>/dev/null; then
 else
     # Check Node.js version
     NODE_VERSION=$(node -v | cut -d 'v' -f 2 | cut -d '.' -f 1)
-    if [[ $NODE_VERSION -lt $NODE_VERSION_REQUIRED ]]; then
-        warning_message "Node.js version ($NODE_VERSION) is too old. Version $NODE_VERSION_REQUIRED or higher required."
+    if [[ $NODE_VERSION -lt $NODE_VERSION_MINIMUM ]]; then
+        warning_message "Node.js version ($NODE_VERSION) is too old. Version $NODE_VERSION_MINIMUM or higher required."
+        warning_message "Attempting to install Node.js $NODE_VERSION_PREFERRED..."
         if [[ "$OS" == "macOS" ]]; then
-            brew install node@18 || error_exit "Could not install Node.js via Homebrew."
-            # Add node to PATH if needed
-            echo 'export PATH="/usr/local/opt/node@18/bin:$PATH"' >> ~/.zshrc
-            echo 'export PATH="/usr/local/opt/node@18/bin:$PATH"' >> ~/.bash_profile
-            source ~/.zshrc 2>/dev/null || source ~/.bash_profile 2>/dev/null || true
+            brew install node || error_exit "Could not install Node.js via Homebrew."
         elif [[ "$OS" == "Linux" ]]; then
-            curl -fsSL https://deb.nodesource.com/setup_18.x | bash - || error_exit "Could not set up Node.js repository."
+            curl -fsSL https://deb.nodesource.com/setup_20.x | bash - || error_exit "Could not set up Node.js repository."
             apt-get install -y nodejs || error_exit "Could not install Node.js. Try running with sudo."
         else
-            error_exit "Please update Node.js manually to version $NODE_VERSION_REQUIRED or higher."
+            error_exit "Please update Node.js manually to version $NODE_VERSION_PREFERRED or higher."
         fi
         success_message "Node.js updated successfully."
+    elif [[ $NODE_VERSION -lt $NODE_VERSION_PREFERRED ]]; then
+        warning_message "Node.js version $NODE_VERSION detected. Version $NODE_VERSION_PREFERRED is recommended for best compatibility."
+        warning_message "Continuing with current version, but consider upgrading for better compatibility with latest tools."
     else
-        success_message "Node.js version $NODE_VERSION is already installed."
+        success_message "Node.js version $NODE_VERSION is installed (recommended: $NODE_VERSION_PREFERRED+)."
     fi
 fi
 
-# Update npm to a compatible version based on Node.js version
-warning_message "Updating npm..."
-if [[ "$NODE_VERSION" == "18" ]]; then
-    npm install -g npm@latest-9 || error_exit "Could not update npm."
-    success_message "npm updated to a compatible version for Node.js 18."
-elif [[ "$NODE_VERSION" == "20" ]]; then
-    npm install -g npm@latest-10 || error_exit "Could not update npm."
-    success_message "npm updated to a compatible version for Node.js 20."
+# Update npm to latest version with fallback in case of compatibility issues
+warning_message "Attempting to update npm to latest version..."
+if npm install -g npm@latest; then
+    success_message "npm updated to latest version successfully."
 else
-    npm install -g npm@latest-9 || error_exit "Could not update npm."
-    success_message "npm updated to a compatible version."
+    warning_message "Could not update to latest npm. Trying compatible version..."
+    NODE_VERSION=$(node -v | cut -d 'v' -f 2 | cut -d '.' -f 1)
+    if [[ $NODE_VERSION -eq 18 ]]; then
+        npm install -g npm@9.8.1 || error_exit "Could not update npm. Please try manually: npm install -g npm@9.8.1"
+        success_message "npm updated to version 9.8.1 (compatible with Node.js 18)."
+    elif [[ $NODE_VERSION -eq 20 ]]; then
+        npm install -g npm@10.2.4 || error_exit "Could not update npm. Please try manually: npm install -g npm@10.2.4"
+        success_message "npm updated to version 10.2.4 (compatible with Node.js 20)."
+    else
+        npm install -g npm@9.8.1 || error_exit "Could not update npm. Please try manually: npm install -g npm@9.8.1"
+        success_message "npm updated to a compatible version."
+    fi
 fi
 
 # Clone the GitHub repository
@@ -160,7 +160,7 @@ npm install tailwindcss@latest @tailwindcss/cli@latest || warning_message "Expli
 
 # Install Eleventy globally
 warning_message "Installing Eleventy globally..."
-npm install -g @11ty/eleventy || warning_message "Global Eleventy installation failed, but the project may still work with local installation."
+npm install -g @11ty/eleventy@latest || warning_message "Global Eleventy installation failed, but the project may still work with local installation."
 
 # Install Storybook and related dependencies
 warning_message "Installing Storybook for HTML..."

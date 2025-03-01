@@ -41,44 +41,72 @@ catch {
     exit 1
 }
 
-# Check if Node.js is installed
+# Install latest Node.js or check version
+$nodeVersionPreferred = 20
+$nodeVersionMinimum = 18
+
 try {
     $nodeVersion = node -v
     $nodeVersionNumber = $nodeVersion.Substring(1).Split('.')[0]
-    if ([int]$nodeVersionNumber -lt 18) {
-        Show-Warning "Node.js version $nodeVersion is too old. Version 18 or higher is required."
-        Show-Warning "Please install Node.js from https://nodejs.org/"
+    
+    if ([int]$nodeVersionNumber -lt $nodeVersionMinimum) {
+        Show-Warning "Node.js version $nodeVersion is too old. Version $nodeVersionMinimum or higher required."
+        Show-Warning "Please install Node.js $nodeVersionPreferred from https://nodejs.org/"
         Show-Warning "After installing Node.js, restart this script."
         Start-Process "https://nodejs.org/"
         exit 1
     }
-    Show-Success "Node.js is already installed: $nodeVersion"
+    elseif ([int]$nodeVersionNumber -lt $nodeVersionPreferred) {
+        Show-Warning "Node.js version $nodeVersionNumber detected. Version $nodeVersionPreferred is recommended for best compatibility."
+        Show-Warning "Continuing with current version, but consider upgrading for better compatibility with latest tools."
+    }
+    else {
+        Show-Success "Node.js version $nodeVersionNumber is installed (recommended: $nodeVersionPreferred+)."
+    }
 }
 catch {
-    Show-Warning "Node.js not found. Please install Node.js from https://nodejs.org/"
+    Show-Warning "Node.js not found. Please install Node.js $nodeVersionPreferred from https://nodejs.org/"
     Show-Warning "After installing Node.js, restart this script."
     Start-Process "https://nodejs.org/"
     exit 1
 }
 
-# Update npm to a compatible version based on Node.js version
-Show-Warning "Updating npm..."
+# Update npm to latest version with fallback in case of compatibility issues
+Show-Warning "Attempting to update npm to latest version..."
 try {
-    if ([int]$nodeVersionNumber -eq 18) {
-        npm install -g npm@latest-9
-        Show-Success "npm updated to a compatible version for Node.js 18."
-    }
-    elseif ([int]$nodeVersionNumber -eq 20) {
-        npm install -g npm@latest-10
-        Show-Success "npm updated to a compatible version for Node.js 20."
-    }
-    else {
-        npm install -g npm@latest-9
-        Show-Success "npm updated to a compatible version."
-    }
+    npm install -g npm@latest
+    Show-Success "npm updated to latest version successfully."
 }
 catch {
-    Show-Error "Failed to update npm. Error: $_"
+    Show-Warning "Could not update to latest npm. Trying compatible version..."
+    
+    if ([int]$nodeVersionNumber -eq 18) {
+        try {
+            npm install -g npm@9.8.1
+            Show-Success "npm updated to version 9.8.1 (compatible with Node.js 18)."
+        }
+        catch {
+            Show-Error "Could not update npm. Please try manually: npm install -g npm@9.8.1"
+        }
+    }
+    elseif ([int]$nodeVersionNumber -eq 20) {
+        try {
+            npm install -g npm@10.2.4
+            Show-Success "npm updated to version 10.2.4 (compatible with Node.js 20)."
+        }
+        catch {
+            Show-Error "Could not update npm. Please try manually: npm install -g npm@10.2.4"
+        }
+    }
+    else {
+        try {
+            npm install -g npm@9.8.1
+            Show-Success "npm updated to a compatible version."
+        }
+        catch {
+            Show-Error "Could not update npm. Please try manually: npm install -g npm@9.8.1"
+        }
+    }
 }
 
 # Clone the GitHub repository
@@ -123,7 +151,7 @@ catch {
 # Install Eleventy globally
 Show-Warning "Installing Eleventy globally..."
 try {
-    npm install -g @11ty/eleventy
+    npm install -g @11ty/eleventy@latest
     Show-Success "Eleventy installed globally."
 }
 catch {
