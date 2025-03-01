@@ -19,7 +19,7 @@ For an automated installation that handles all dependencies and configurations:
 1. **Download the script**
 
    ```sh
-   curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/setup-project.sh
+   curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.sh
    ```
 
 2. **Make the script executable**
@@ -39,7 +39,7 @@ For an automated installation that handles all dependencies and configurations:
 1. **Download the script**
 
    ```powershell
-   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/setup-project.ps1" -OutFile "setup-project.ps1"
+   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.ps1" -OutFile "setup-project.ps1""
    ```
 
 2. **Run the script**
