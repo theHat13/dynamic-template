@@ -25,7 +25,7 @@ const config = {
       test: /\.njk$/,
       use: [
         {
-          loader: 'nunjucks-loader',
+          loader: 'simple-nunjucks-loader',
           options: {
             // Configuration minimale
             environment: 'production'
