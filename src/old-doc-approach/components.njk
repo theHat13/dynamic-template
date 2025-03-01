@@ -1,15 +1,15 @@
----
-title: Component Library
-description: Interactive documentation of HAT Design System components
-layout: '00-organisms-global/base.njk'
+--- 
+title: Component Library 
+description: Interactive documentation of HAT Design System components 
+layout: '00-organisms-global/base.njk' 
 ---
 
 <!-- Import macros for components -->
-{% from "02-atoms-navigation/link.njk" import renderLink %}
-{% from "02-atoms-form/select.njk" import renderSelect %}
-{% from "02-atoms-form/input-select.njk" import renderInput %}
-{% from "02-atoms-form/input-text.njk" import renderInputText %}
-{# {% from "02-atoms-form/input-multi-select.njk" import renderMultiSelect %} #}
+{% from "../_includes/02-atoms-navigation/link.njk" import renderLink %}
+{% from "../_includes/02-atoms-form/select.njk" import renderSelect %}
+{% from "../_includes/02-atoms-form/input-select.njk" import renderInput %}
+{% from "../_includes/02-atoms-form/input-text.njk" import renderInputText %}
+{# {% from "../_includes/02-atoms-form/input-multi-select.njk" import renderMultiSelect %} #}
 
 <div class="container mx-auto px-4 py-8">
     <!-- Header -->
@@ -22,14 +22,30 @@ layout: '00-organisms-global/base.njk'
     <nav class="mb-10 p-6 bg-white shadow-md rounded-lg">
         <h2 class="text-xl font-bold mb-4">Components</h2>
         <ul class="grid grid-cols-2 md:grid-cols-4 gap-2">
-            <li><a href="#link" class="text-blue-600 hover:underline">Link</a></li>
-            <li><a href="#tag" class="text-blue-600 hover:underline">Tag</a></li>
-            <li><a href="#chip" class="text-blue-600 hover:underline">Chip</a></li>
-            <li><a href="#tooltip" class="text-blue-600 hover:underline">Tooltip</a></li>
-            <li><a href="#select" class="text-blue-600 hover:underline">Select</a></li>
-            <li><a href="#input-text" class="text-blue-600 hover:underline">Input Text</a></li>
-            <li><a href="#input-select" class="text-blue-600 hover:underline">Input Select</a></li>
-            <li><a href="#input-multi-select" class="text-blue-600 hover:underline">Multi-Select</a></li>
+            <li>
+                <a href="#link" class="text-blue-600 hover:underline">Link</a>
+            </li>
+            <li>
+                <a href="#tag" class="text-blue-600 hover:underline">Tag</a>
+            </li>
+            <li>
+                <a href="#chip" class="text-blue-600 hover:underline">Chip</a>
+            </li>
+            <li>
+                <a href="#tooltip" class="text-blue-600 hover:underline">Tooltip</a>
+            </li>
+            <li>
+                <a href="#select" class="text-blue-600 hover:underline">Select</a>
+            </li>
+            <li>
+                <a href="#input-text" class="text-blue-600 hover:underline">Input Text</a>
+            </li>
+            <li>
+                <a href="#input-select" class="text-blue-600 hover:underline">Input Select</a>
+            </li>
+            <li>
+                <a href="#input-multi-select" class="text-blue-600 hover:underline">Multi-Select</a>
+            </li>
         </ul>
     </nav>
 
@@ -39,16 +55,15 @@ layout: '00-organisms-global/base.njk'
     <section id="link" class="mb-12 p-6 bg-white shadow-md rounded-lg">
         <h2 class="text-2xl font-bold mb-2">Link</h2>
         <p class="text-gray-600 mb-6">Standard hyperlink for navigation.</p>
-        
+
         <!-- Examples -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">Examples</h3>
             <div class="p-4 bg-gray-50 rounded mb-4 flex gap-4">
-                {{ renderLink(links.link_home) }}
-                {{ renderLink(links.link_contact) }}
+                {{ renderLink(links.link_data.link_home) }}
             </div>
         </div>
-        
+
         <!-- API Quick Reference -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">API</h3>
@@ -73,14 +88,14 @@ layout: '00-organisms-global/base.njk'
                 </table>
             </div>
         </div>
-        
+
         <!-- Code Example -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">Usage</h3>
-            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}{% from "02-atoms-navigation/link.njk" import renderLink %}
-{{ renderLink(links.link_home) }}{% endraw %}</code></pre>
+            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}{% from "02-atoms-navigation/link.njk" import renderlink %}
+{{ renderlink(links.link_home) }}{% endraw %}</code></pre>
         </div>
-        
+
         <!-- Tips -->
         <div>
             <h3 class="text-lg font-semibold mb-3">Tips</h3>
@@ -95,11 +110,11 @@ layout: '00-organisms-global/base.njk'
     <section id="input-text" class="mb-12 p-6 bg-white shadow-md rounded-lg">
         <h2 class="text-2xl font-bold mb-2">Input Text</h2>
         <p class="text-gray-600 mb-6">Text input field for user data entry.</p>
-        
+
         <!-- Examples -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">Examples</h3>
-            
+
             {% if input_text and input_text.examples %}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
                     {% for example in input_text.examples %}
@@ -146,7 +161,7 @@ layout: '00-organisms-global/base.njk'
                 </div>
             {% endif %}
         </div>
-        
+
         <!-- API Quick Reference -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">API</h3>
@@ -194,20 +209,20 @@ layout: '00-organisms-global/base.njk'
                 </table>
             </div>
         </div>
-        
+
         <!-- Code Example -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">Usage</h3>
-            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}{% from "02-atoms-form/input-text.njk" import renderInputText %}
-{{ renderInputText(
+            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}{% from "02-atoms-form/input-text.njk" import renderinputtext %}
+{{ renderinputtext(
   id="username",
   name="username",
-  label="Username",
+  label="username",
   required=true,
-  placeholder="Enter your username"
+  placeholder="enter your username"
 ) }}{% endraw %}</code></pre>
         </div>
-        
+
         <!-- Tips -->
         <div>
             <h3 class="text-lg font-semibold mb-3">Tips</h3>
@@ -229,7 +244,7 @@ layout: '00-organisms-global/base.njk'
     <section id="tag" class="mb-12 p-6 bg-white shadow-md rounded-lg">
         <h2 class="text-2xl font-bold mb-2">Tag</h2>
         <p class="text-gray-600 mb-6">Labels to categorize or highlight content.</p>
-        
+
         <!-- Examples -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">Examples</h3>
@@ -237,15 +252,15 @@ layout: '00-organisms-global/base.njk'
                 {% include "02-atoms-notifications/tag.njk" %}
             </div>
         </div>
-        
+
         <!-- Code Example -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">Usage</h3>
-            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}<span class="tag tag-default">Default Tag</span>
-<span class="tag tag-success">Success Tag</span>{% endraw %}</code></pre>
+            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}<span class="tag tag-default">default tag</span>
+<span class="tag tag-success">success tag</span>{% endraw %}</code></pre>
         </div>
     </section>
 
     <!-- Continue with other components following the same structure -->
-    
+
 </div>
