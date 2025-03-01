@@ -61,11 +61,21 @@ catch {
     exit 1
 }
 
-# Update npm to latest version
+# Update npm to a compatible version based on Node.js version
 Show-Warning "Updating npm..."
 try {
-    npm install -g npm
-    Show-Success "npm updated successfully."
+    if ([int]$nodeVersionNumber -eq 18) {
+        npm install -g npm@latest-9
+        Show-Success "npm updated to a compatible version for Node.js 18."
+    }
+    elseif ([int]$nodeVersionNumber -eq 20) {
+        npm install -g npm@latest-10
+        Show-Success "npm updated to a compatible version for Node.js 20."
+    }
+    else {
+        npm install -g npm@latest-9
+        Show-Success "npm updated to a compatible version."
+    }
 }
 catch {
     Show-Error "Failed to update npm. Error: $_"

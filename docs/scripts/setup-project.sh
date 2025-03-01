@@ -124,10 +124,18 @@ else
     fi
 fi
 
-# Update npm to latest version
+# Update npm to a compatible version based on Node.js version
 warning_message "Updating npm..."
-npm install -g npm || error_exit "Could not update npm."
-success_message "npm updated successfully."
+if [[ "$NODE_VERSION" == "18" ]]; then
+    npm install -g npm@latest-9 || error_exit "Could not update npm."
+    success_message "npm updated to a compatible version for Node.js 18."
+elif [[ "$NODE_VERSION" == "20" ]]; then
+    npm install -g npm@latest-10 || error_exit "Could not update npm."
+    success_message "npm updated to a compatible version for Node.js 20."
+else
+    npm install -g npm@latest-9 || error_exit "Could not update npm."
+    success_message "npm updated to a compatible version."
+fi
 
 # Clone the GitHub repository
 warning_message "Cloning GitHub repository..."
