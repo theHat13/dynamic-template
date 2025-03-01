@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# HAT Dynamic Template (HDT) Component Library
+
+Welcome to the HAT Dynamic Template component library. This Storybook showcases all the components used in the HDT project organized according to the Atomic Design methodology.
+
+## Component Structure
+
+Components are organized following the Atomic Design methodology:
+
+- **Atoms**: The smallest building blocks (buttons, form inputs, links)
+- **Molecules**: Groups of atoms functioning together (forms, navigation menus)
+- **Organisms**: Complex components composed of molecules and atoms (headers, footers, sections)
+
+## Usage
+
+Browse the components in the sidebar to see examples and documentation. Each component includes:
+
+- Live examples
+- Documentation on available props and options
+- Default usage and variations
+
+## Development
+
+When adding new components:
+1. Create the component in the appropriate directory under `src/_includes`
+2. Add a story file in the `src/stories/components` directory
+3. Follow the existing pattern for story creation
+
+## Styling
+
+Components use TailwindCSS for styling. The design system tokens are defined in `src/input.css`.

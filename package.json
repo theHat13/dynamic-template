@@ -2,12 +2,15 @@
   "name": "hat-dynamic-template",
   "version": "1.0.0",
   "description": "These are the starting files used by [HAT](https://#) to create a dynamic site.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-  "start": "npx @tailwindcss/cli -i ./src/input.css -o ./public/css/output.css --watch & eleventy --serve --watch",
-  "build": "eleventy",
-  "refresh": "rm -rf .cache ./public/css/output.css"
-},
+    "start": "npx @tailwindcss/cli -i ./src/input.css -o ./public/css/output.css --watch & eleventy --serve --watch",
+    "build": "eleventy",
+    "refresh": "rm -rf .cache ./public/css/output.css",
+    "storybook": "npx @tailwindcss/cli -i ./src/input.css -o ./public/css/output.css && storybook dev -p 6006",
+    "build-storybook": "npx @tailwindcss/cli -i ./src/input.css -o ./public/css/output.css && storybook build"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://git@github.com:theHat13/dynamic-template.git"
@@ -21,8 +24,19 @@
   "homepage": "https://github.com/theHat13/dynamic-template#readme",
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "@chromatic-com/storybook": "^3.2.5",
+    "@storybook/addon-essentials": "^8.6.2",
+    "@storybook/addon-interactions": "^8.6.2",
+    "@storybook/blocks": "^8.6.2",
+    "@storybook/html": "^8.6.2",
+    "@storybook/html-vite": "^8.6.2",
+    "@storybook/test": "^8.6.2",
     "@tailwindcss/cli": "^4.0.7",
-    "tailwindcss": "^4.0.7"
+    "html-loader": "^5.1.0",
+    "nunjucks-loader": "^3.0.0",
+    "storybook": "^8.6.2",
+    "tailwindcss": "^4.0.7",
+    "vite-plugin-nunjucks": "^0.2.0"
   },
   "dependencies": {
     "nunjucks": "^3.2.4"
