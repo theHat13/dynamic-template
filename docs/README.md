@@ -39,7 +39,7 @@ For an automated installation that handles all dependencies and configurations:
 1. **Download the script**
 
    ```powershell
-   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.ps1" -OutFile "setup-project.ps1""
+   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.ps1" -OutFile "setup-project.ps1"
    ```
 
 2. **Run the script**
@@ -59,13 +59,23 @@ If you prefer to install components manually:
    cd your-project
    ```
 
-2. **Install dependencies**
+2. **Update npm to a compatible version**
+
+   ```sh
+   # For Node.js 18:
+   npm install -g npm@latest-9
+   
+   # For Node.js 20:
+   npm install -g npm@latest-10
+   ```
+
+3. **Install dependencies**
 
    ```sh
    npm install
    ```
 
-3. **Install Storybook**
+4. **Install Storybook**
 
    ```sh
    npm install --save-dev @storybook/html @storybook/addon-essentials @storybook/addon-interactions @storybook/addon-a11y @storybook/addon-links @storybook/addon-viewport
@@ -73,22 +83,22 @@ If you prefer to install components manually:
    npm install --save-dev simple-nunjucks-loader
    ```
 
-4. **Start the development server**
+5. **Start the development server**
 
    ```sh
    npm start
    ```
 
-5. **Access the site**  
+6. **Access the site**  
    The site is available at [http://localhost:8080](http://localhost:8080)
 
-6. **Start Storybook**
+7. **Start Storybook**
 
    ```sh
    npm run storybook
    ```
 
-7. **Access Storybook**  
+8. **Access Storybook**  
    Storybook is available at [http://localhost:6006](http://localhost:6006)
 
 ## Troubleshooting Installation
@@ -113,10 +123,17 @@ sudo apt-get install -y nodejs
 ### npm Issues
 
 ```sh
-# Update npm
-npm install -g npm
+# Update npm to a compatible version
+# For Node.js 18:
+npm install -g npm@latest-9
 
-# Clean npm cache
+# For Node.js 20:
+npm install -g npm@latest-10
+
+# If you encounter npm ERR! code EBADENGINE errors, use a compatible version
+# as described above rather than the latest npm version
+
+# Clean npm cache if needed
 npm cache clean --force
 ```
 
