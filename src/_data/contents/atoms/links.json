@@ -1,0 +1,24 @@
+{
+  "component": "link",
+  "summary": "A navigation link for the website",
+  "params": [
+    { "name": "option", "type": "object", "required": true, "notes": "Object containing link properties" },
+    { "name": "option.href", "type": "string", "required": true, "notes": "URL path for the navigation link" },
+    { "name": "option.text", "type": "string", "required": true, "notes": "Displayed text for the link" },
+    { "name": "option.variant", "type": "string", "required": false, "notes": "Visual style variant" }
+  ],
+  "link_data": {
+    "link_home": {
+      "name": "home",
+      "href": "/",
+      "text": "Home",
+      "variant": "default"
+    },
+    "link_services": {
+      "name": "services", 
+      "href": "/services", 
+      "text": "Our Services",
+      "variant": "primary"
+    }
+  }
+}
