@@ -450,7 +450,3 @@ Consider using JSON Schema for strict validation:
 - Prioritize readability
 - Document your approach
 - Continuously refactor
-
-Les templates sont maintenant intégrés à chaque étape de création de fichier, en utilisant les templates fournis. Les développeurs peuvent suivre ce guide étape par étape en copiant et en personnalisant les templates pour créer de nouveaux composants conformes à l'architecture recommandée.
-
-N'oubliez pas d'adapter les noms de fichiers, les chemins d'accès et le contenu des templates en fonction de vos besoins spécifiques et de votre stack technique. L'objectif est de fournir une structure de base cohérente et extensible pour le développement de composants dans votre projet Hat Dynamic Template.
