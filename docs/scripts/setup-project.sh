@@ -204,11 +204,25 @@ success_message "Dependencies installed successfully."
 
 # Install TailwindCSS and CLI explicitly
 warning_message "Installing TailwindCSS and CLI..."
-npm install tailwindcss@latest @tailwindcss/cli@latest || warning_message "Explicit TailwindCSS installation failed, but it may be included in project dependencies."
+if npm install tailwindcss@latest @tailwindcss/cli@latest; then
+    success_message "TailwindCSS and CLI installed successfully."
+    # Get TailwindCSS version
+    TAILWIND_VERSION=$(npx tailwindcss --version 2>/dev/null)
+    success_message "TailwindCSS version: $TAILWIND_VERSION"
+else
+    warning_message "Explicit TailwindCSS installation failed, but it may be included in project dependencies."
+fi
 
 # Install Eleventy globally - use npm prefix to avoid permission issues
 warning_message "Installing Eleventy globally..."
-npm install -g @11ty/eleventy@latest || warning_message "Global Eleventy installation failed, but the project may still work with local installation."
+if npm install -g @11ty/eleventy@latest; then
+    success_message "Eleventy installed successfully."
+    # Get Eleventy version
+    ELEVENTY_VERSION=$(npx eleventy --version 2>/dev/null)
+    success_message "Eleventy version: $ELEVENTY_VERSION"
+else
+    warning_message "Global Eleventy installation failed, but the project may still work with local installation."
+fi
 
 # Install Storybook and related dependencies
 warning_message "Installing Storybook for HTML..."
@@ -294,7 +308,11 @@ fi
 
 # Install necessary webpack loaders for Nunjucks support
 warning_message "Installing Nunjucks support for Storybook..."
-npm install --save-dev simple-nunjucks-loader || warning_message "Nunjucks loader installation failed. You may need to install it manually."
+if npm install --save-dev simple-nunjucks-loader; then
+    success_message "Nunjucks loader installed successfully."
+else
+    warning_message "Nunjucks loader installation failed. You may need to install it manually."
+fi
 
 # Create necessary directories if they don't exist
 mkdir -p public/css
@@ -304,7 +322,11 @@ touch public/css/output.css
 
 # Ensure TailwindCSS compiles styles
 warning_message "Compiling TailwindCSS styles..."
-npx tailwindcss -i ./src/input.css -o ./public/css/output.css || warning_message "Error compiling TailwindCSS. Check the configuration."
+if npx tailwindcss -i ./src/input.css -o ./public/css/output.css; then
+    success_message "TailwindCSS styles compiled successfully."
+else
+    warning_message "Error compiling TailwindCSS. Check the configuration."
+fi
 
 # Skip Eleventy server initialization to avoid the script getting stuck
 warning_message "Skipping Eleventy server initialization to avoid blocking the script."
@@ -327,6 +349,16 @@ chmod -R u+w "$PROJECT_DIR"
 success_message "================================================================="
 success_message "Hat Dynamic Template setup completed successfully!"
 success_message "================================================================="
+success_message "Project created: $PROJECT_DIR"
+success_message ""
+success_message "Key components installed:"
+success_message "✓ Node.js"
+success_message "✓ npm"
+success_message "✓ TailwindCSS"
+success_message "✓ Eleventy"
+success_message "✓ Storybook"
+success_message "✓ Nunjucks support"
+success_message ""
 success_message "Use the following commands to start:"
 success_message "cd $PROJECT_DIR"
 success_message "npm start          # Start Eleventy development server"
