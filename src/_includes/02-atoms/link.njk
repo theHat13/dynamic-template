@@ -2,22 +2,32 @@
 <!--           LINK            -->
 <!-- ========================= -->
 
-{# {% macro renderLink(option) %}
-  <a href="{{ option.href }}" class="typography-label-l link">
-    {{ option.text }}
-  </a>
-{% endmacro %} #}
-
 {% macro renderLink(option) %}
-  {# Retrieve link style configuration from site data #}
-  {% set linkVariant = option.variant | default('default') %}
-  {% set linkStyle = site.components.link.variants | selectattr('name', 'equalto', linkVariant) | first %}
+  {# Get link options with default values if not provided #}
+  {% set href = option.href | default('#') %}
+  {% set text = option.text | default('Link') %}
+  {% set variant = option.variant | default(link.defaultProps.variant) %}
   
-  <a 
-    href="{{ option.href }}" {# Link destination from link data #}
-    class="{{ linkStyle.class }}" {# Link style variant classes #}
-  >
-    {{ option.text }} {# Link text from link data #}
+  {# Find the variant in the link.json file #}
+  {% set selectedVariant = null %}
+  {% for v in link.variants %}
+    {% if v.name == variant %}
+      {% set selectedVariant = v %}
+    {% endif %}
+  {% endfor %}
+  
+  {# Use default variant if specified variant was not found #}
+  {% if not selectedVariant %}
+    {% for v in link.variants %}
+      {% if v.name == link.defaultProps.variant %}
+        {% set selectedVariant = v %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+  {# Render the anchor tag with appropriate classes from link.json #}
+  <a href="{{ href }}" class="{{ selectedVariant.class }}">
+    {{ text }}
   </a>
 {% endmacro %}
 
@@ -25,22 +35,9 @@
 <!-- HOW TO USE THIS COMPONENT -->
 <!-- ========================= -->
 
-<!-- 1. Import the macro at the top of your page -->
-{# {% from "02-atoms-navigation/link.njk" import renderLink %} #}
-
-<!-- 2. Insert the component in your template -->
-{# {{ renderLink(links.link_data.link_home) }} #}
-
-<!-- 3. Replace "link_home" with the name of your specific link -->
-<!-- Available links are defined in src/_data/links.json -->
-<!-- To add new links, edit the link_data section in links.json:
-{
-  "link_data": {
-    "your_new_link_name": {
-      "name": "unique_identifier",
-      "href": "/your-path",
-      "text": "Link Text"
-    }
-  }
-}
+<!--
+  Complete documentation in Storybook
+  Basic usage: {% from "02-atoms-navigation/link.njk" import renderLink %}
+              {{ renderLink(links.link_data.link_home) }}
+  With style: {{ renderLink(links.link_data.link_home, "primary") }}
 -->

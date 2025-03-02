@@ -9,7 +9,7 @@ const config = {
     "@storybook/addon-essentials",
     "@chromatic-com/storybook",
     "@storybook/addon-interactions",
-    "@storybook/addon-a11y" // Ajout recommandé pour l'accessibilité
+    "@storybook/addon-a11y"
   ],
   framework: {
     name: "@storybook/html-webpack5",
@@ -19,7 +19,7 @@ const config = {
       }
     }
   },
-  // Ajout d'une configuration webpack pour gérer Nunjucks
+
   webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.njk$/,
@@ -27,7 +27,7 @@ const config = {
         {
           loader: 'simple-nunjucks-loader',
           options: {
-            // Configuration minimale
+
             environment: 'production'
           }
         }
@@ -35,7 +35,7 @@ const config = {
     });
     return config;
   },
-  // Configuration des docs
+
   docs: {
     autodocs: 'tag',
     defaultName: 'Documentation'
