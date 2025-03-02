@@ -189,30 +189,26 @@ The ComponentName component is used for [description].
 | content    | string  | Main content               | ""         | Yes      |
 | class      | string  | Additional CSS classes     | ""         | No       |
 
-## Usage Example
-
-```njk
-{% from "path/to/component-name.njk" import renderComponentName %}
-
-{{ renderComponentName({
-  variant: "primary",
-  content: "Component content"
-}) }}
-```
-
 ## Accessibility
 
 - Keyboard navigable
 - Screen reader compatible
 - Color contrast compliant with WCAG 2.1 AA
-  
-```## 8. How to Use the Component
-
-```njk
-{% from "path/to/component-name.njk" import renderComponentName %}
-
-{{ renderComponentName({
-  variant: "primary",
-  content: "Component content"
-}) }}
 ```
+
+## 8. How to Use the Component
+
+To correctly import and use a macro in a Nunjucks template, follow these steps:
+
+1. **Import the macro** at the top of your page:  
+
+   ```nunjucks
+   {% from "02-atoms/button.njk" import renderButton %}
+   ```
+
+   **Insert the component** into your template using the imported macro and the appropriate JSON data:
+
+```{{ renderButton(buttons.button_home) }}
+```
+
+Make sure to replace button.njk with the correct component file and buttons.button_home with the corresponding JSON data you want to use.
