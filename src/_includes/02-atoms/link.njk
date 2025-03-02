@@ -1,10 +1,23 @@
 <!-- ========================= -->
-<!--          LINK            -->
+<!--           LINK            -->
 <!-- ========================= -->
 
-{% macro renderLink(option) %}
+{# {% macro renderLink(option) %}
   <a href="{{ option.href }}" class="typography-label-l link">
     {{ option.text }}
+  </a>
+{% endmacro %} #}
+
+{% macro renderLink(option) %}
+  {# Retrieve link style configuration from site data #}
+  {% set linkVariant = option.variant | default('default') %}
+  {% set linkStyle = site.components.link.variants | selectattr('name', 'equalto', linkVariant) | first %}
+  
+  <a 
+    href="{{ option.href }}" {# Link destination from link data #}
+    class="{{ linkStyle.class }}" {# Link style variant classes #}
+  >
+    {{ option.text }} {# Link text from link data #}
   </a>
 {% endmacro %}
 
