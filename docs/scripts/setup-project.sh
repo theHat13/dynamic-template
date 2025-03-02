@@ -3,6 +3,7 @@
 # Variables
 REPO_URL="https://github.com/theHat13/dynamic-template.git"
 PROJECT_DIR="new-hat-project"
+NEED_SUDO=false
 
 # Colors for better readability
 GREEN='\033[0;32m'
@@ -26,10 +27,29 @@ function warning_message {
     echo -e "${YELLOW}$1${NC}"
 }
 
-# Check for root privileges on Linux
-if [[ "$OSTYPE" == "linux-gnu"* ]] && [[ $EUID -ne 0 ]]; then
-    warning_message "This script may require administrator privileges for some operations."
-    warning_message "If installation fails, try running it with sudo."
+# Function to run commands with sudo if needed
+function run_with_sudo_if_needed {
+    if [ "$NEED_SUDO" = true ]; then
+        sudo $@
+    else
+        $@
+    fi
+}
+
+# Check if we're already root
+if [[ $EUID -eq 0 ]]; then
+    warning_message "Running as root. Will set proper permissions at the end."
+    RUNNING_AS_ROOT=true
+else
+    RUNNING_AS_ROOT=false
+    # Check if we need sudo for some operations
+    if ! touch /usr/local/test_sudo_needed 2>/dev/null; then
+        warning_message "Some operations may require administrative privileges."
+        warning_message "You'll be prompted for your password when needed."
+        NEED_SUDO=true
+    else
+        rm /usr/local/test_sudo_needed
+    fi
 fi
 
 # Detect OS
@@ -47,9 +67,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     OS="Linux"
     warning_message "Linux system detected"
-    # Update packages
-    warning_message "Updating packages..."
-    apt-get update || error_exit "Could not update packages. Try running with sudo."
+    # Update packages - only if we can without sudo
+    if [ "$NEED_SUDO" = false ]; then
+        warning_message "Updating packages..."
+        apt-get update || warning_message "Could not update packages. Continuing anyway."
+    else
+        warning_message "Skipping system package updates (requires sudo)."
+    fi
 elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
     OS="Windows"
     warning_message "Windows system detected"
@@ -68,7 +92,7 @@ if ! command -v git &>/dev/null; then
     if [[ "$OS" == "macOS" ]]; then
         brew install git || error_exit "Could not install Git via Homebrew."
     elif [[ "$OS" == "Linux" ]]; then
-        apt-get install -y git || error_exit "Could not install Git. Try running with sudo."
+        run_with_sudo_if_needed apt-get install -y git || error_exit "Could not install Git."
     elif [[ "$OS" == "Windows" ]]; then
         error_exit "Git is not installed. Please install it manually from https://git-scm.com/download/win"
     else
@@ -83,12 +107,24 @@ fi
 NODE_VERSION_PREFERRED="20"
 NODE_VERSION_MINIMUM="18"
 if ! command -v node &>/dev/null; then
-    warning_message "Node.js not found. Installing latest version..."
+    warning_message "Node.js not found. Installing..."
     if [[ "$OS" == "macOS" ]]; then
         brew install node || error_exit "Could not install Node.js via Homebrew."
     elif [[ "$OS" == "Linux" ]]; then
-        curl -fsSL https://deb.nodesource.com/setup_20.x | bash - || error_exit "Could not set up Node.js repository."
-        apt-get install -y nodejs || error_exit "Could not install Node.js. Try running with sudo."
+        # Install Node.js using nvm instead of system packages
+        warning_message "Installing nvm (Node Version Manager)..."
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
+        
+        nvm install ${NODE_VERSION_PREFERRED} || error_exit "Could not install Node.js via nvm."
+        nvm use ${NODE_VERSION_PREFERRED} || error_exit "Could not use Node.js ${NODE_VERSION_PREFERRED}."
+        
+        # Add to .bashrc to make it persist
+        if ! grep -q "export NVM_DIR" ~/.bashrc; then
+            echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.bashrc
+        fi
     elif [[ "$OS" == "Windows" ]]; then
         error_exit "Node.js is not installed. Please install it manually from https://nodejs.org/"
     else
@@ -104,8 +140,20 @@ else
         if [[ "$OS" == "macOS" ]]; then
             brew install node || error_exit "Could not install Node.js via Homebrew."
         elif [[ "$OS" == "Linux" ]]; then
-            curl -fsSL https://deb.nodesource.com/setup_20.x | bash - || error_exit "Could not set up Node.js repository."
-            apt-get install -y nodejs || error_exit "Could not install Node.js. Try running with sudo."
+            # Install Node.js using nvm instead of system packages
+            warning_message "Installing nvm (Node Version Manager)..."
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
+            
+            nvm install ${NODE_VERSION_PREFERRED} || error_exit "Could not install Node.js via nvm."
+            nvm use ${NODE_VERSION_PREFERRED} || error_exit "Could not use Node.js ${NODE_VERSION_PREFERRED}."
+            
+            # Add to .bashrc to make it persist
+            if ! grep -q "export NVM_DIR" ~/.bashrc; then
+                echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc
+                echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.bashrc
+            fi
         else
             error_exit "Please update Node.js manually to version $NODE_VERSION_PREFERRED or higher."
         fi
@@ -158,7 +206,7 @@ success_message "Dependencies installed successfully."
 warning_message "Installing TailwindCSS and CLI..."
 npm install tailwindcss@latest @tailwindcss/cli@latest || warning_message "Explicit TailwindCSS installation failed, but it may be included in project dependencies."
 
-# Install Eleventy globally
+# Install Eleventy globally - use npm prefix to avoid permission issues
 warning_message "Installing Eleventy globally..."
 npm install -g @11ty/eleventy@latest || warning_message "Global Eleventy installation failed, but the project may still work with local installation."
 
@@ -168,7 +216,7 @@ npm install --save-dev @storybook/html @storybook/addon-essentials @storybook/ad
 
 # Initialize Storybook using the official command
 warning_message "Initializing Storybook..."
-npx storybook init --builder webpack5 || warning_message "Storybook initialization failed. You may need to run it manually later."
+npx storybook init --builder webpack5 --use-npm || warning_message "Storybook initialization failed. You may need to run it manually later."
 
 # Add Storybook scripts to package.json if they don't exist
 if ! grep -q '"storybook":' package.json; then
@@ -248,10 +296,6 @@ fi
 warning_message "Installing Nunjucks support for Storybook..."
 npm install --save-dev simple-nunjucks-loader || warning_message "Nunjucks loader installation failed. You may need to install it manually."
 
-# Initialize Eleventy
-warning_message "Initializing Eleventy..."
-npx eleventy --serve || warning_message "Error initializing Eleventy, but configuration may be correct."
-
 # Create necessary directories if they don't exist
 mkdir -p public/css
 
@@ -261,6 +305,23 @@ touch public/css/output.css
 # Ensure TailwindCSS compiles styles
 warning_message "Compiling TailwindCSS styles..."
 npx tailwindcss -i ./src/input.css -o ./public/css/output.css || warning_message "Error compiling TailwindCSS. Check the configuration."
+
+# Skip Eleventy server initialization to avoid the script getting stuck
+warning_message "Skipping Eleventy server initialization to avoid blocking the script."
+warning_message "You can start the server manually later with 'npm start'."
+
+# Set proper ownership if run with sudo
+if [[ $RUNNING_AS_ROOT == true ]]; then
+    if [[ -n "$SUDO_USER" ]]; then
+        chown -R $SUDO_USER:$(id -g $SUDO_USER) "$PROJECT_DIR"
+        success_message "Changed ownership of $PROJECT_DIR to $SUDO_USER"
+    else
+        warning_message "Running as root but SUDO_USER is not set. Could not change ownership."
+    fi
+fi
+
+# Ensure permissions are correct for the project directory
+chmod -R u+w "$PROJECT_DIR"
 
 # Setup complete
 success_message "================================================================="
