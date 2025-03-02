@@ -389,13 +389,6 @@ Implement the necessary JavaScript enhancements for your component.
 
 ### Dynamic Data Loading
 
-```nunjucks
-{# Helper macro to load JSON data #}
-{% macro load_json(path) %}
-  {% include path | replace('.json', '') %}
-{% endmacro %}
-```
-
 ## 🚀 Implementation Workflow
 
 1. Define component data in JSON
@@ -422,13 +415,21 @@ Consider using JSON Schema for strict validation:
 
 ## 📦 Example Integration
 
-```nunjucks
-{# Using new component with data #}
-{{ renderNewComponent({
-  variant: 'primary',
-  content: 'Hello, World!'
-}) }}
-```
+### How to Import and Use a Macro in a Nunjucks Template
+
+To correctly import and use a macro in a Nunjucks template, follow these steps:
+
+1. **Import the macro** at the top of your page:  
+
+   ```nunjucks
+   {% from "02-atoms-navigation/link.njk" import renderLink %}
+
+2. **Insert the component** into your template using the imported macro and the appropriate JSON data:
+
+   ```nunjucks
+   {{ renderLink(links.link_home) }}
+
+Make sure to replace link.njk with the correct component file and links.link_home with the corresponding JSON data you want to use.
 
 ## 🔧 Tooling Recommendations
 
