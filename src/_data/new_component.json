@@ -1,0 +1,56 @@
+{
+    "name": "NewComponent",
+    "description": "Description of the new component",
+    
+    "variants": [
+      {
+        "name": "default",
+        "class": "new-component--default",
+        "styles": {
+          "backgroundColor": "#ffffff",
+          "color": "#000000"
+        }
+      },
+      {
+        "name": "primary",
+        "class": "new-component--primary",
+        "styles": {
+          "backgroundColor": "#007bff",
+          "color": "#ffffff"
+        }
+      },
+      {
+        "name": "secondary",
+        "class": "new-component--secondary",
+        "styles": {
+          "backgroundColor": "#6c757d",
+          "color": "#ffffff"
+        }
+      }
+    ],
+    
+    "defaultProps": {
+      "variant": "default",
+      "disabled": false,
+      "size": "medium"
+    },
+    
+    "sizes": [
+      "small",
+      "medium",
+      "large"
+    ],
+    
+    "accessibility": {
+      "ariaRoles": ["button", "link"],
+      "keyboardInteractions": ["Enter", "Space"]
+    },
+    
+    "validations": {
+      "requiredProps": [],
+      "optionalProps": [
+        "content",
+        "ariaLabel" 
+      ]
+    }
+  }
