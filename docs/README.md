@@ -2,113 +2,113 @@
 
 ## 🌟 Introduction
 
-Hat Dynamic Template est un framework de développement front-end conçu pour créer des sites web modulaires et maintenables. Il combine les technologies suivantes :
+Hat Dynamic Template is a front-end development framework designed to create modular and maintainable websites. It combines the following technologies:
 
-- **Eleventy** : Générateur de sites statiques
-- **Nunjucks** : Moteur de templates
-- **TailwindCSS v4** : Framework CSS utility-first
-- **Storybook** : Développement de composants isolés
-- **Decap CMS** : Gestion de contenu
+- **Eleventy**: Static site generator
+- **Nunjucks**: Template engine
+- **TailwindCSS v4**: Utility-first CSS framework
+- **Storybook**: Isolated component development
+- **Decap CMS**: Content management
 
 ### Architecture
 
-Le projet suit l'architecture OMA (Organism-Molecule-Atom) pour garantir une structure de composants claire et évolutive.
+The project follows the OMA (Organism-Molecule-Atom) architecture to ensure a clear and scalable component structure.
 
-## 🔧 Prérequis
+## 🔧 Prerequisites
 
-- Node.js (v20.0.0 recommandé, minimum v18.0.0)
-- npm (dernière version)
+- Node.js (v20.0.0 recommended, minimum v18.0.0)
+- npm (latest version)
 - Git
 
-## 🚀 Installation Rapide
+## 🚀 Quick Installation
 
-### Sur Linux/macOS
+### On Linux/macOS
 
 ```sh
 curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.sh && chmod +x setup-project.sh && ./setup-project.sh
 ```
 
-### Sur Windows (PowerShell)
+### On Windows (PowerShell)
 
 ```powershell
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.ps1" -OutFile "setup-project.ps1" ; .\setup-project.ps1
 ```
 
-## 📦 Installation Manuelle
+## 📦 Manual Installation
 
-1. **Cloner le dépôt**
+1. **Clone the repository**
 
    ```sh
-   git clone https://github.com/theHat13/dynamic-template.git votre-projet
-   cd votre-projet
+   git clone https://github.com/theHat13/dynamic-template.git your-project
+   cd your-project
    ```
 
-2. **Installer les dépendances**
+2. **Install dependencies**
 
    ```sh
    npm install
    ```
 
-3. **Installer Storybook**
+3. **Install Storybook**
 
    ```sh
    npm install --save-dev @storybook/html @storybook/addon-essentials
    npx storybook init --builder webpack5
    ```
 
-## 🖥 Scripts NPM
+## 🖥 NPM Scripts
 
-- `npm start` : Démarrer le serveur de développement
-- `npm run build` : Compiler le site pour la production
-- `npm run refresh` : Nettoyer le cache et les fichiers générés
-- `npm run storybook` : Démarrer Storybook
-- `npm run build-storybook` : Compiler Storybook pour la production
+- `npm start`: Start development server
+- `npm run build`: Compile site for production
+- `npm run refresh`: Clear cache and generated files
+- `npm run storybook`: Start Storybook
+- `npm run build-storybook`: Compile Storybook for production
 
-## 🛠 Personnalisation
+## 🛠 Customization
 
 ### Styles
 
-- Modifier `src/input.css` pour ajouter des styles personnalisés
-- Utiliser le thème Tailwind pour maintenir la cohérence visuelle
+- Modify `src/input.css` to add custom styles
+- Use Tailwind theme to maintain visual consistency
 
-### Composants
+### Components
 
-Suivre l'architecture OMA :
+Follow the OMA architecture:
 
-- **Atoms** : Composants de base (boutons, champs de formulaire)
-- **Molecules** : Combinaisons d'atoms (cartes, en-têtes de section)
-- **Organisms** : Sections complètes (en-tête, pied de page)
+- **Atoms**: Basic components (buttons, form fields)
+- **Molecules**: Combinations of atoms (cards, section headers)
+- **Organisms**: Complete sections (header, footer)
 
 ### Storybook
 
-- Créer des stories de composants dans le dossier `stories`
-- Développer et documenter les composants de manière isolée
-- Suivre la convention de nommage : `nomComposant.stories.js`
+- Create component stories in the `stories` folder
+- Develop and document components in isolation
+- Follow naming convention: `componentName.stories.js`
 
-## 🚢 Déploiement
+## 🚢 Deployment
 
 ### Netlify
 
-1. Connecter le dépôt GitHub à Netlify
-2. Configurer les paramètres de build :
-   - Commande de build : `npm run build`
-   - Répertoire de publication : `public`
+1. Connect GitHub repository to Netlify
+2. Configure build settings:
+   - Build command: `npm run build`
+   - Publish directory: `public`
 
-### Configuration Decap CMS
+### Decap CMS Configuration
 
-1. Activer l'authentification Netlify Identity
-2. Inviter les administrateurs via le panneau Netlify Identity
-3. Configurer `src/admin/config.yml` selon vos besoins
+1. Enable Netlify Identity authentication
+2. Invite administrators via Netlify Identity panel
+3. Configure `src/admin/config.yml` according to your needs
 
-## 🔄 Maintenance des Technologies
+## 🔄 Technology Maintenance
 
-Utilisez le script `check_web_versions.sh` (Unix) ou `check_web_versions.ps1` (Windows) pour :
+Use the `check_web_versions.sh` (Unix) or `check_web_versions.ps1` (Windows) script to:
 
-- Vérifier les versions actuelles
-- Comparer avec les dernières versions disponibles
-- Mettre à jour de manière interactive
+- Check current versions
+- Compare with latest available versions
+- Update interactively
 
-Technologies surveillées :
+Monitored technologies:
 
 - Node.js
 - npm
@@ -120,12 +120,12 @@ Technologies surveillées :
 
 ## 🤝 Contribution
 
-Les contributions sont les bienvenues ! Créez une pull request ou ouvrez une issue pour discuter des améliorations.
+Contributions are welcome! Create a pull request or open an issue to discuss improvements.
 
-## 📄 Licence
+## 📄 License
 
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 ---
 
-Pour toute question ou assistance, contactez : <carpentier.dev@gmail.com>
+For any questions or assistance, contact: <carpentier.dev@gmail.com>
