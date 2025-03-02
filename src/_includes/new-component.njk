@@ -1,0 +1,65 @@
+{# 
+  New Component Macro Template
+  
+  STEPS TO CUSTOMIZE:
+  1. Replace 'NewComponent' with your component's name
+  2. Update macro signature and parameters
+  3. Add default options handling
+  4. Implement component logic
+  5. Add accessibility attributes
+  6. Implement optional content/children support
+#}
+
+{% macro renderNewComponent(options) %}
+  {# 
+    Options Structure:
+    - content: Main content/text
+    - class: Additional CSS classes
+    - variant: Component variant (e.g., primary, secondary)
+    - attributes: Custom HTML attributes
+  #}
+  {% set defaults = {
+    variant: 'default',
+    class: '',
+    attributes: {},
+    content: ''
+  } %}
+  
+  {# Merge default options with passed options #}
+  {% set componentOptions = defaults | merge(options) %}
+
+  {# Load component-specific data #}
+  {% set componentData = load_json('_data/components/new-component.json') %}
+
+  <div 
+    class="new-component 
+      new-component--{{ componentOptions.variant }} 
+      {{ componentOptions.class }}"
+    
+    {# Spread additional attributes #}
+    {% for attr, value in componentOptions.attributes %}
+      {{ attr }}="{{ value }}"
+    {% endfor %}
+
+    {# Optional ARIA attributes for accessibility #}
+    {% if componentOptions.ariaLabel %}
+      aria-label="{{ componentOptions.ariaLabel }}"
+    {% endif %}
+  >
+    {# Component content rendering #}
+    {% if componentOptions.content %}
+      <div class="new-component__content">
+        {{ componentOptions.content | safe }}
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{# 
+  Helper macro for JSON loading (if not already defined globally)
+  Requires nunjucks-loader or custom implementation 
+#}
+{% macro load_json(path) %}
+  {# Implementation depends on your Eleventy setup #}
+  {# Placeholder for JSON loading logic #}
+{% endmacro %}
