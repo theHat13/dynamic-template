@@ -10,43 +10,23 @@ Hat Dynamic Template is a front-end development framework based on **Eleventy**,
 - **npm** (latest version)
 - **Git**
 
-## Installation via script (recommended)
-
-For an automated installation that handles all dependencies and configurations:
+## Quick Installation
 
 ### On Linux/macOS
 
-1. **Download the script**
+Simply copy and paste this one-liner in your terminal:
 
-   ```sh
-   curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.sh
-   ```
-
-2. **Make the script executable**
-
-   ```sh
-   chmod +x setup-project.sh
-   ```
-
-3. **Run the script**
-
-   ```sh
-   ./setup-project.sh
-   ```
+```sh
+curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.sh && chmod +x setup-project.sh && ./setup-project.sh
+```
 
 ### On Windows (PowerShell)
 
-1. **Download the script**
+Copy and paste this one-liner in PowerShell:
 
-   ```powershell
-   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.ps1" -OutFile "setup-project.ps1"
-   ```
-
-2. **Run the script**
-
-   ```powershell
-   .\setup-project.ps1
-   ```
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.ps1" -OutFile "setup-project.ps1" ; .\setup-project.ps1
+```
 
 ## Manual Installation
 
@@ -98,17 +78,11 @@ If you prefer to install components manually:
    npm start
    ```
 
-7. **Access the site**  
-   The site is available at [http://localhost:8080](http://localhost:8080)
-
-8. **Start Storybook**
+7. **Start Storybook**
 
    ```sh
    npm run storybook
    ```
-
-9.  **Access Storybook**  
-   Storybook is available at [http://localhost:6006](http://localhost:6006)
 
 ## Troubleshooting Installation
 
@@ -170,31 +144,10 @@ npm install tailwindcss@latest @tailwindcss/cli@latest
 
 ```sh
 # Install Storybook dependencies explicitly
-npm install --save-dev @storybook/html @storybook/addon-essentials @storybook/addon-interactions
+npm install --save-dev @storybook/html @storybook/addon-essentials @storybook/addon-interactions @storybook/addon-a11y @storybook/addon-links @storybook/addon-viewport
 
 # Rebuild Storybook configuration
-npx storybook init --builder webpack5
-```
-
-## Project Structure
-
-```sh
-.
-├── src/                    # Source code
-│   ├── _data/              # Global data for templates
-│   ├── _includes/          # Components and partials
-│   │   ├── 00-organisms-*/ # Organism components (large blocks)
-│   │   ├── 01-molecules-*/ # Molecule components (groups of atoms)
-│   │   └── 02-atoms-*/     # Atom components (basic elements)
-│   ├── admin/              # Decap CMS interface
-│   ├── assets/             # Images, static files
-│   ├── blog/               # Blog posts
-│   └── input.css           # Main CSS file for Tailwind
-├── .storybook/            # Storybook configuration
-├── stories/               # Storybook component stories
-├── .eleventy.js            # Eleventy configuration
-├── package.json            # Dependencies and scripts
-└── README.md               # Documentation
+npx storybook init --builder webpack5 --use-npm
 ```
 
 ## NPM Scripts
@@ -204,6 +157,48 @@ npx storybook init --builder webpack5
 - `npm run refresh` - Clean cache and generated files
 - `npm run storybook` - Start Storybook development server
 - `npm run build-storybook` - Build Storybook for production
+
+## 🔄 Technology Maintenance
+
+### Automatic Technology Update Script
+
+Our project includes a bash script (`check_web_versions.sh` for Unix ou `check_web_versions.ps1` for Windows) for managing and tracking web technology versions.
+
+#### 🚀 Key Features
+
+- Check current technology versions
+- Compare with latest available versions
+- Interactive updates
+- Links to official documentation
+
+#### 🛠 Monitored Technologies
+
+- Node.js
+- npm
+- Eleventy
+- Nunjucks
+- TailwindCSS
+- Storybook
+- Decap CMS
+- Netlify Updates
+
+#### 💡 Usage
+
+```bash
+# Make the script executable
+chmod +x check_web_versions.sh
+
+# Run version check
+./check_web_versions.sh
+```
+
+#### ⚠️ Recommendations
+
+- Always backup the project before updating
+- Manually verify version compatibility
+- Test the application after each update
+
+*Tool developed to simplify project maintenance.*
 
 ## Customization
 
