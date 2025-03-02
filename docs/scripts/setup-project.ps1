@@ -142,7 +142,9 @@ catch {
 Show-Warning "Installing TailwindCSS and CLI..."
 try {
     npm install tailwindcss@latest @tailwindcss/cli@latest
+    $tailwindVersion = npx tailwindcss --version
     Show-Success "TailwindCSS and CLI installed successfully."
+    Show-Success "TailwindCSS version: $tailwindVersion"
 }
 catch {
     Show-Warning "Explicit TailwindCSS installation failed, but it may be included in project dependencies."
@@ -152,7 +154,9 @@ catch {
 Show-Warning "Installing Eleventy globally..."
 try {
     npm install -g @11ty/eleventy@latest
-    Show-Success "Eleventy installed globally."
+    $eleventyVersion = npx eleventy --version
+    Show-Success "Eleventy installed successfully."
+    Show-Success "Eleventy version: $eleventyVersion"
 }
 catch {
     Show-Warning "Global Eleventy installation failed, but the project may still work with local installation."
@@ -171,7 +175,7 @@ catch {
 # Initialize Storybook using the official command
 Show-Warning "Initializing Storybook..."
 try {
-    npx storybook init --builder webpack5
+    npx storybook init --builder webpack5 --use-npm
     Show-Success "Storybook initialized successfully."
 }
 catch {
@@ -291,6 +295,16 @@ catch {
 Show-Success "================================================================="
 Show-Success "Hat Dynamic Template setup completed successfully!"
 Show-Success "================================================================="
+Show-Success "Project created: $projectDir"
+Show-Success ""
+Show-Success "Key components installed:"
+Show-Success "✓ Node.js"
+Show-Success "✓ npm"
+Show-Success "✓ TailwindCSS"
+Show-Success "✓ Eleventy"
+Show-Success "✓ Storybook"
+Show-Success "✓ Nunjucks support"
+Show-Success ""
 Show-Success "Use the following commands to start:"
 Show-Success "cd $projectDir"
 Show-Success "npm start          # Start Eleventy development server"
