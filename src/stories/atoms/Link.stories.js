@@ -1,6 +1,6 @@
 // src/stories/atoms/Link.stories.js
 import nunjucks from 'nunjucks';
-import linkData from '../../_data/components/atoms/link.json';
+import linkData from '../../_data/styles/atoms/link.json';
 import linksData from '../../_data/contents/atoms/links.json';
 
 // Nunjucks template for rendering links

@@ -3,11 +3,11 @@
 <!-- ========================= -->
 
 {% macro renderChip(content='0', variant='default') %}
-  {# Déterminer la taille selon la longueur #}
+  {# Determine the size based on the length #}
   {% set classes = {
     '1': 'h-6 w-6 text-xs',
-    '2': 'h-7 w-7 text-sm',
-    '3+': 'h-8 min-w-8 px-1 text-sm'
+    '2': 'h-8 w-8 text-sm',
+    '3+': 'h-10 w-10 px-1 text-sm'
   } %}
   
   {% set contentLength = content | string | length %}
