@@ -1,8 +1,9 @@
 // src/stories/atoms/Link.stories.js
 import nunjucks from 'nunjucks';
 import linkData from '../../_data/components/atoms/link.json';
+import linksData from '../../_data/contents/atoms/links.json';
 
-// Simple Nunjucks template string for the link component
+// Nunjucks template for rendering links
 const linkTemplate = `
   <a 
     href="{{ href }}" 
@@ -12,52 +13,39 @@ const linkTemplate = `
   </a>
 `;
 
-/**
- * Helper function to determine CSS class based on link variant
- * Uses the same styling logic from link.json but applied directly in JavaScript
- */
+// Helper function to get variant-specific CSS classes
 function getVariantClass(variant) {
-  // Find the matching variant in linkData or use default
   const foundVariant = linkData.variants.find(v => v.name === variant);
-  
-  if (foundVariant && foundVariant.class) {
-    // Extract just the styling part (removing the link--variant part which we add separately)
-    return foundVariant.class.replace(`link--${variant}`, '').trim();
-  }
-  
-  // Fallback to a simple default style
-  return 'text-gray-800 hover:text-gray-600 transition-colors duration-200';
+  return foundVariant ? foundVariant.class.replace(`link--${variant}`, '').trim() : '';
 }
 
 export default {
   title: 'Atoms/Link',
   tags: ['autodocs'],
   
+  // Render function using Nunjucks macro
   render: (args) => {
-    // Get styling from the link.json variants
-    const variantClass = getVariantClass(args.variant);
-    
-    // Render the template with Nunjucks
     return nunjucks.renderString(linkTemplate, {
       href: args.href,
       text: args.text,
       variant: args.variant,
-      variantClass: variantClass
+      variantClass: getVariantClass(args.variant)
     });
   },
   
+  // Argument types for storybook controls
   argTypes: {
-    href: {
+    href: { 
       description: 'Destination URL for the link',
       control: 'text',
-      defaultValue: '#'
+      defaultValue: '#' 
     },
-    text: {
+    text: { 
       description: 'Text displayed for the link',
       control: 'text',
-      defaultValue: 'Link'
+      defaultValue: 'Link' 
     },
-    variant: {
+    variant: { 
       description: 'Visual style of the link',
       control: { 
         type: 'select', 
@@ -68,51 +56,52 @@ export default {
   }
 };
 
-// Default link variant story
-export const Default = {
+// Using examples from links.json
+const linkExamples = linksData.link_data;
+
+export const Home = {
   args: {
-    href: '#',
-    text: 'Default Link',
-    variant: 'default'
+    href: linkExamples.link_home.href,
+    text: linkExamples.link_home.text,
+    variant: linkExamples.link_home.variant
   }
 };
 
-// Primary link variant story
-export const Primary = {
+export const Services = {
   args: {
-    href: '/home',
-    text: 'Primary Link',
-    variant: 'primary'
+    href: linkExamples.link_services.href,
+    text: linkExamples.link_services.text,
+    variant: linkExamples.link_services.variant
   }
 };
 
-// Secondary link variant story
-export const Secondary = {
-  args: {
-    href: '/about',
-    text: 'Secondary Link', 
-    variant: 'secondary'
-  }
-};
-
+// Using examples from links.json
 export const Usage = () => {
   const usageGuide = document.createElement('div');
-  usageGuide.className = 'usage-guide';
+  usageGuide.className = 'bg-gray-50 p-6 rounded-lg max-w-4xl mx-auto';
   usageGuide.innerHTML = `
-    <h2>How to Use This Component</h2>
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">How to Use This Component</h2>
     
-    <h3>1. Import the macro at the top of your page:</h3>
-    <pre><code>{% from "02-atoms-navigation/link.njk" import renderLink %}</code></pre>
-    
-    <h3>2. Insert the component in your template:</h3>
-    <pre><code>{{ renderLink(links.link_data.link_home) }}</code></pre>
-    
-    <h3>3. You can also specify a custom variant directly in the call:</h3>
-    <pre><code>{{ renderLink(links.link_data.link_home, "primary") }}</code></pre>
-    
-    <h3>4. Replace "link_home" with the name of your specific link:</h3>
-    <p>Available links are defined in src/_data/links.json. To add new links, edit the link_data section in links.json:</p>
-    <pre><code>{
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">1. Import the macro at the top of your page:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "02-atoms-navigation/link.njk" import renderLink %}</code></pre>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Insert the component in your template:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink(links.link_data.link_home) }}</code></pre>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. You can also specify a custom variant directly in the call:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink(links.link_data.link_home, "primary") }}</code></pre>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Replace "link_home" with the name of your specific link:</h3>
+        <p class="text-gray-600 mb-3">Available links are defined in src/_data/contents/atoms/links.json. To add new links, edit the link_data section in links.json:</p>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
 "link_data": {
   "your_new_link_name": {
     "href": "/your-path",
@@ -121,10 +110,12 @@ export const Usage = () => {
   }
 }
 }</code></pre>
-    
-    <h3>5. Style variants are defined in src/_data/link.json:</h3>
-    <p>To modify or add variants, edit the variants section in link.json:</p>
-    <pre><code>{
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Style variants are defined in src/_data/components/atoms/link.json:</h3>
+        <p class="text-gray-600 mb-3">To modify or add variants, edit the variants section in link.json:</p>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
 "variants": [
   {
     "name": "your_new_variant",
@@ -136,6 +127,8 @@ export const Usage = () => {
   }
 ]
 }</code></pre>
+      </div>
+    </div>
   `;
   
   return usageGuide;
