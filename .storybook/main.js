@@ -1,4 +1,14 @@
 /** @type { import('@storybook/html-webpack5').StorybookConfig } */
+import path from 'path';
+import nunjucks from 'nunjucks';
+
+// Configure Nunjucks environment
+const njkEnv = new nunjucks.Environment(
+  new nunjucks.FileSystemLoader([
+    path.resolve(__dirname, '../src/_includes')
+  ])
+);
+
 const config = {
   stories: [
     "../src/**/*.mdx",
@@ -21,24 +31,47 @@ const config = {
   },
 
   webpackFinal: async (config) => {
+    // Existing rule for .njk files
     config.module.rules.push({
       test: /\.njk$/,
       use: [
         {
           loader: 'simple-nunjucks-loader',
           options: {
-
             environment: 'production'
           }
         }
       ]
     });
+    
+    // Add rule for raw loading of njk templates if needed
+    config.module.rules.push({
+      test: /\.njk$/,
+      resourceQuery: /raw/,
+      type: 'asset/source'
+    });
+    
     return config;
   },
 
   docs: {
     autodocs: 'tag',
     defaultName: 'Documentation'
+  },
+  
+  // Add global renderNunjucks function
+  globals: {
+    renderNunjucks: (template, context = {}) => {
+      try {
+        return njkEnv.renderString(template, {
+          ...context,
+          // Add any global data your Nunjucks templates expect
+        });
+      } catch (error) {
+        console.error('Nunjucks render error:', error);
+        return `<div style="color: red;">Error rendering template: ${error.message}</div>`;
+      }
+    }
   }
 };
 
