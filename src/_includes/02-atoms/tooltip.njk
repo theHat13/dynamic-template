@@ -1,0 +1,55 @@
+<!-- ========================= -->
+<!--         TOOLTIP          -->
+<!-- ========================= -->
+
+{% macro renderTooltip(option) %}
+  {# Get tooltip options with default values if not provided #}
+  {% set text = option.text | default('Tooltip content') %}
+  {% set buttonText = option.buttonText | default('Hover me') %}
+  {% set variant = option.variant | default(tooltip.defaultProps.variant) %}
+  {% set name = option.name | default('default') %}
+  
+  {# Find the variant in the tooltip.json file #}
+  {% set selectedVariant = null %}
+  {% for v in tooltip.variants %}
+    {% if v.name == variant %}
+      {% set selectedVariant = v %}
+    {% endif %}
+  {% endfor %}
+  
+  {# Use default variant if specified variant was not found #}
+  {% if not selectedVariant %}
+    {% for v in tooltip.variants %}
+      {% if v.name == tooltip.defaultProps.variant %}
+        {% set selectedVariant = v %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+  {# Render the tooltip container with appropriate classes #}
+  <div class="tooltip-container">
+    <button 
+      class="tooltip typography-label-l" 
+      aria-describedby="tooltip-{{ name }}"
+    >
+      {{ buttonText }}
+    </button>
+    <div 
+      id="tooltip-{{ name }}" 
+      class="tag inline-flex items-center px-2 py-1 text-xs font-medium rounded-md {{ selectedVariant.class }}"
+    >
+      {{ text }}
+    </div>
+  </div>
+{% endmacro %}
+
+<!-- ========================= -->
+<!-- HOW TO USE THIS COMPONENT -->
+<!-- ========================= -->
+
+<!--
+  Complete documentation in Storybook
+  Basic usage: {% from "02-atoms/tooltip.njk" import renderTooltip %}
+              {{ renderTooltip(tooltips.tooltip_data.mystic_amulet) }}
+  With style: {{ renderTooltip({ text: "Custom Tooltip", variant: "success" }) }}
+-->

@@ -112,42 +112,51 @@ export const Usage = () => {
     <div class="space-y-6">
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">1. Import the macro at the top of your page:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "02-atoms-notifications/tag.njk" import renderTag %}</code></pre>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "02-atoms/tag.njk" import renderTag %}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Insert the component with options:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderTag({ text: "Low-Level Adventurer", variant: "default-gray" }) }}</code></pre>
-      </div>
-      
-      <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Or use pre-defined tags from the data file:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Insert the component in your template:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderTag(tags.tag_data.tag_adventure) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Available Variants:</h3>
-        <p class="text-gray-600 mb-3">The tag component comes with the following variants:</p>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Use a custom variant directly in the call:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderTag({
+  text: 'Custom Tag', 
+  variant: 'success'
+}) }}</code></pre>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Available content & styles:</h3>
+        <p class="text-gray-600 mb-3">Check the following files:</p>
         <ul class="list-disc pl-6 space-y-2 text-gray-600">
-          <li><strong>default / default-gray</strong> - Standard gray tags</li>
-          <li><strong>information / information-gray</strong> - Blue tags for informational content</li>
-          <li><strong>success / success-gray</strong> - Green tags for successful status</li>
-          <li><strong>warning / warning-gray</strong> - Yellow tags for warnings or alerts</li>
-          <li><strong>critical / critical-gray</strong> - Red tags for critical status or errors</li>
+          <li>Content: <code>src/_data/contents/atoms/tags.json</code></li>
+          <li>Styles: <code>src/_data/styles/atoms/tag.json</code></li>
         </ul>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Creating new tag variants:</h3>
-        <p class="text-gray-600 mb-3">To add new tag variants, edit the src/_data/styles/atoms/tag.json file:</p>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
-  "variants": [
-    {
-      "name": "your-custom-variant",
-      "class": "bg-purple-100 text-purple-800 border border-purple-200 hover:bg-purple-200"
-    }
-  ]
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Create a new content or style:</h3>
+        <div class="bg-gray-100 p-3 rounded-md overflow-x-auto">
+          <h4 class="font-semibold mb-2">Add content to tags.json:</h4>
+          <pre><code class="text-sm text-gray-900">"tag_data": {
+  "your_new_tag": {
+    "name": "unique_name",
+    "text": "Your tag text",
+    "variant": "default"
+  }
 }</code></pre>
+          
+          <h4 class="font-semibold mt-4 mb-2">Add style to tag.json:</h4>
+          <pre><code class="text-sm text-gray-900">"variants": [
+  {
+    "name": "your_new_variant",
+    "class": "tag--custom bg-purple-100 text-purple-800 border border-purple-200"
+  }
+]</code></pre>
+        </div>
       </div>
     </div>
   `;

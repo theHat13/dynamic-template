@@ -1,0 +1,25 @@
+{
+    "component": "tooltip",
+    "summary": "Provides additional context or explanation for interactive elements",
+    "params": [
+      { "name": "text", "type": "string", "required": true, "notes": "Main tooltip text" },
+      { "name": "variant", "type": "string", "required": false, "notes": "Visual style of the tooltip" }
+    ],
+    "tooltip_data": {
+      "mystic_amulet": {
+        "name": "mystic_amulet",
+        "text": "Increases mana regeneration by +15%\nGrants night vision ability",
+        "variant": "default"
+      },
+      "critical_warning": {
+        "name": "critical_warning", 
+        "text": "This action cannot be undone.\nProceed with caution.",
+        "variant": "warning"
+      },
+      "info_tip": {
+        "name": "info_tip",
+        "text": "Click to learn more about this feature.\nAdditional details available.",
+        "variant": "info"
+      }
+    }
+  }
