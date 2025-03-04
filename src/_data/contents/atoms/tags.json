@@ -1,0 +1,61 @@
+{
+    "component": "tag",
+    "summary": "A label tag for categorization and status indication",
+    "params": [
+      { "name": "option", "type": "object", "required": true, "notes": "Object containing tag properties" },
+      { "name": "option.text", "type": "string", "required": true, "notes": "Displayed text for the tag" },
+      { "name": "option.variant", "type": "string", "required": false, "notes": "Visual style variant" }
+    ],
+    "tag_data": {
+      "tag_adventure": {
+        "name": "adventure",
+        "text": "Low-Level Adventurer",
+        "variant": "default-gray"
+      },
+      "tag_equipment": {
+        "name": "equipment",
+        "text": "Rusty Dagger Equipped",
+        "variant": "default"
+      },
+      "tag_lore": {
+        "name": "lore",
+        "text": "Lore Master",
+        "variant": "information-gray"
+      },
+      "tag_magic": {
+        "name": "magic",
+        "text": "Magic Item (Unidentified)",
+        "variant": "information"
+      },
+      "tag_success": {
+        "name": "success",
+        "text": "Critical Success",
+        "variant": "success-gray"
+      },
+      "tag_treasure": {
+        "name": "treasure",
+        "text": "Treasure Acquired",
+        "variant": "success"
+      },
+      "tag_encumbrance": {
+        "name": "encumbrance",
+        "text": "Encumbrance Exceeded",
+        "variant": "warning-gray"
+      },
+      "tag_boss": {
+        "name": "boss",
+        "text": "Boss Encounter",
+        "variant": "warning"
+      },
+      "tag_death": {
+        "name": "death",
+        "text": "Perma-death Warning",
+        "variant": "critical-gray"
+      },
+      "tag_curse": {
+        "name": "curse",
+        "text": "Cursed Item Equipped",
+        "variant": "critical"
+      }
+    }
+  }
