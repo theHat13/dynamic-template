@@ -1,0 +1,58 @@
+{
+  "component": "select",
+  "summary": "A dropdown select component for the website",
+  "params": [
+    { "name": "option", "type": "object", "required": true, "notes": "Object containing select properties" },
+    { "name": "option.name", "type": "string", "required": true, "notes": "HTML name attribute for the select element" },
+    { "name": "option.options", "type": "array", "required": true, "notes": "Array of option objects with value and label properties" },
+    { "name": "option.variant", "type": "string", "required": false, "notes": "Visual style variant, defaults to 'default'" }
+  ],
+  "select_data": {
+    "categories": {
+      "name": "categories",
+      "options": [
+        { "value": "warrior", "label": "Warrior" },
+        { "value": "rogue", "label": "Rogue" },
+        { "value": "sorcerer", "label": "Sorcerer" },
+        { "value": "paladin", "label": "Paladin of Justice" },
+        { "value": "necromancer", "label": "Necromancer" },
+        { "value": "bard", "label": "Bard (Loot Included)" },
+        { "value": "beastmaster", "label": "Beastmaster" }
+      ],
+      "variant": "default"
+    },
+    "locations": {
+      "name": "locations",
+      "options": [
+        { "value": "stormhold", "label": "Stormhold Citadel" },
+        { "value": "shadowmere", "label": "Shadowmere Swamps" },
+        { "value": "eldoria", "label": "Eldoria, the Ancient Kingdom" },
+        { "value": "dragonspire", "label": "Dragonspire Peak" },
+        { "value": "mysthaven", "label": "Mysthaven Village" },
+        { "value": "darkhollow", "label": "Darkhollow Dungeon" },
+        { "value": "arcane-sanctum", "label": "Arcane Sanctum" }
+      ],
+      "variant": "primary"
+    },
+    "difficulties": {
+      "name": "difficulty",
+      "options": [
+        { "value": "easy", "label": "Easy", "selected": true },
+        { "value": "medium", "label": "Medium" },
+        { "value": "hard", "label": "Hard" },
+        { "value": "nightmare", "label": "Nightmare" }
+      ],
+      "variant": "secondary"
+    },
+    "itemsPerPage": {
+      "name": "perPage",
+      "options": [
+        { "value": "10", "label": "10 per page", "selected": true },
+        { "value": "20", "label": "20 per page" },
+        { "value": "50", "label": "50 per page" },
+        { "value": "100", "label": "100 per page" }
+      ],
+      "variant": "small"
+    }
+  }
+}
