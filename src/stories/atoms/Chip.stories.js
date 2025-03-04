@@ -98,30 +98,42 @@ export const Usage = () => {
       
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Insert the component in your template:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderChip('3') }}             {# Default style #}
-{{ renderChip('12', 'info') }}      {# Info style #}
-{{ renderChip('8', 'success') }}    {# Success style #}</code></pre>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderChip(chips.chip_data.notification_count) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Size is automatically determined:</h3>
-        <ul class="list-disc list-inside text-gray-600 mb-3">
-          <li>1 digit = small size (w-6 h-6)</li>
-          <li>2 digits = medium size (w-8 w-8)</li>
-          <li>3+ digits = large size with padding (h-10 w-10)</li>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Use a custom variant directly in the call:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderChip({
+  content: '42', 
+  variant: 'success'
+}) }}</code></pre>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Available content & styles:</h3>
+        <p class="text-gray-600 mb-3">Check the following files:</p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-600">
+          <li>Content: <code>src/_data/contents/atoms/chips.json</code></li>
+          <li>Styles: <code>src/_data/styles/atoms/chip.json</code></li>
         </ul>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Available variants in src/_data/components/atoms/chip.json:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
-  "variants": {
-    "default": "bg-red-500",
-    "success": "bg-green-500", 
-    "warning": "bg-yellow-500",
-    "info": "bg-blue-500"
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Create a new content or style:</h3>
+        <div class="bg-gray-100 p-3 rounded-md overflow-x-auto">
+          <h4 class="font-semibold mb-2">Add content to chips.json:</h4>
+          <pre><code class="text-sm text-gray-900">"chip_data": {
+  "your_new_chip": {
+    "name": "unique_name",
+    "content": "42"
   }
 }</code></pre>
+          
+          <h4 class="font-semibold mt-4 mb-2">Add style to chip.json:</h4>
+          <pre><code class="text-sm text-gray-900">"variants": {
+  "your_new_variant": "bg-purple-500"
+}</code></pre>
+        </div>
       </div>
     </div>
   `;

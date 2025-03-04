@@ -85,7 +85,7 @@ export const Usage = () => {
     <div class="space-y-6">
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">1. Import the macro at the top of your page:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "02-atoms-navigation/link.njk" import renderLink %}</code></pre>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "02-atoms/link.njk" import renderLink %}</code></pre>
       </div>
       
       <div>
@@ -94,39 +94,44 @@ export const Usage = () => {
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. You can also specify a custom variant directly in the call:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink(links.link_data.link_home, "primary") }}</code></pre>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Use a custom variant directly in the call:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink({
+  href: '/custom-page', 
+  text: 'Custom Link', 
+  variant: 'primary'
+}) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Replace "link_home" with the name of your specific link:</h3>
-        <p class="text-gray-600 mb-3">Available links are defined in src/_data/contents/atoms/links.json. To add new links, edit the link_data section in links.json:</p>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
-"link_data": {
-  "your_new_link_name": {
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Available content & styles:</h3>
+        <p class="text-gray-600 mb-3">Check the following files:</p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-600">
+          <li>Content: <code>src/_data/contents/atoms/links.json</code></li>
+          <li>Styles: <code>src/_data/styles/atoms/link.json</code></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Create a new content or style:</h3>
+        <div class="bg-gray-100 p-3 rounded-md overflow-x-auto">
+          <h4 class="font-semibold mb-2">Add content to links.json:</h4>
+          <pre><code class="text-sm text-gray-900">"link_data": {
+  "your_new_link": {
+    "name": "unique_name",
     "href": "/your-path",
-    "text": "Link Text",
-    "variant": "default" // Optional: can be "default", "primary", or "secondary"
+    "text": "Your link text",
+    "variant": "default"
   }
-}
 }</code></pre>
-      </div>
-      
-      <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Style variants are defined in src/_data/components/atoms/link.json:</h3>
-        <p class="text-gray-600 mb-3">To modify or add variants, edit the variants section in link.json:</p>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
-"variants": [
+          
+          <h4 class="font-semibold mt-4 mb-2">Add style to link.json:</h4>
+          <pre><code class="text-sm text-gray-900">"variants": [
   {
     "name": "your_new_variant",
-    "class": "link--custom text-green-600 hover:text-green-800 transition-colors duration-200",
-    "styles": {
-      "color": "#48bb78",
-      "hoverColor": "#2f855a"
-    }
+    "class": "link--custom text-green-600 hover:text-green-800"
   }
-]
-}</code></pre>
+]</code></pre>
+        </div>
       </div>
     </div>
   `;
