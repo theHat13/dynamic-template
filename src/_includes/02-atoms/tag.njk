@@ -1,0 +1,42 @@
+<!-- ========================= -->
+<!--           TAG            -->
+<!-- ========================= -->
+
+{% macro renderTag(option) %}
+  {# Extract options with default values #}
+  {% set text = option.text | default('Tag') %}
+  {% set variant = option.variant | default(tag.defaultProps.variant) %}
+  
+  {# Find the variant in the tag.json file #}
+  {% set selectedVariant = null %}
+  {% for v in tag.variants %}
+    {% if v.name == variant %}
+      {% set selectedVariant = v %}
+    {% endif %}
+  {% endfor %}
+  
+  {# Use default variant if specified variant was not found #}
+  {% if not selectedVariant %}
+    {% for v in tag.variants %}
+      {% if v.name == tag.defaultProps.variant %}
+        {% set selectedVariant = v %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+  {# Render the tag with the appropriate class #}
+  <span class="tag inline-flex items-center px-2 py-1 text-xs font-medium rounded-md {{ selectedVariant.class }}">
+    {{ text }}
+  </span>
+{% endmacro %}
+
+<!-- ========================= -->
+<!-- HOW TO USE THIS COMPONENT -->
+<!-- ========================= -->
+
+<!--
+  Complete documentation in Storybook
+  Basic usage: {% from "02-atoms-notifications/tag.njk" import renderTag %}
+              {{ renderTag(tags.tag_data.tag_adventure) }}
+  With style: {{ renderTag({ text: "Custom Tag", variant: "success" }) }}
+-->
