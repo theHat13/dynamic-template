@@ -20,21 +20,41 @@ The project follows the OMA (Organism-Molecule-Atom) architecture to ensure a cl
 - npm (latest version)
 - Git
 
-## 🚀 Quick Installation
+## 🚀 Installation Options
 
-### On Linux/macOS
+### 1️⃣ Create a New Project Based on HAT Template
+
+Use these scripts to set up a new project based on the HAT Dynamic Template:
+
+#### On Linux/macOS
 
 ```sh
-curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.sh && chmod +x setup-project.sh && ./setup-project.sh
+curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-new-project.sh && chmod +x setup-new-project.sh && ./setup-new-project.sh
 ```
 
-### On Windows (PowerShell)
+#### On Windows (PowerShell)
 
 ```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-project.ps1" -OutFile "setup-project.ps1" ; .\setup-project.ps1
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-new-project.ps1" -OutFile "setup-new-project.ps1" ; .\setup-new-project.ps1
 ```
 
-## 📦 Manual Installation
+### 2️⃣ Clone the HAT Template for Framework Development
+
+If you want to work on the HAT template framework itself, use these scripts:
+
+#### On Linux/macOS
+
+```sh
+curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/clone-hat-template.sh && chmod +x clone-hat-template.sh && ./clone-hat-template.sh
+```
+
+#### On Windows (PowerShell)
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/clone-hat-template.ps1" -OutFile "clone-hat-template.ps1" ; .\clone-hat-template.ps1
+```
+
+### 3️⃣ Manual Installation Process
 
 1. **Clone the repository**
 
@@ -55,6 +75,37 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-templ
    npm install --save-dev @storybook/html @storybook/addon-essentials
    npx storybook init --builder webpack5
    ```
+
+## 🔄 Update and Maintenance
+
+Keep your HAT Dynamic Template installation up to date with these scripts:
+
+#### On Linux/macOS
+
+```sh
+curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/update-project.sh && chmod +x update-project.sh && ./update-project.sh
+```
+
+#### On Windows (PowerShell)
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/update-project.ps1" -OutFile "update-project.ps1" ; .\update-project.ps1
+```
+
+These scripts will:
+
+- Check current versions of all dependencies
+- Compare with latest available versions
+- Provide options to update components interactively
+
+Monitored technologies:
+- Node.js
+- npm
+- Eleventy
+- Nunjucks
+- TailwindCSS
+- Storybook
+- Decap CMS
 
 ## 🖥 NPM Scripts
 
@@ -99,24 +150,6 @@ Follow the OMA architecture:
 1. Enable Netlify Identity authentication
 2. Invite administrators via Netlify Identity panel
 3. Configure `src/admin/config.yml` according to your needs
-
-## 🔄 Technology Maintenance
-
-Use the `check_web_versions.sh` (Unix) or `check_web_versions.ps1` (Windows) script to:
-
-- Check current versions
-- Compare with latest available versions
-- Update interactively
-
-Monitored technologies:
-
-- Node.js
-- npm
-- Eleventy
-- Nunjucks
-- TailwindCSS
-- Storybook
-- Decap CMS
 
 ## 🤝 Contribution
 
