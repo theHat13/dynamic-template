@@ -1,27 +1,72 @@
 #!/bin/bash
 
-# Color codes
+# ============================================================
+# HAT Dynamic Template Update Script
+# ============================================================
+# This script checks for updates to dependencies and tools
+# used in the HAT Dynamic Template project.
+# ============================================================
+
+# ===================== CONFIGURATION =====================
+
+# Tools to check for updates
+TOOLS=("nodejs" "npm" "eleventy" "nunjucks" "tailwindcss" "storybook" "decap-cms")
+
+# Colors for better readability
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
 BLUE='\033[0;34m'
-NC='\033[0m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+# ===================== UTILITY FUNCTIONS =====================
+
+# Function to display error messages
+function error_message {
+    echo -e "${RED}ERROR: $1${NC}" 1>&2
+}
+
+# Function to display success messages
+function success_message {
+    echo -e "${GREEN}$1${NC}"
+}
+
+# Function to display warning messages
+function warning_message {
+    echo -e "${YELLOW}$1${NC}"
+}
+
+# Function to display info messages
+function info_message {
+    echo -e "${CYAN}$1${NC}"
+}
+
+# Function to display section headers
+function section_header {
+    echo -e "${BLUE}===== $1 =====${NC}"
+}
+
+# ===================== NETLIFY UPDATES =====================
 
 # Function to get Netlify latest updates
-get_netlify_updates() {
+function get_netlify_updates() {
     local temp_file=$(mktemp)
     
+    section_header "NETLIFY UPDATES"
+    
     # Fetch latest releases from Netlify's GitHub repository
+    info_message "Fetching latest Netlify releases..."
     curl -s "https://api.github.com/repos/netlify/netlify/releases" > "$temp_file"
     
     # Check if curl was successful
     if [ ! -s "$temp_file" ]; then
-        echo -e "${RED}Impossible de récupérer les mises à jour de Netlify.${NC}"
+        error_message "Could not retrieve Netlify updates."
         return 1
     fi
 
     # Extract release information using standard Unix tools
-    echo -e "${BLUE}Dernières mises à jour de Netlify :${NC}"
+    info_message "Latest Netlify updates:"
     
     # Extract first 3 releases, using sed and grep to parse JSON-like structure
     releases_count=0
@@ -54,10 +99,19 @@ get_netlify_updates() {
 
     # Clean up temporary file
     rm "$temp_file"
+    
+    # Additional Netlify resources
+    echo
+    info_message "Netlify Resources:"
+    echo -e "- Documentation: https://docs.netlify.com/"
+    echo -e "- Blog: https://www.netlify.com/blog/"
+    echo -e "- Changelog: https://github.com/netlify/netlify/releases"
 }
 
+# ===================== VERSION CHECKING =====================
+
 # Function to get current and latest versions
-check_version() {
+function check_version() {
     local tool=$1
     local current_version=""
     local latest_version=""
@@ -92,7 +146,7 @@ check_version() {
             latest_version=$(npm view decap-cms-app version)
             ;;
         *)
-            echo "Outil non reconnu"
+            error_message "Unrecognized tool: $tool"
             return 1
             ;;
     esac
@@ -100,8 +154,10 @@ check_version() {
     echo "$current_version|$latest_version"
 }
 
+# ===================== DOCUMENTATION =====================
+
 # Function to open documentation
-open_documentation() {
+function open_documentation() {
     local tool=$1
     local docs=""
 
@@ -129,21 +185,23 @@ open_documentation() {
             ;;
     esac
 
-    echo "Documentation recommandée : $docs"
-    read -p "Voulez-vous ouvrir la documentation dans votre navigateur par défaut ? (o/n) " open_doc
-    if [[ "$open_doc" == "o" || "$open_doc" == "O" ]]; then
+    info_message "Recommended documentation: $docs"
+    read -p "Would you like to open the documentation in your default browser? (y/n) " open_doc
+    if [[ "$open_doc" == "y" || "$open_doc" == "Y" ]]; then
         xdg-open "$docs" 2>/dev/null || open "$docs" 2>/dev/null || start "$docs" 2>/dev/null
     fi
 }
 
+# ===================== UPDATE TOOLS =====================
+
 # Function to update a tool
-update_tool() {
+function update_tool() {
     local tool=$1
     local update_command=""
 
     case $tool in
         "nodejs")
-            echo "Veuillez utiliser nvm ou télécharger depuis nodejs.org"
+            warning_message "Please use nvm or download from nodejs.org"
             return 1
             ;;
         "npm")
@@ -165,68 +223,80 @@ update_tool() {
             update_command="npm install decap-cms-app@latest --save-dev"
             ;;
         *)
-            echo "Mise à jour non prise en charge"
+            error_message "Update not supported for this tool"
             return 1
             ;;
     esac
 
-    echo -e "${YELLOW}Commande de mise à jour :${NC} $update_command"
-    read -p "Voulez-vous procéder à la mise à jour ? (o/n) " confirm
-    if [[ "$confirm" == "o" || "$confirm" == "O" ]]; then
+    warning_message "Update command: $update_command"
+    read -p "Do you want to proceed with the update? (y/n) " confirm
+    if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
+        echo -e "${CYAN}Executing update command...${NC}"
         eval "$update_command"
         if [ $? -eq 0 ]; then
-            echo -e "${GREEN}Mise à jour réussie !${NC}"
+            success_message "Update successful!"
         else
-            echo -e "${RED}Échec de la mise à jour.${NC}"
+            error_message "Update failed."
         fi
     fi
 }
 
-# Main script
-main() {
-    # Array of tools to check
-    local tools=("nodejs" "npm" "eleventy" "nunjucks" "tailwindcss" "storybook" "decap-cms")
+# ===================== MAIN FUNCTION =====================
 
-    echo -e "${BLUE}Vérification des versions de technologies web${NC}"
+# Main function to execute the script
+function main() {
+    # Display script title
+    section_header "HAT DYNAMIC TEMPLATE UPDATE CHECKER"
+    info_message "This script will check for updates to all tools and dependencies."
+    echo
+    
+    section_header "CHECKING TOOL VERSIONS"
 
-    for tool in "${tools[@]}"; do
+    # Check versions of each tool
+    for tool in "${TOOLS[@]}"; do
         # Get versions
+        info_message "Checking $tool..."
         version_info=$(check_version "$tool")
+        
+        # Skip if tool not found
+        if [ $? -ne 0 ]; then
+            warning_message "Could not check $tool. Make sure it's installed."
+            continue
+        }
         
         # Split version info
         IFS='|' read -r current_version latest_version <<< "$version_info"
 
         # Print version comparison
-        echo -e "\n${YELLOW}$tool${NC}"
-        echo -e "Version actuelle : ${GREEN}$current_version${NC}"
-        echo -e "Dernière version : ${GREEN}$latest_version${NC}"
+        echo
+        warning_message "$tool"
+        success_message "Current version: $current_version"
+        success_message "Latest version: $latest_version"
 
         # Compare versions
         if [ "$current_version" != "$latest_version" ]; then
-            echo -e "${RED}Une nouvelle version est disponible !${NC}"
+            warning_message "A new version is available!"
             
             # Ask about documentation
             open_documentation "$tool"
 
             # Ask about update
-            read -p "Voulez-vous vérifier les détails de mise à jour ? (o/n) " update_check
-            if [[ "$update_check" == "o" || "$update_check" == "O" ]]; then
+            read -p "Would you like to update this tool? (y/n) " update_check
+            if [[ "$update_check" == "y" || "$update_check" == "Y" ]]; then
                 update_tool "$tool"
             fi
         else
-            echo -e "${GREEN}Vous êtes à jour.${NC}"
+            success_message "You are up to date."
         fi
+        
+        echo
     done
 
-    # Add Netlify updates section
-    echo -e "\n${BLUE}====== Mises à jour Netlify ======${NC}"
+    # Get Netlify updates
     get_netlify_updates
-
-    # Additional Netlify resources
-    echo -e "\n${YELLOW}Ressources Netlify :${NC}"
-    echo -e "- Documentation : https://docs.netlify.com/"
-    echo -e "- Blog : https://www.netlify.com/blog/"
-    echo -e "- Changelog : https://github.com/netlify/netlify/releases"
+    
+    section_header "UPDATE CHECK COMPLETED"
+    success_message "All tools have been checked for updates."
 }
 
 # Execute main function
