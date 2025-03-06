@@ -2,21 +2,32 @@
 <!--        INPUT TEXT        -->
 <!-- ========================= -->
 
-{% macro renderInputText(id, name, label, required = false, placeholder = "", value = "", type = "text", className = "", disabled = false, critical = false) %}
-<div>
-  <label for="{{ id }}" class="block typography-label-l {% if critical %}text-danger{% endif %}">
+{% macro renderInputText(id, name, label, variant = "default", placeholder = "", value = "", required = false, errorMessage = "") %}
+<div class="mb-4">
+  <label 
+    for="{{ id }}" 
+    class="block mb-2 {{ input_text.variants[variant].label }}"
+  >
     {{ label }} {% if required %}*{% endif %}
   </label>
   
   <input 
-    type="{{ type }}" 
+    type="text" 
     id="{{ id }}" 
     name="{{ name }}"
     placeholder="{{ placeholder }}" 
     value="{{ value }}"
-    class="input {% if critical %}critical{% endif %} {{ className }}"
-    {% if disabled %}disabled{% endif %}
+    class="w-full 
+      {{ input_text.states.border }} 
+      {{ input_text.states.padding }} 
+      {{ input_text.states.typography }}
+      {{ input_text.variants[variant].input }}"
+    {% if variant == "disabled" %}disabled{% endif %}
   />
+  
+  {% if variant == "critical" and errorMessage %}
+  <p class="mt-1 text-sm text-red-600">{{ errorMessage }}</p>
+  {% endif %}
 </div>
 {% endmacro %}
 
@@ -24,28 +35,9 @@
 <!-- HOW TO USE THIS COMPONENT -->
 <!-- ========================= -->
 
-<!-- 1. Import the macro at the top of your page -->
-{# {% from "02-atoms-form/input-text.njk" import renderInputText %} #}
-
-<!-- 2. Insert the component in your template -->
+<!-- 1. Basic usage -->
 {# {{ renderInputText(
   id="username",
   name="username", 
-  label="Username", 
-  required=true, 
-  placeholder="Enter your username", 
-  type="text"
+  label="Username"
 ) }} #}
-
-<!-- 3. Options:
-  - id: ID attribute for the input (required)
-  - name: Name attribute for the input (required)
-  - label: Label text (required)
-  - required: Whether the field is required (default: false)
-  - placeholder: Placeholder text (default: "")
-  - value: Initial value (default: "")
-  - type: Input type (default: "text")
-  - className: Additional CSS classes (default: "")
-  - disabled: Whether the input is disabled (default: false)
-  - critical: Whether to show in error state (default: false)
--->
