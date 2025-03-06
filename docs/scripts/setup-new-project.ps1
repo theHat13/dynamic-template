@@ -1,8 +1,19 @@
-# PowerShell script for installing Hat Dynamic Template on Windows
+# ============================================================
+# HAT Dynamic Template Setup Script for Windows
+# ============================================================
+# This script clones the HAT Dynamic Template repository and
+# installs all necessary dependencies for a new project.
+# ============================================================
 
-# Variables
+# ===================== CONFIGURATION =====================
+
+# Configuration variables
 $repoUrl = "https://github.com/theHat13/dynamic-template.git"
 $projectDir = "new-hat-project"
+$nodeVersionPreferred = 20
+$nodeVersionMinimum = 18
+
+# ===================== UTILITY FUNCTIONS =====================
 
 # Function to display error messages and exit
 function Show-Error {
@@ -29,6 +40,26 @@ function Show-Warning {
     Write-Host $Message -ForegroundColor Yellow
 }
 
+# Function to display info messages
+function Show-Info {
+    param (
+        [string]$Message
+    )
+    Write-Host $Message -ForegroundColor Cyan
+}
+
+# Function to display section headers
+function Show-SectionHeader {
+    param (
+        [string]$Title
+    )
+    Write-Host "`n===== $Title =====" -ForegroundColor Blue
+}
+
+# ===================== DEPENDENCY CHECKS =====================
+
+Show-SectionHeader "CHECKING DEPENDENCIES"
+
 # Check if Git is installed
 try {
     $gitVersion = git --version
@@ -41,10 +72,7 @@ catch {
     exit 1
 }
 
-# Install latest Node.js or check version
-$nodeVersionPreferred = 20
-$nodeVersionMinimum = 18
-
+# Check for Node.js installation
 try {
     $nodeVersion = node -v
     $nodeVersionNumber = $nodeVersion.Substring(1).Split('.')[0]
@@ -71,11 +99,12 @@ catch {
     exit 1
 }
 
-# Update npm to latest version with fallback in case of compatibility issues
+# Update npm to latest version with fallback for compatibility issues
 Show-Warning "Attempting to update npm to latest version..."
 try {
     npm install -g npm@latest
-    Show-Success "npm updated to latest version successfully."
+    $npmVersion = npm --version
+    Show-Success "npm updated to latest version successfully: $npmVersion"
 }
 catch {
     Show-Warning "Could not update to latest npm. Trying compatible version..."
@@ -109,12 +138,27 @@ catch {
     }
 }
 
+# ===================== PROJECT SETUP =====================
+
+Show-SectionHeader "SETTING UP PROJECT"
+
 # Clone the GitHub repository
 Show-Warning "Cloning GitHub repository..."
 if (Test-Path $projectDir) {
     $timestamp = Get-Date -Format "yyyyMMddHHmmss"
     $projectDir = "new-hat-project-$timestamp"
     Show-Warning "Directory 'new-hat-project' already exists. Using '$projectDir' instead."
+}
+
+# Ask for project name
+$customProjectDir = Read-Host "Enter project name (press Enter to use '$projectDir')"
+if ($customProjectDir) {
+    $projectDir = $customProjectDir
+    if (Test-Path $projectDir) {
+        $timestamp = Get-Date -Format "yyyyMMddHHmmss"
+        $projectDir = "$projectDir-$timestamp"
+        Show-Warning "Directory '$customProjectDir' already exists. Using '$projectDir' instead."
+    }
 }
 
 try {
@@ -127,6 +171,10 @@ catch {
 
 # Navigate to the project directory
 Set-Location $projectDir
+
+# ===================== INSTALLING DEPENDENCIES =====================
+
+Show-SectionHeader "INSTALLING PROJECT DEPENDENCIES"
 
 # Install dependencies
 Show-Warning "Installing npm dependencies..."
@@ -141,9 +189,9 @@ catch {
 # Install TailwindCSS and CLI explicitly
 Show-Warning "Installing TailwindCSS and CLI..."
 try {
-    npm install tailwindcss@latest @tailwindcss/cli@latest
+    npm install tailwindcss@latest postcss autoprefixer --save-dev
     $tailwindVersion = npx tailwindcss --version
-    Show-Success "TailwindCSS and CLI installed successfully."
+    Show-Success "TailwindCSS and dependencies installed successfully."
     Show-Success "TailwindCSS version: $tailwindVersion"
 }
 catch {
@@ -161,6 +209,10 @@ try {
 catch {
     Show-Warning "Global Eleventy installation failed, but the project may still work with local installation."
 }
+
+# ===================== SETTING UP STORYBOOK =====================
+
+Show-SectionHeader "SETTING UP STORYBOOK"
 
 # Install Storybook and related dependencies
 Show-Warning "Installing Storybook for HTML..."
@@ -271,6 +323,10 @@ catch {
     Show-Warning "Nunjucks loader installation failed. You may need to install it manually."
 }
 
+# ===================== FINALIZING SETUP =====================
+
+Show-SectionHeader "FINALIZING SETUP"
+
 # Create necessary directories if they don't exist
 if (!(Test-Path "public/css")) {
     New-Item -Path "public/css" -ItemType Directory -Force
@@ -291,12 +347,16 @@ catch {
     Show-Warning "TailwindCSS compilation failed. Check the configuration."
 }
 
-# Setup complete
-Show-Success "================================================================="
-Show-Success "Hat Dynamic Template setup completed successfully!"
-Show-Success "================================================================="
+# ===================== COMPLETION =====================
+
+Show-SectionHeader "SETUP COMPLETED"
+
+Write-Host "=================================================================" -ForegroundColor Blue
+Write-Host "                   HAT Dynamic Template                          " -ForegroundColor Blue
+Write-Host "              Setup completed successfully!                      " -ForegroundColor Blue
+Write-Host "=================================================================" -ForegroundColor Blue
 Show-Success "Project created: $projectDir"
-Show-Success ""
+Write-Host ""
 Show-Success "Key components installed:"
 Show-Success "✓ Node.js"
 Show-Success "✓ npm"
@@ -304,12 +364,20 @@ Show-Success "✓ TailwindCSS"
 Show-Success "✓ Eleventy"
 Show-Success "✓ Storybook"
 Show-Success "✓ Nunjucks support"
-Show-Success ""
+Write-Host ""
 Show-Success "Use the following commands to start:"
-Show-Success "cd $projectDir"
-Show-Success "npm start          # Start Eleventy development server"
-Show-Success "npm run storybook  # Start Storybook development server"
-Show-Success "================================================================="
-Show-Success "The site will be available at: http://localhost:8080"
-Show-Success "Storybook will be available at: http://localhost:6006"
-Show-Success "================================================================="
+Write-Host "cd $projectDir" -ForegroundColor Green
+Write-Host "npm start          # Start Eleventy development server" -ForegroundColor Green
+Write-Host "npm run storybook  # Start Storybook development server" -ForegroundColor Green
+Write-Host "=================================================================" -ForegroundColor Blue
+Write-Host "The site will be available at: " -ForegroundColor Green -NoNewline
+Write-Host "http://localhost:8080" -ForegroundColor Cyan
+Write-Host "Storybook will be available at: " -ForegroundColor Green -NoNewline
+Write-Host "http://localhost:6006" -ForegroundColor Cyan
+Write-Host "=================================================================" -ForegroundColor Blue
+
+# Open project folder in explorer
+$openFolder = Read-Host "Do you want to open the project folder in Explorer? (y/n)"
+if ($openFolder -eq "y" -or $openFolder -eq "Y") {
+    Start-Process explorer.exe -ArgumentList $projectDir
+}

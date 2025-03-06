@@ -8,17 +8,17 @@
     { "name": "option.variant", "type": "string", "required": false, "notes": "Visual style variant" }
   ],
   "link_data": {
-    "link_home": {
-      "name": "home",
-      "href": "/",
-      "text": "Home",
-      "variant": "default"
-    },
-    "link_services": {
-      "name": "services", 
-      "href": "/services", 
-      "text": "Our Services",
-      "variant": "primary"
-    }
+    "link_tavern_quest": {
+            "name": "tavern_quest",
+            "href": "/", 
+            "text": "Tavern Quest Board",
+            "variant": "secondary"
+        },
+        "link_monster_manual": {
+            "name": "monster_manual",
+            "href": "/bestiary", 
+            "text": "Legendary Monster Encyclopedia",
+            "variant": "primary"
+        }
   }
 }

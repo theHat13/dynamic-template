@@ -59,19 +59,19 @@ export default {
 // Using examples from links.json
 const linkExamples = linksData.link_data;
 
-export const Home = {
+export const Tavern = {
   args: {
-    href: linkExamples.link_home.href,
-    text: linkExamples.link_home.text,
-    variant: linkExamples.link_home.variant
+    href: linkExamples.link_tavern_quest.href,
+    text: linkExamples.link_tavern_quest.text,
+    variant: linkExamples.link_tavern_quest.variant
   }
 };
 
-export const Services = {
+export const MonsertManual = {
   args: {
-    href: linkExamples.link_services.href,
-    text: linkExamples.link_services.text,
-    variant: linkExamples.link_services.variant
+    href: linkExamples.link_monster_manual.href,
+    text: linkExamples.link_monster_manual.text,
+    variant: linkExamples.link_monster_manual.variant
   }
 };
 

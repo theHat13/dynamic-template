@@ -1,15 +1,29 @@
 #!/bin/bash
 
-# Variables
+# ============================================================
+# HAT Dynamic Template Setup Script
+# ============================================================
+# This script clones the HAT Dynamic Template repository and
+# installs all necessary dependencies for a new project.
+# ============================================================
+
+# ===================== CONFIGURATION =====================
+
+# Configuration variables
 REPO_URL="https://github.com/theHat13/dynamic-template.git"
 PROJECT_DIR="new-hat-project"
+NODE_VERSION_PREFERRED="20"
+NODE_VERSION_MINIMUM="18"
 NEED_SUDO=false
 
 # Colors for better readability
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
+BLUE='\033[0;34m'
 NC='\033[0m' # No Color
+
+# ===================== UTILITY FUNCTIONS =====================
 
 # Function to display error messages and exit
 function error_exit {
@@ -27,14 +41,23 @@ function warning_message {
     echo -e "${YELLOW}$1${NC}"
 }
 
+# Function to display section headers
+function section_header {
+    echo -e "${BLUE}===== $1 =====${NC}"
+}
+
 # Function to run commands with sudo if needed
 function run_with_sudo_if_needed {
     if [ "$NEED_SUDO" = true ]; then
-        sudo $@
+        sudo "$@"
     else
-        $@
+        "$@"
     fi
 }
+
+# ===================== PERMISSION CHECKS =====================
+
+section_header "CHECKING PERMISSIONS"
 
 # Check if we're already root
 if [[ $EUID -eq 0 ]]; then
@@ -52,7 +75,11 @@ else
     fi
 fi
 
-# Detect OS
+# ===================== ENVIRONMENT DETECTION =====================
+
+section_header "DETECTING ENVIRONMENT"
+
+# Detect operating system
 if [[ "$OSTYPE" == "darwin"* ]]; then
     OS="macOS"
     warning_message "macOS system detected"
@@ -86,6 +113,10 @@ else
     warning_message "Unrecognized operating system. Installation might not work correctly."
 fi
 
+# ===================== DEPENDENCY CHECKS =====================
+
+section_header "CHECKING DEPENDENCIES"
+
 # Install Git if not installed
 if ! command -v git &>/dev/null; then
     warning_message "Git not found. Installing..."
@@ -104,8 +135,6 @@ else
 fi
 
 # Install latest Node.js or check version
-NODE_VERSION_PREFERRED="20"
-NODE_VERSION_MINIMUM="18"
 if ! command -v node &>/dev/null; then
     warning_message "Node.js not found. Installing..."
     if [[ "$OS" == "macOS" ]]; then
@@ -185,6 +214,10 @@ else
     fi
 fi
 
+# ===================== PROJECT SETUP =====================
+
+section_header "SETTING UP PROJECT"
+
 # Clone the GitHub repository
 warning_message "Cloning GitHub repository..."
 if [ -d "$PROJECT_DIR" ]; then
@@ -197,6 +230,10 @@ success_message "Repository cloned successfully into folder $PROJECT_DIR."
 # Navigate to the project directory
 cd "$PROJECT_DIR" || error_exit "Error navigating to the project directory."
 
+# ===================== INSTALLING DEPENDENCIES =====================
+
+section_header "INSTALLING PROJECT DEPENDENCIES"
+
 # Install dependencies
 warning_message "Installing npm dependencies..."
 npm install || error_exit "Error installing dependencies."
@@ -204,7 +241,7 @@ success_message "Dependencies installed successfully."
 
 # Install TailwindCSS and CLI explicitly
 warning_message "Installing TailwindCSS and CLI..."
-if npm install tailwindcss@latest @tailwindcss/cli@latest; then
+if npm install tailwindcss@latest postcss autoprefixer --save-dev; then
     success_message "TailwindCSS and CLI installed successfully."
     # Get TailwindCSS version
     TAILWIND_VERSION=$(npx tailwindcss --version 2>/dev/null)
@@ -223,6 +260,10 @@ if npm install -g @11ty/eleventy@latest; then
 else
     warning_message "Global Eleventy installation failed, but the project may still work with local installation."
 fi
+
+# ===================== SETTING UP STORYBOOK =====================
+
+section_header "SETTING UP STORYBOOK"
 
 # Install Storybook and related dependencies
 warning_message "Installing Storybook for HTML..."
@@ -314,6 +355,10 @@ else
     warning_message "Nunjucks loader installation failed. You may need to install it manually."
 fi
 
+# ===================== FINALIZING SETUP =====================
+
+section_header "FINALIZING SETUP"
+
 # Create necessary directories if they don't exist
 mkdir -p public/css
 
@@ -345,7 +390,10 @@ fi
 # Ensure permissions are correct for the project directory
 chmod -R u+w "$PROJECT_DIR"
 
-# Setup complete
+# ===================== COMPLETION =====================
+
+section_header "SETUP COMPLETED"
+
 success_message "================================================================="
 success_message "Hat Dynamic Template setup completed successfully!"
 success_message "================================================================="
