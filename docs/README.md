@@ -128,7 +128,8 @@ Follow the OMA architecture:
 
 - **Atoms**: Basic components (buttons, form fields)
 - **Molecules**: Combinations of atoms (cards, section headers)
-- **Organisms**: Complete sections (header, footer)
+- **Organisms**: Complete sections
+- **Core**: Base templates (base, header, footer)
 
 ### Storybook
 
