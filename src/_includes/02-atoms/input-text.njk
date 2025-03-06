@@ -35,9 +35,18 @@
 <!-- HOW TO USE THIS COMPONENT -->
 <!-- ========================= -->
 
-<!-- 1. Basic usage -->
-{# {{ renderInputText(
-  id="username",
-  name="username", 
-  label="Username"
-) }} #}
+<!--
+  Complete documentation in Storybook
+  Basic usage: {% from "02-atoms/input-text.njk" import renderInputText %}
+              {{ renderInputText(
+                id="username",
+                name="username", 
+                label="Username"
+              ) }}
+  With variant: {{ renderInputText(
+                  id="email",
+                  name="email", 
+                  label="Email",
+                  variant="focus"
+                ) }}
+-->
