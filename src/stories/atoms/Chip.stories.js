@@ -93,7 +93,7 @@ export const Usage = () => {
     <div class="space-y-6">
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">1. Import the macro at the top of your page:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "02-atoms/chip.njk" import renderChip %}</code></pre>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "03-atoms/chip.njk" import renderChip %}</code></pre>
       </div>
       
       <div>
