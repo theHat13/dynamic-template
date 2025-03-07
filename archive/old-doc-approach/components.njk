@@ -5,11 +5,11 @@ layout: '00-organisms-global/base.njk'
 ---
 
 <!-- Import macros for components -->
-{% from "../_includes/02-atoms-navigation/link.njk" import renderLink %}
-{% from "../_includes/02-atoms-form/select.njk" import renderSelect %}
-{% from "../_includes/02-atoms-form/input-select.njk" import renderInput %}
-{% from "../_includes/02-atoms-form/input-text.njk" import renderInputText %}
-{# {% from "../_includes/02-atoms-form/input-multi-select.njk" import renderMultiSelect %} #}
+{% from "../_includes/03-atoms-navigation/link.njk" import renderLink %}
+{% from "../_includes/03-atoms-form/select.njk" import renderSelect %}
+{% from "../_includes/03-atoms-form/input-select.njk" import renderInput %}
+{% from "../_includes/03-atoms-form/input-text.njk" import renderInputText %}
+{# {% from "../_includes/03-atoms-form/input-multi-select.njk" import renderMultiSelect %} #}
 
 <div class="container mx-auto px-4 py-8">
     <!-- Header -->
@@ -92,7 +92,7 @@ layout: '00-organisms-global/base.njk'
         <!-- Code Example -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">Usage</h3>
-            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}{% from "02-atoms-navigation/link.njk" import renderlink %}
+            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}{% from "03-atoms-navigation/link.njk" import renderlink %}
 {{ renderlink(links.link_home) }}{% endraw %}</code></pre>
         </div>
 
@@ -213,7 +213,7 @@ layout: '00-organisms-global/base.njk'
         <!-- Code Example -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">Usage</h3>
-            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}{% from "02-atoms-form/input-text.njk" import renderinputtext %}
+            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}{% from "03-atoms-form/input-text.njk" import renderinputtext %}
 {{ renderinputtext(
   id="username",
   name="username",
@@ -249,7 +249,7 @@ layout: '00-organisms-global/base.njk'
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">Examples</h3>
             <div class="p-4 bg-gray-50 rounded mb-4">
-                {% include "02-atoms-notifications/tag.njk" %}
+                {% include "03-atoms-notifications/tag.njk" %}
             </div>
         </div>
 

@@ -17,14 +17,13 @@ Each component consists of several files distributed across different directorie
 project/
 ├── src/
 │   ├── _includes/
-│   │   ├── 00-organisms/
-│   │   │   └── [organism-category]/
+│   │   ├── 00-core/
+│   │   │       └── core-name.njk
+│   │   ├── 01-organisms/
 │   │   │       └── organism-name.njk
-│   │   ├── 01-molecules/
-│   │   │   └── [molecule-category]/
+│   │   ├── 02-molecules/
 │   │   │       └── molecule-name.njk
-│   │   └── 02-atoms/
-│   │       └── [atom-category]/
+│   │   └── 03-atoms/
 │   │           └── atom-name.njk
 │   ├── _data/
 │   │   ├── styles/
@@ -43,13 +42,10 @@ project/
 │   │           └── organism-names.json (plural)
 └── stories/
     ├── atoms/
-    │   └── [atom-category]/
     │       └── AtomName.stories.js
     ├── molecules/
-    │   └── [molecule-category]/
     │       └── MoleculeName.stories.js
     └── organisms/
-        └── [organism-category]/
             └── OrganismName.stories.js
 ```
 
@@ -59,7 +55,7 @@ project/
 
 This file contains the component macro that defines its HTML structure.
 
-**Example** (`src/_includes/02-atoms/button.njk`):
+**Example** (`src/_includes/03-atoms/button.njk`):
 
 ```njk
 <!-- ========================= -->
@@ -84,7 +80,7 @@ This file contains the component macro that defines its HTML structure.
 <!-- ========================= -->
 
 <!--
-  Basic usage: {% from "02-atoms/button.njk" import renderButton %}
+  Basic usage: {% from "03-atoms/button.njk" import renderButton %}
               {{ renderButton(buttons.button_data.primary_button) }}
 -->
 ```
@@ -215,7 +211,7 @@ export const Usage = () => {
 
 ## Naming Conventions
 
-- **Directories**: Use numeric prefix (`00-`, `01-`, `02-`) to indicate OMA level
+- **Directories**: Use numeric prefix (`00-`, `01-`, `02-`, `03-`) to indicate OMA level
 - **Nunjucks Files**: Kebab-case (`button-link.njk`)
 - **Style JSON Files**: Kebab-case (`button.json`)
 - **Content JSON Files**: Kebab-case plural (`buttons.json`)
@@ -230,7 +226,7 @@ To create a new component, you need to create these four files in their respecti
 To use a component in a template, import the Nunjucks macro and use it with the appropriate content data:
 
 ```njk
-{% from "02-atoms/button.njk" import renderButton %}
+{% from "03-atoms/button.njk" import renderButton %}
 {{ renderButton(buttons.button_data.primary_button) }}
 ```
 
