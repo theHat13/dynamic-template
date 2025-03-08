@@ -21,7 +21,7 @@
             {% set minlength = input.minlength %}
             {% set maxlength = input.maxlength %}
 
-            {% include "02-atoms-form/input-text.njk" %}
+            {% include "atoms/input-text.njk" %}
         {% endfor %} #}
 
         <!-- Message textarea -->
@@ -34,6 +34,6 @@
         <div data-netlify-recaptcha="true"></div>
 
         <!-- Include submit button -->
-        {% include '02-atoms-buttons/button-submit.njk' %}
+        {% include 'atoms/button-submit.njk' %}
     </form>
 </div>

@@ -21,9 +21,9 @@ project/
 │   │   │       └── core-name.njk
 │   │   ├── 01-organisms/
 │   │   │       └── organism-name.njk
-│   │   ├── 02-molecules/
+│   │   ├── molecules/
 │   │   │       └── molecule-name.njk
-│   │   └── 03-atoms/
+│   │   └── atoms/
 │   │           └── atom-name.njk
 │   ├── _data/
 │   │   ├── styles/
@@ -55,7 +55,7 @@ project/
 
 This file contains the component macro that defines its HTML structure.
 
-**Example** (`src/_includes/03-atoms/button.njk`):
+**Example** (`src/_includes/atoms/button.njk`):
 
 ```njk
 <!-- ========================= -->
@@ -80,7 +80,7 @@ This file contains the component macro that defines its HTML structure.
 <!-- ========================= -->
 
 <!--
-  Basic usage: {% from "03-atoms/button.njk" import renderButton %}
+  Basic usage: {% from "atoms/button.njk" import renderButton %}
               {{ renderButton(buttons.button_data.primary_button) }}
 -->
 ```
@@ -211,7 +211,7 @@ export const Usage = () => {
 
 ## Naming Conventions
 
-- **Directories**: Use numeric prefix (`00-`, `01-`, `02-`, `03-`) to indicate OMA level
+- **Directories**: Use either semantic names or numeric prefix (`00-`, `01-`) to indicate OMA level
 - **Nunjucks Files**: Kebab-case (`button-link.njk`)
 - **Style JSON Files**: Kebab-case (`button.json`)
 - **Content JSON Files**: Kebab-case plural (`buttons.json`)
@@ -226,7 +226,7 @@ To create a new component, you need to create these four files in their respecti
 To use a component in a template, import the Nunjucks macro and use it with the appropriate content data:
 
 ```njk
-{% from "03-atoms/button.njk" import renderButton %}
+{% from "atoms/button.njk" import renderButton %}
 {{ renderButton(buttons.button_data.primary_button) }}
 ```
 

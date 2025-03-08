@@ -21,10 +21,10 @@ src/
 │   │   └── footer.njk
 │   ├── 01-organisms/ # Page sections
 │   │   └── sections/ # Complete sections like hero, featured, about
-│   ├── 02-molecules/ # Composite components (made from organisms and atoms)
+│   ├── molecules/    # Composite components (made from organisms and atoms)
 │   │   ├── cards/    # Card components
 │   │   ├── forms/    # Form groups
-│   └── 03-atoms/     # Basic components
+│   └── atoms/        # Basic components
 
 ├── admin/            # Decap CMS configuration
 ├── assets/           # Static assets
@@ -65,7 +65,7 @@ Organisms are relatively complex components that form distinct sections of the i
 - Article sections
 - Page-level sections
 
-### 2. Molecules (02-molecules)
+### 2. Molecules (molecules)
 
 Molecules are groups of components that work together as a unit to perform a more complex function.
 
@@ -77,7 +77,7 @@ Molecules are groups of components that work together as a unit to perform a mor
 - Navigation menu
 - Carousels
 
-### 3. Atoms (03-atoms)
+### 3. Atoms (atoms)
 
 Atoms are the smallest building blocks of the interface - they cannot be broken down further without losing their functionality.
 

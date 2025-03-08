@@ -46,11 +46,11 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    {% include '00-organisms-global/header.njk' %}
+    {% include 'organisms-global/header.njk' %}
     <main class="flex-grow">
         {{ content | safe }}
     </main>
-    {% include '00-organisms-global/footer.njk' %}
+    {% include 'organisms-global/footer.njk' %}
 
     <!-- Decap CMS - redirect user back to the /admin/ path -->
     <script>

@@ -201,7 +201,7 @@ export const Usage = () => {
     <div class="space-y-6">
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">1. Import the macro at the top of your page:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "03-atoms/input-text.njk" import renderInputText %}</code></pre>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "atoms/input-text.njk" import renderInputText %}</code></pre>
       </div>
       
       <div>
@@ -244,7 +244,7 @@ export const Usage = () => {
         <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Reference files:</h3>
         <p class="text-gray-600 mb-3">Check these files for more details:</p>
         <ul class="list-disc pl-6 space-y-2 text-gray-600">
-          <li>Component: <code>src/_includes/03-atoms-form/input-text.njk</code></li>
+          <li>Component: <code>src/_includes/atoms/input-text.njk</code></li>
           <li>Styles: <code>src/_data/styles/atoms/input_text.json</code></li>
           <li>Content examples: <code>src/_data/contents/atoms/input_texts.json</code></li>
         </ul>

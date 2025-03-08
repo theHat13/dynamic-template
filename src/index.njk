@@ -1,16 +1,16 @@
----
-title: Hat dynamic site
-layout: '00-organisms-global/base.njk'
----
-
-{# Set hero section data from hero.json #}
-{% set pageData = hero %}
-
-{# Include hero section #}
-{% include '00-organisms-sections/section-hero.njk' %}
-
-{# Include featured section #}
-{% include '00-organisms-sections/section-featured.njk' %}
-
-{# Include about section #}
-{% include '00-organisms-sections/section-about.njk' %}
+---
+title: Hat dynamic site
+layout: 'organisms-global/base.njk'
+---
+
+{# Set hero section data from hero.json #}
+{% set pageData = hero %}
+
+{# Include hero section #}
+{% include 'organisms/section-hero.njk' %}
+
+{# Include featured section #}
+{% include 'organisms/section-featured.njk' %}
+
+{# Include about section #}
+{% include 'organisms/section-about.njk' %}
