@@ -1,0 +1,41 @@
+{
+    "name": "InputMultiSelect",
+    "description": "Multi-select input component with chip display for selected options",
+    "variants": [
+      {
+        "name": "default",
+        "class": "input-multi-select--default w-full p-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-gray-400"
+      },
+      {
+        "name": "hover",
+        "class": "input-multi-select--hover w-full p-2 text-gray-700 bg-gray-50 border border-gray-400 rounded-md shadow-sm"
+      },
+      {
+        "name": "focus",
+        "class": "input-multi-select--focus w-full p-2 text-gray-700 bg-white border-2 border-blue-500 rounded-md shadow-sm outline-none ring-2 ring-blue-200"
+      },
+      {
+        "name": "active",
+        "class": "input-multi-select--active w-full p-2 text-gray-700 bg-white border-2 border-blue-600 rounded-md shadow-sm outline-none ring-2 ring-blue-300"
+      },
+      {
+        "name": "filled",
+        "class": "input-multi-select--filled w-full p-2 text-gray-900 bg-white border border-gray-300 rounded-md shadow-sm"
+      },
+      {
+        "name": "critical",
+        "class": "input-multi-select--critical w-full p-2 text-red-900 bg-white border-2 border-red-500 rounded-md shadow-sm ring-2 ring-red-200"
+      },
+      {
+        "name": "disabled",
+        "class": "input-multi-select--disabled w-full p-2 text-gray-400 bg-gray-100 border border-gray-200 rounded-md shadow-sm cursor-not-allowed"
+      }
+    ],
+    "defaultProps": {
+      "variant": "default"
+    },
+    "accessibility": {
+      "roles": ["listbox", "option"],
+      "keyboardInteractions": ["Arrow Up", "Arrow Down", "Space", "Enter", "Escape"]
+    }
+  }

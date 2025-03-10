@@ -8,7 +8,6 @@
   {% set title = options.title | default('Select options') %}
   {% set variant = options.variant | default('default') %}
   {% set chipOptions = options.options | default([]) %}
-  {% set disabled = options.disabled | default(false) %}
   
   {# Get variant styles from the chip_multi_select.json file #}
   {% set variantStyles = chip_multi_select.variants[variant] %}
@@ -19,11 +18,6 @@
   {% endif %}
 
   <div class="chip-multi-select">
-    <span class="inline-flex items-center font-medium text-purple-500 text-xs mb-2">
-      <span class="w-3 h-3 inline-block mr-1 bg-purple-500 rounded-full"></span>
-      .chip-multiselect
-    </span>
-    
     {# Title for the chip group #}
     {% if title %}
       <label class="block text-sm font-medium text-gray-700 mb-2">{{ title }}</label>
@@ -32,28 +26,26 @@
     {# Container for all chips #}
     <div class="{{ variantStyles.container }}" role="group" aria-label="{{ title }}">
       {% for option in chipOptions %}
-        <div 
-          class="{{ variantStyles.chip.base }} {{ variantStyles.chip.default }}"
-          data-state="default"
-          data-hover-class="{{ variantStyles.chip.hover }}"
-          data-focus-class="{{ variantStyles.chip.focus }}"
-          data-disabled-class="{{ variantStyles.chip.disabled }}"
-          data-option-value="{{ option.value }}"
-          role="button"
-          tabindex="{% if disabled or option.disabled %}-1{% else %}0{% endif %}"
-          {% if disabled or option.disabled %}aria-disabled="true"{% endif %}
+        {# Hidden input to store selection state #}
+        <input 
+          type="checkbox" 
+          id="{{ name }}-{{ option.value }}" 
+          name="{{ name }}[]" 
+          value="{{ option.value }}" 
+          {% if option.selected %}checked{% endif %} 
+          class="sr-only" 
+        />
+        
+        {# Chip label that acts as the visual control #}
+        <label 
+          for="{{ name }}-{{ option.value }}" 
+          class="{{ variantStyles.chip.base }} {% if option.selected %}{{ variantStyles.chip.selected }}{% else %}{{ variantStyles.chip.unselected }}{% endif %}"
+          role="checkbox"
+          aria-checked="{{ option.selected }}"
+          tabindex="0"
         >
-          <span class="chip-label">{{ option.label }}</span>
-          <button type="button" 
-            class="chip-remove {{ variantStyles.chip.removeIcon }}"
-            aria-label="Remove {{ option.label }}"
-            {% if disabled or option.disabled %}disabled{% endif %}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
-              <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-            </svg>
-          </button>
-        </div>
+          {{ option.label }}
+        </label>
       {% endfor %}
     </div>
   </div>
@@ -69,9 +61,53 @@
                {{ renderChipMultiSelect(chip_multi_selects.chip_multi_select_data.geek_languages) }}
   
   Features:
-  - Multiple selection with clickable remove button
-  - Four visual states: default, hover, focus, and disabled
+  - Multiple selection through checkbox inputs
+  - Automatic state styling based on selection
   - Fully accessible with keyboard support
-  
-  Note: This component requires the JS file: /js/atoms/chip-multi-select.js
+  - Configurable variants for different visual styles
 -->
+
+<!-- Add simple JavaScript to make it interactive -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Handle keyboard navigation
+    document.querySelectorAll('.chip-multi-select label[role="checkbox"]').forEach(chip => {
+      chip.addEventListener('keydown', function(e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          const input = document.getElementById(this.getAttribute('for'));
+          input.checked = !input.checked;
+          
+          // Update the aria-checked attribute
+          this.setAttribute('aria-checked', input.checked);
+          
+          // Toggle the selected class
+          const variantClasses = this.className.split(' ');
+          const baseClasses = variantClasses.filter(cls => 
+            !cls.includes('bg-') && !cls.includes('text-') && !cls.includes('hover:')
+          ).join(' ');
+          
+          // Find the variant being used
+          const variantMatch = this.className.match(/bg-(\w+)-\d+/);
+          const variant = variantMatch ? variantMatch[1] : 'gray';
+          
+          if (input.checked) {
+            // Apply selected styles based on variant
+            if (variant === 'yellow') {
+              this.className = `${baseClasses} bg-yellow-500 text-black hover:bg-yellow-600`;
+            } else if (variant === 'green') {
+              this.className = `${baseClasses} bg-green-500 text-white hover:bg-green-600`;
+            } else if (variant === 'blue') {
+              this.className = `${baseClasses} bg-blue-500 text-white hover:bg-blue-600`;
+            } else {
+              this.className = `${baseClasses} bg-red-500 text-white hover:bg-red-600`;
+            }
+          } else {
+            // Apply unselected styles
+            this.className = `${baseClasses} bg-gray-200 text-gray-700 hover:bg-gray-300`;
+          }
+        }
+      });
+    });
+  });
+</script>
