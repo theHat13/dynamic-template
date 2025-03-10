@@ -11,31 +11,23 @@ const inputMultiSelectTemplate = `
       </label>
     {% endif %}
     
-    {# Add input field for searching/adding new options #}
-    <div class="relative mb-2">
-      <input 
-        type="text" 
-        id="{{ name }}-input"
-        placeholder="{{ placeholder }}"
-        class="w-full p-2 {{ inputClass }}"
-        {% if disabled %}disabled{% endif %}
-        data-multi-select-input
-      />
-    </div>
-    
-    {# Selected options container #}
-    <div class="selected-options {{ containerClass }}" data-selected-options-container>
+    <div class="relative flex flex-wrap items-center p-2 min-h-[42px] {{ containerClass }}" data-chip-container>
       {% for option in options %}
         <div 
-          class="{{ chipClass }}"
+          class="inline-flex items-center bg-blue-100 text-blue-800 px-2 py-1 text-sm rounded-md mr-1 mb-1"
           data-option-value="{{ option.value }}"
           role="button"
           tabindex="{% if disabled or option.disabled %}-1{% else %}0{% endif %}"
           {% if disabled or option.disabled %}aria-disabled="true"{% endif %}
+          data-default-class="bg-blue-100 text-blue-800"
+          data-hover-class="bg-blue-200 text-blue-900"
+          data-focus-class="bg-blue-100 text-blue-800 ring-2 ring-blue-400"
+          data-disabled-class="bg-gray-100 text-gray-400 opacity-60"
+          data-state="default"
         >
           <span class="chip-label">{{ option.label }}</span>
           <button type="button" 
-            class="chip-remove ml-1.5 text-gray-500 hover:text-gray-700"
+            class="chip-remove ml-1 text-blue-500 hover:text-blue-700"
             aria-label="Remove {{ option.label }}"
             {% if disabled or option.disabled %}disabled{% endif %}
           >
@@ -45,9 +37,23 @@ const inputMultiSelectTemplate = `
           </button>
         </div>
       {% endfor %}
+      
+      <input 
+        type="text" 
+        id="{{ name }}-input"
+        placeholder="{{ placeholder }}"
+        class="flex-grow min-w-[120px] border-none focus:ring-0 focus:outline-none bg-transparent {{ inputClass }}"
+        {% if disabled %}disabled{% endif %}
+        readonly
+      />
+      
+      <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+        </svg>
+      </div>
     </div>
     
-    {# Hidden input for form submission #}
     <input type="hidden" name="{{ name }}_values" id="{{ name }}-values" data-multi-select-values />
   </div>
 `;
@@ -59,17 +65,15 @@ function getVariantClasses(variant) {
   if (!foundVariant) {
     return {
       labelClass: "text-gray-700 font-medium",
-      inputClass: "border-gray-300 text-gray-900 rounded-md",
-      containerClass: "flex flex-wrap gap-2 p-2 border border-gray-300 rounded-md min-h-10",
-      chipClass: "flex items-center bg-blue-100 text-blue-800 px-2 py-1 text-sm rounded-md"
+      inputClass: "",
+      containerClass: "border border-gray-300 rounded-md"
     };
   }
   
   return {
     labelClass: foundVariant.label,
-    inputClass: `${foundVariant.border} ${foundVariant.input}`,
-    containerClass: `flex flex-wrap gap-2 p-2 ${foundVariant.border} min-h-10 ${foundVariant.container}`,
-    chipClass: "flex items-center bg-blue-100 text-blue-800 px-2 py-1 text-sm rounded-md"
+    inputClass: foundVariant.input || "",
+    containerClass: foundVariant.border || "border border-gray-300 rounded-md"
   };
 }
 
@@ -86,13 +90,11 @@ export default {
       title: args.title,
       placeholder: args.placeholder,
       options: args.options,
-      variant: args.variant,
       disabled: args.disabled,
       required: args.required,
       labelClass: variantClasses.labelClass,
       inputClass: variantClasses.inputClass,
-      containerClass: variantClasses.containerClass,
-      chipClass: variantClasses.chipClass
+      containerClass: variantClasses.containerClass
     });
   },
   
@@ -111,7 +113,7 @@ export default {
     placeholder: { 
       description: 'Placeholder text for input field',
       control: 'text',
-      defaultValue: 'Type to search...' 
+      defaultValue: 'Select options...' 
     },
     options: { 
       description: 'Array of selectable options',
@@ -142,130 +144,56 @@ export default {
   }
 };
 
-// Create examples with sample data
-const sampleOptions = [
-  { value: 'js', label: 'JavaScript' },
-  { value: 'py', label: 'Python' },
-  { value: 'java', label: 'Java' },
-  { value: 'cpp', label: 'C++' },
-  { value: 'ts', label: 'TypeScript' }
-];
-
-const characterClassOptions = [
-  { value: 'warrior', label: 'Warrior' },
-  { value: 'mage', label: 'Mage' },
-  { value: 'rogue', label: 'Rogue' },
-  { value: 'cleric', label: 'Cleric' },
-  { value: 'paladin', label: 'Paladin', disabled: true }
-];
-
-const excuseOptions = [
-  { value: 'traffic', label: 'Traffic' },
-  { value: 'alarm', label: 'Alarm' },
-  { value: 'cat', label: 'Cat Chaos' },
-  { value: 'coffee', label: 'Coffee Spill' }
-];
-
-const cursedItemOptions = [
-  { value: 'sword', label: 'Hexed Sword' },
-  { value: 'shield', label: 'Haunted Shield' },
-  { value: 'amulet', label: 'Corrupted Amulet' }
-];
-
-const osOptions = [
-  { value: 'linux', label: 'Linux' },
-  { value: 'windows', label: 'Windows' },
-  { value: 'macos', label: 'macOS' },
-  { value: 'bsd', label: 'BSD', disabled: true }
-];
-
-// Basic example with default state
 export const Default = {
   args: {
-    name: 'programming-languages',
+    name: 'input-multi-select-default',
     title: 'Programming Languages',
-    placeholder: 'Add a language...',
-    options: sampleOptions,
+    placeholder: 'Select languages...',
+    options: [
+      { value: 'js', label: 'JavaScript' },
+      { value: 'py', label: 'Python' }
+    ],
     variant: 'default'
   }
 };
 
-// Hover state example
 export const Hover = {
   args: {
-    name: 'programming-languages-hover',
+    name: 'input-multi-select-hover',
     title: 'Programming Languages',
-    placeholder: 'Add a language...',
-    options: sampleOptions,
+    placeholder: 'Select languages...',
+    options: [
+      { value: 'js', label: 'JavaScript' },
+      { value: 'py', label: 'Python' }
+    ],
     variant: 'hover'
   }
 };
 
-// Focus state example
 export const Focus = {
   args: {
-    name: 'character-classes',
-    title: 'Character Classes',
-    placeholder: 'Add a class...',
-    options: characterClassOptions,
+    name: 'input-multi-select-focus',
+    title: 'Programming Languages',
+    placeholder: 'Select languages...',
+    options: [
+      { value: 'js', label: 'JavaScript' },
+      { value: 'py', label: 'Python' }
+    ],
     variant: 'focus'
   }
 };
 
-// Active state example
-export const Active = {
-  args: {
-    name: 'character-classes-active',
-    title: 'Character Classes',
-    placeholder: 'Add a class...',
-    options: characterClassOptions,
-    variant: 'active'
-  }
-};
-
-// Filled state example
-export const Filled = {
-  args: {
-    name: 'late-excuses',
-    title: 'Today\'s Excuse',
-    placeholder: 'Add an excuse...',
-    options: excuseOptions,
-    variant: 'filled'
-  }
-};
-
-// Critical state example
-export const Critical = {
-  args: {
-    name: 'late-excuses-critical',
-    title: 'Today\'s Excuse',
-    placeholder: 'Add an excuse...',
-    options: excuseOptions,
-    variant: 'critical'
-  }
-};
-
-// Disabled state example
 export const Disabled = {
   args: {
-    name: 'cursed-items',
-    title: 'Cursed Items',
-    placeholder: 'Can\'t add items...',
-    options: cursedItemOptions,
+    name: 'input-multi-select-disabled',
+    title: 'Programming Languages',
+    placeholder: 'Selection disabled',
+    options: [
+      { value: 'js', label: 'JavaScript' },
+      { value: 'py', label: 'Python' }
+    ],
     disabled: true,
     variant: 'disabled'
-  }
-};
-
-// Required example
-export const Required = {
-  args: {
-    name: 'operating-system',
-    title: 'Your OS',
-    placeholder: 'Select at least one OS...',
-    options: osOptions,
-    required: true,
-    variant: 'default'
   }
 };
 
@@ -288,23 +216,23 @@ export const Usage = () => {
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Use with chip-multi-select component:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Custom implementation:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderInputMultiSelect({
   name: "languages",
   title: "Programming Languages",
-  placeholder: "Add a language...",
+  placeholder: "Select languages...",
   options: [
     { value: "js", label: "JavaScript" },
     { value: "py", label: "Python" }
   ],
   variant: "default",
-  useChips: true  // Use chip-multi-select component
+  required: true
 }) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Available states:</h3>
-        <p class="text-gray-600 mb-3">The component supports multiple visual states:</p>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Available variants:</h3>
+        <p class="text-gray-600 mb-3">The component supports multiple visual styles:</p>
         <ul class="list-disc pl-6 space-y-2 text-gray-600">
           <li><code>default</code> - Standard appearance</li>
           <li><code>hover</code> - When hovering over the component</li>
@@ -314,11 +242,6 @@ export const Usage = () => {
           <li><code>critical</code> - For error states</li>
           <li><code>disabled</code> - When the component is disabled</li>
         </ul>
-      </div>
-      
-      <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. JavaScript integration:</h3>
-        <p class="text-gray-600 mb-3">This component requires the JavaScript from <code>src/js/atoms/input-multi-select.js</code> to handle interaction.</p>
       </div>
     </div>
   `;
