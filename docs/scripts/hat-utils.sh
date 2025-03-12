@@ -128,6 +128,10 @@ function clone_repository {
     local project_dir=$1
     local default_dir=$2
     
+    # Clean color codes and trim whitespace
+    project_dir=$(echo "$project_dir" | sed -E 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g' | xargs)
+    default_dir=$(echo "$default_dir" | sed -E 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g' | xargs)
+    
     # Ask for project name if not provided
     if [ -z "$project_dir" ]; then
         read -p "Enter project name (press Enter to use '$default_dir'): " project_dir
@@ -146,11 +150,12 @@ function clone_repository {
     
     # Clone the repository
     warning_message "Cloning GitHub repository..."
-    git clone "$REPO_URL" "$project_dir" || error_exit "Error cloning repository."
-    success_message "Repository cloned successfully into $project_dir folder."
     
-    # Return the project directory
-    echo "$project_dir"
+    # Clone with error handling and absolute path
+    git clone "$REPO_URL" "$project_dir" || error_exit "Failed to clone repository"
+    
+    # Print and return the full path
+    realpath "$project_dir"
 }
 
 # Function to install common dependencies
