@@ -40,6 +40,8 @@ project/
 │   │       │   └── molecule-names.json (plural)
 │   │       └── organisms/
 │   │           └── organism-names.json (plural)
+│   └── js/
+│       └── generate-component.js  <!-- Component generator script -->
 └── stories/
     ├── atoms/
     │       └── AtomName.stories.js
@@ -232,27 +234,29 @@ To create a new component manually, you need to create these four files in their
 
 The HAT Component Generator is a utility script that automates the creation of all necessary component files.
 
-#### Installation
+#### Location
 
-1. Save the `generate-component.js` file in the root directory of your HAT Dynamic Template project
-2. Make sure you have Node.js installed
+The component generator script is located at:
+```
+src/js/generate-component.js
+```
 
 #### Usage
 
 **Basic usage - Create an Atom component**
 
 ```bash
-node generate-component.js Button
+node src/js/generate-component.js Button
 ```
 
 **Create other component types**
 
 ```bash
 # Create a Molecule component
-node generate-component.js Card molecules
+node src/js/generate-component.js Card molecules
 
 # Create an Organism component
-node generate-component.js Hero organisms
+node src/js/generate-component.js Hero organisms
 ```
 
 #### Generated Files
