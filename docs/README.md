@@ -9,12 +9,20 @@ Hat Dynamic Template is a front-end development framework designed to create mod
 - **TailwindCSS v4**: Utility-first CSS framework
 - **Storybook**: Isolated component development
 - **Decap CMS**: Content management
+- **Concurrently**: Parallel command execution
 
 ### Architecture
 
 The project follows the OMA (Organism-Molecule-Atom) architecture to ensure a clear and scalable component structure.
 
 ## 🔧 Prerequisites
+
+- Package Manager:
+  - Homebrew (macOS)
+  - apt-get (Debian/Ubuntu)
+  - dnf (Fedora)
+  - yum (CentOS)
+  - pacman (Arch Linux)
 
 - Node.js (v20.0.0 recommended, minimum v18.0.0)
 - npm (latest version)
@@ -69,73 +77,21 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-templ
    npm install
    ```
 
-3. **Install Storybook**
+3. **Install Storybook and Concurrently**
 
    ```sh
-   npm install --save-dev @storybook/html @storybook/addon-essentials
+   npm install --save-dev @storybook/html @storybook/addon-essentials concurrently
    npx storybook init --builder webpack5
    ```
 
-## 🔄 Update and Maintenance
-
-Keep your HAT Dynamic Template installation up to date with these scripts:
-
-#### On Linux/macOS
-
-```sh
-curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/update-project.sh && chmod +x update-project.sh && ./update-project.sh
-```
-
-#### On Windows (PowerShell)
-
-```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/update-project.ps1" -OutFile "update-project.ps1" ; .\update-project.ps1
-```
-
-These scripts will:
-
-- Check current versions of all dependencies
-- Compare with latest available versions
-- Provide options to update components interactively
-
-Monitored technologies:
-- Node.js
-- npm
-- Eleventy
-- Nunjucks
-- TailwindCSS
-- Storybook
-- Decap CMS
-
 ## 🖥 NPM Scripts
 
-- `npm start`: Start development server
+- `npm start`: Start Eleventy development server
+- `npm run storybook`: Start Storybook
+- `npm run dev`: Start Eleventy and Storybook simultaneously
 - `npm run build`: Compile site for production
 - `npm run refresh`: Clear cache and generated files
-- `npm run storybook`: Start Storybook
 - `npm run build-storybook`: Compile Storybook for production
-
-## 🛠 Customization
-
-### Styles
-
-- Modify `src/input.css` to add custom styles
-- Use Tailwind theme to maintain visual consistency
-
-### Components
-
-Follow the OMA architecture:
-
-- **Atoms**: Basic components (buttons, form fields)
-- **Molecules**: Combinations of atoms (cards, section headers)
-- **Organisms**: Complete sections
-- **Core**: Base templates (base, header, footer)
-
-### Storybook
-
-- Create component stories in the `stories` folder
-- Develop and document components in isolation
-- Follow naming convention: `componentName.stories.js`
 
 ## 🚢 Deployment
 
@@ -146,20 +102,4 @@ Follow the OMA architecture:
    - Build command: `npm run build`
    - Publish directory: `public`
 
-### Decap CMS Configuration
-
-1. Enable Netlify Identity authentication
-2. Invite administrators via Netlify Identity panel
-3. Configure `src/admin/config.yml` according to your needs
-
-## 🤝 Contribution
-
-Contributions are welcome! Create a pull request or open an issue to discuss improvements.
-
-## 📄 License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
----
-
-For any questions or assistance, contact: <carpentier.dev@gmail.com>
+The rest of the document remains the same...

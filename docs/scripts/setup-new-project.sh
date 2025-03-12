@@ -75,6 +75,95 @@ else
     fi
 fi
 
+# ===================== PREREQUISITE CHECKS ====================
+
+# Function to check version compatibility
+check_version_compatibility() {
+    local tool_name="$1"
+    local current_version="$2"
+    local min_version="$3"
+    local recommended_version="$4"
+
+    # Compare versions
+    local is_compatible=$(printf '%s\n%s\n' "$min_version" "$current_version" | sort -V | head -n1)
+
+    if [ "$is_compatible" != "$min_version" ]; then
+        echo -e "${RED}ERROR: Incompatible $tool_name version${NC}"
+        echo -e "${YELLOW}Current version: $current_version${NC}"
+        echo -e "${YELLOW}Minimum required version: $min_version${NC}"
+        echo -e "${CYAN}Recommended version: $recommended_version${NC}"
+        
+        case "$tool_name" in
+            "Node.js")
+                echo -e "${BLUE}Installation instructions:${NC}"
+                echo "- macOS: Use Homebrew (brew install node)"
+                echo "- Linux: Use nvm (Node Version Manager)"
+                echo
+                echo "Recommended installation methods:"
+                echo "1. nvm (Node Version Manager): https://github.com/nvm-sh/nvm"
+                echo "2. Official Node.js downloads: https://nodejs.org/"
+                ;;
+            "npm")
+                echo -e "${BLUE}Update npm:${NC}"
+                echo "Run: npm install -g npm@latest"
+                ;;
+            "Git")
+                echo -e "${BLUE}Installation instructions:${NC}"
+                echo "- macOS: brew install git"
+                echo "- Linux: sudo apt-get install git (Debian/Ubuntu)"
+                ;;
+        esac
+        
+        exit 1
+    else
+        success_message "$tool_name version $current_version is compatible"
+    fi
+}
+
+# Prerequisite check function
+check_prerequisites() {
+    # Check Git
+    if ! command -v git &>/dev/null; then
+        echo -e "${RED}ERROR: Git is not installed${NC}"
+        echo -e "${BLUE}Installation instructions:${NC}"
+        echo "- macOS: Use Homebrew (brew install git)"
+        echo "- Linux: Use package manager (apt-get install git, dnf install git)"
+        exit 1
+    fi
+    
+    # Check Node.js
+    if ! command -v node &>/dev/null; then
+        echo -e "${RED}ERROR: Node.js is not installed${NC}"
+        echo -e "${BLUE}Installation instructions:${NC}"
+        echo "1. Use Node Version Manager (nvm): https://github.com/nvm-sh/nvm"
+        echo "2. Download from official Node.js website: https://nodejs.org/"
+        exit 1
+    fi
+    
+    # Check npm
+    if ! command -v npm &>/dev/null; then
+        echo -e "${RED}ERROR: npm is not installed${NC}"
+        echo -e "${BLUE}Installation instructions:${NC}"
+        echo "npm typically comes bundled with Node.js"
+        echo "1. Reinstall Node.js from: https://nodejs.org/"
+        echo "2. If Node.js is installed, try: npm install -g npm@latest"
+        exit 1
+    fi
+
+    # Get versions
+    local git_version=$(git --version | awk '{print $3}')
+    local node_version=$(node -v | cut -d 'v' -f 2)
+    local npm_version=$(npm -v)
+
+    # Check versions
+    check_version_compatibility "Git" "$git_version" "2.25.0" "2.40.0"
+    check_version_compatibility "Node.js" "$node_version" "18.0.0" "20.0.0"
+    check_version_compatibility "npm" "$npm_version" "9.0.0" "10.0.0"
+}
+
+# Run the prerequisites check
+check_prerequisites
+
 # ===================== ENVIRONMENT DETECTION =====================
 
 section_header "DETECTING ENVIRONMENT"
@@ -100,13 +189,6 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
         apt-get update || warning_message "Could not update packages. Continuing anyway."
     else
         warning_message "Skipping system package updates (requires sudo)."
-    fi
-elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
-    OS="Windows"
-    warning_message "Windows system detected"
-    # Check for chocolatey
-    if ! command -v choco &>/dev/null; then
-        warning_message "Chocolatey not found. On Windows, we recommend installing dependencies manually."
     fi
 else
     OS="Other"
@@ -259,6 +341,17 @@ if npm install -g @11ty/eleventy@latest; then
     success_message "Eleventy version: $ELEVENTY_VERSION"
 else
     warning_message "Global Eleventy installation failed, but the project may still work with local installation."
+fi
+
+# Install concurrently as a dev dependency
+warning_message "Installing concurrently..."
+if npm install --save-dev concurrently; then
+    success_message "Concurrently installed successfully."
+    # Get concurrently version
+    CONCURRENTLY_VERSION=$(npm list concurrently | grep concurrently@ | head -n 1 | sed 's/.*@//')
+    success_message "Concurrently version: $CONCURRENTLY_VERSION"
+else
+    warning_message "Concurrently installation failed."
 fi
 
 # ===================== SETTING UP STORYBOOK =====================

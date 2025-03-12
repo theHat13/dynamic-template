@@ -123,77 +123,125 @@ else
     fi
 fi
 
+# ===================== PREREQUISITE CHECKS ====================
+
+# Function to check version compatibility
+check_version_compatibility() {
+    local tool_name="$1"
+    local current_version="$2"
+    local min_version="$3"
+    local recommended_version="$4"
+
+    # Compare versions
+    local is_compatible=$(printf '%s\n%s\n' "$min_version" "$current_version" | sort -V | head -n1)
+
+    if [ "$is_compatible" != "$min_version" ]; then
+        echo -e "${RED}ERROR: Incompatible $tool_name version${NC}"
+        echo -e "${YELLOW}Current version: $current_version${NC}"
+        echo -e "${YELLOW}Minimum required version: $min_version${NC}"
+        echo -e "${CYAN}Recommended version: $recommended_version${NC}"
+        
+        case "$tool_name" in
+            "Node.js")
+                echo -e "${BLUE}Installation instructions:${NC}"
+                echo "- macOS: Use Homebrew (brew install node)"
+                echo "- Linux: Use nvm (Node Version Manager)"
+                echo
+                echo "Recommended installation methods:"
+                echo "1. nvm (Node Version Manager): https://github.com/nvm-sh/nvm"
+                echo "2. Official Node.js downloads: https://nodejs.org/"
+                ;;
+            "npm")
+                echo -e "${BLUE}Update npm:${NC}"
+                echo "Run: npm install -g npm@latest"
+                ;;
+            "Git")
+                echo -e "${BLUE}Installation instructions:${NC}"
+                echo "- macOS: brew install git"
+                echo "- Linux: sudo apt-get install git (Debian/Ubuntu)"
+                ;;
+        esac
+        
+        exit 1
+    else
+        success_message "$tool_name version $current_version is compatible"
+    fi
+}
+
+# Prerequisite check function
+check_prerequisites() {
+    # Check Git
+    if ! command -v git &>/dev/null; then
+        echo -e "${RED}ERROR: Git is not installed${NC}"
+        echo -e "${BLUE}Installation instructions:${NC}"
+        echo "- macOS: Use Homebrew (brew install git)"
+        echo "- Linux: Use package manager (apt-get install git, dnf install git)"
+        exit 1
+    fi
+    
+    # Check Node.js
+    if ! command -v node &>/dev/null; then
+        echo -e "${RED}ERROR: Node.js is not installed${NC}"
+        echo -e "${BLUE}Installation instructions:${NC}"
+        echo "1. Use Node Version Manager (nvm): https://github.com/nvm-sh/nvm"
+        echo "2. Download from official Node.js website: https://nodejs.org/"
+        exit 1
+    fi
+    
+    # Check npm
+    if ! command -v npm &>/dev/null; then
+        echo -e "${RED}ERROR: npm is not installed${NC}"
+        echo -e "${BLUE}Installation instructions:${NC}"
+        echo "npm typically comes bundled with Node.js"
+        echo "1. Reinstall Node.js from: https://nodejs.org/"
+        echo "2. If Node.js is installed, try: npm install -g npm@latest"
+        exit 1
+    fi
+
+    # Get versions
+    local git_version=$(git --version | awk '{print $3}')
+    local node_version=$(node -v | cut -d 'v' -f 2)
+    local npm_version=$(npm -v)
+
+    # Check versions
+    check_version_compatibility "Git" "$git_version" "2.25.0" "2.40.0"
+    check_version_compatibility "Node.js" "$node_version" "18.0.0" "20.0.0"
+    check_version_compatibility "npm" "$npm_version" "9.0.0" "10.0.0"
+}
+
+# Run the prerequisites check
+check_prerequisites
+
 # ===================== ENVIRONMENT DETECTION =====================
+
+section_header "DETECTING ENVIRONMENT"
 
 # Detect operating system
 if [[ "$OSTYPE" == "darwin"* ]]; then
     OS="macOS"
-    info_message "macOS system detected"
-    # Check for macOS version
-    MAC_VERSION=$(sw_vers -productVersion)
-    info_message "macOS version: $MAC_VERSION"
-    
+    warning_message "macOS system detected"
+    # Check if Homebrew is installed
+    if ! command -v brew &>/dev/null; then
+        warning_message "Homebrew not found. Installing..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || error_exit "Could not install Homebrew."
+        success_message "Homebrew installed successfully."
+    else
+        success_message "Homebrew is already installed."
+    fi
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     OS="Linux"
-    info_message "Linux system detected"
-    
-    # Check for distribution details
-    if [ -f /etc/os-release ]; then
-        source /etc/os-release
-        DISTRO="$NAME"
-        DISTRO_VERSION="$VERSION_ID"
-        info_message "Distribution: $DISTRO $DISTRO_VERSION"
+    warning_message "Linux system detected"
+    # Update packages - only if we can without sudo
+    if [ "$NEED_SUDO" = false ]; then
+        warning_message "Updating packages..."
+        apt-get update || warning_message "Could not update packages. Continuing anyway."
     else
-        DISTRO="Unknown"
-        warning_message "Could not determine Linux distribution"
+        warning_message "Skipping system package updates (requires sudo)."
     fi
-    
-elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
-    OS="Windows"
-    info_message "Windows system detected"
-    
-    # Check for Windows version
-    if command -v systeminfo &>/dev/null; then
-        WIN_VERSION=$(systeminfo | grep -i "OS Version" | cut -d: -f2 | tr -d ' ')
-        info_message "Windows version: $WIN_VERSION"
-    fi
-    
-    # Check for package managers
-    if command -v choco &>/dev/null; then
-        success_message "Chocolatey package manager detected"
-    else
-        warning_message "Chocolatey not found. On Windows, we recommend installing dependencies manually."
-    fi
-    
 else
     OS="Other"
     warning_message "Unrecognized operating system. Installation might not work correctly."
 fi
-
-# Check system resources
-if command -v free &>/dev/null; then
-    TOTAL_MEM=$(free -m | awk '/^Mem:/{print $2}')
-    info_message "Total memory: ${TOTAL_MEM}MB"
-    
-    if [ "$TOTAL_MEM" -lt 2048 ]; then
-        warning_message "Low memory detected. Some operations might be slow."
-    fi
-fi
-
-# Check disk space
-if command -v df &>/dev/null; then
-    FREE_SPACE=$(df -h . | awk 'NR==2 {print $4}')
-    info_message "Available disk space: $FREE_SPACE"
-fi
-
-# Check CPU information
-if command -v nproc &>/dev/null; then
-    CPU_CORES=$(nproc)
-    info_message "CPU cores: $CPU_CORES"
-fi
-
-# Check package manager based on OS
-check_package_manager
 
 # ===================== DEPENDENCY CHECKS AND INSTALLATION =====================
 
@@ -362,6 +410,17 @@ if npm install -g @11ty/eleventy@latest; then
     success_message "Eleventy version: $ELEVENTY_VERSION"
 else
     warning_message "Global Eleventy installation failed, but the project may still work with local installation."
+fi
+
+# Install concurrently as a dev dependency
+warning_message "Installing concurrently..."
+if npm install --save-dev concurrently; then
+    success_message "Concurrently installed successfully."
+    # Get concurrently version
+    CONCURRENTLY_VERSION=$(npm list concurrently | grep concurrently@ | head -n 1 | sed 's/.*@//')
+    success_message "Concurrently version: $CONCURRENTLY_VERSION"
+else
+    warning_message "Concurrently installation failed."
 fi
 
 # Install Storybook and related dependencies
