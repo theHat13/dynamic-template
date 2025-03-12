@@ -16,9 +16,18 @@ The project follows the OMA (Organism-Molecule-Atom) architecture to ensure a cl
 
 ## 🔧 Prerequisites
 
-- Node.js (v20.0.0 recommended, minimum v18.0.0)
-- npm (latest version)
-- Git
+Before running the installation scripts, make sure you have:
+
+- **Git**: Required for cloning the repository
+- **Node.js**: Version 18.0.0 minimum, 20.0.0 recommended
+- **npm**: Latest version (will be updated by scripts if needed)
+
+### Package Manager Requirements
+
+Depending on your operating system, you may need:
+
+- **macOS**: [Homebrew](https://brew.sh) (`brew`)
+- **Linux**: A package manager (apt, dnf, yum or pacman)
 
 ## 🚀 Installation Options
 
@@ -29,7 +38,9 @@ Use these scripts to set up a new project based on the HAT Dynamic Template:
 #### On Linux/macOS
 
 ```sh
-curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-new-project.sh && chmod +x setup-new-project.sh && ./setup-new-project.sh
+curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/hat-utils.sh && chmod +x hat-utils.sh
+curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/setup-new-project.sh && chmod +x setup-new-project.sh
+./setup-new-project.sh
 ```
 
 #### On Windows (PowerShell)
@@ -45,7 +56,9 @@ If you want to work on the HAT template framework itself, use these scripts:
 #### On Linux/macOS
 
 ```sh
-curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/clone-hat-template.sh && chmod +x clone-hat-template.sh && ./clone-hat-template.sh
+curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/hat-utils.sh && chmod +x hat-utils.sh
+curl -O https://raw.githubusercontent.com/theHat13/dynamic-template/main/docs/scripts/clone-hat-template.sh && chmod +x clone-hat-template.sh
+./clone-hat-template.sh
 ```
 
 #### On Windows (PowerShell)
@@ -67,6 +80,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-templ
 
    ```sh
    npm install
+   npm install concurrently --save-dev
    ```
 
 3. **Install Storybook**
@@ -74,6 +88,12 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/theHat13/dynamic-templ
    ```sh
    npm install --save-dev @storybook/html @storybook/addon-essentials
    npx storybook init --builder webpack5
+   ```
+
+4. **Compile TailwindCSS**
+
+   ```sh
+   npx tailwindcss -i ./src/input.css -o ./public/css/output.css
    ```
 
 ## 🔄 Update and Maintenance
@@ -99,6 +119,7 @@ These scripts will:
 - Provide options to update components interactively
 
 Monitored technologies:
+
 - Node.js
 - npm
 - Eleventy

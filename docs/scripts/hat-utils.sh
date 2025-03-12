@@ -153,22 +153,6 @@ function clone_repository {
     echo "$project_dir"
 }
 
-# Function to install TailwindCSS with CLI only
-function install_tailwind {
-    local project_dir=$1
-    
-    warning_message "Installing TailwindCSS with CLI..."
-    (cd "$project_dir" && npm install tailwindcss @tailwindcss/cli --save-dev) || warning_message "Error installing TailwindCSS and CLI."
-    
-    # Verify installation
-    if (cd "$project_dir" && npx tailwindcss --version &>/dev/null); then
-        local tailwind_version=$(cd "$project_dir" && npx tailwindcss --version)
-        success_message "TailwindCSS installed successfully. Version: $tailwind_version"
-    else
-        warning_message "TailwindCSS installation verification failed. You may need to install it manually."
-    fi
-}
-
 # Function to install common dependencies
 function install_dependencies {
     local project_dir=$1
@@ -181,8 +165,9 @@ function install_dependencies {
     warning_message "Installing concurrently..."
     (cd "$project_dir" && npm install concurrently --save-dev) || warning_message "Error installing concurrently."
     
-    # Install TailwindCSS with CLI
-    install_tailwind "$project_dir"
+    # Install TailwindCSS
+    warning_message "Installing TailwindCSS..."
+    (cd "$project_dir" && npm install tailwindcss@latest postcss autoprefixer --save-dev) || warning_message "Error installing TailwindCSS."
     
     # Install Eleventy globally
     warning_message "Installing Eleventy globally..."
