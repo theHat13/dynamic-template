@@ -128,10 +128,6 @@ function clone_repository {
     local project_dir=$1
     local default_dir=$2
     
-    # Clean color codes and trim whitespace
-    project_dir=$(echo "$project_dir" | sed -E 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g' | xargs)
-    default_dir=$(echo "$default_dir" | sed -E 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g' | xargs)
-    
     # Ask for project name if not provided
     if [ -z "$project_dir" ]; then
         read -p "Enter project name (press Enter to use '$default_dir'): " project_dir
@@ -142,41 +138,39 @@ function clone_repository {
         project_dir="$default_dir"
     fi
     
-    # Check if directory exists
+    # Check if directory already exists
     if [ -d "$project_dir" ]; then
         warning_message "Directory $project_dir already exists. Using alternative name."
         project_dir="${project_dir}-$(date +%s)"
     fi
     
-    # Clone the repository
-    warning_message "Cloning GitHub repository..."
+    # Display info but avoid mixing output with the return value
+    warning_message "Cloning GitHub repository into $project_dir..."
     
-    # Clone with error handling and absolute path
+    # Clone the repository
     git clone "$REPO_URL" "$project_dir" || error_exit "Failed to clone repository"
     
-    # Print and return the full path
-    realpath "$project_dir"
+    # Ensure the directory exists before returning it
+    if [ ! -d "$project_dir" ]; then
+        error_exit "Cloning failed. Directory $project_dir does not exist."
+    fi
+    
+    # Return the project directory (no extra messages here!)
+    echo "$project_dir"
 }
 
 # Function to install common dependencies
 function install_dependencies {
     local project_dir=$1
-    
+
+    # Debugging: check if project_dir is valid
+    if [ ! -d "$project_dir" ]; then
+        error_exit "Invalid project directory: '$project_dir'. Cannot install dependencies."
+    fi
+
     # Install npm dependencies
-    warning_message "Installing npm dependencies..."
+    warning_message "Installing npm dependencies in $project_dir..."
     (cd "$project_dir" && npm install) || error_exit "Error installing dependencies."
-    
-    # Install concurrently
-    warning_message "Installing concurrently..."
-    (cd "$project_dir" && npm install concurrently --save-dev) || warning_message "Error installing concurrently."
-    
-    # Install TailwindCSS
-    warning_message "Installing TailwindCSS..."
-    (cd "$project_dir" && npm install tailwindcss@latest postcss autoprefixer --save-dev) || warning_message "Error installing TailwindCSS."
-    
-    # Install Eleventy globally
-    warning_message "Installing Eleventy globally..."
-    npm install -g @11ty/eleventy@latest || warning_message "Global Eleventy installation failed. Local installation will be used."
     
     success_message "Dependencies installed successfully."
 }
