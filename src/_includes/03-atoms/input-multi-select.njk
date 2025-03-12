@@ -2,81 +2,38 @@
 <!--     INPUT MULTI SELECT    -->
 <!-- ========================= -->
 
-{% macro renderInputMultiSelect(option) %}
-  {# Extract needed properties with defaults #}
-  {% set name = option.name | default('input-select') %}
-  {% set title = option.title | default('Select options') %}
-  {% set options = option.options | default([]) %}
-  {% set placeholder = option.placeholder | default('Select options...') %}
-  {% set variant = option.variant | default('default') %}
-  {% set disabled = option.disabled | default(false) %}
-  {% set required = option.required | default(false) %}
-  
-  {# Find the variant in input_multi_select.json #}
-  {% set variantClasses = input_multi_select.variants | selectattr("name", "equalto", variant) | first %}
-  {% if not variantClasses %}
-    {% set variantClasses = input_multi_select.variants | selectattr("name", "equalto", "default") | first %}
-  {% endif %}
-
-  <div class="input-multi-select" data-multi-select-container id="{{ name }}-container">
-    {% if title %}
-      <label for="{{ name }}-input" class="block text-sm font-medium {{ variantClasses.label }} mb-2">
-        {{ title }}{% if required %} *{% endif %}
-      </label>
-    {% endif %}
-    
-    {# Single input field container with chips inside #}
-    <div class="relative flex flex-wrap items-center p-2 min-h-[42px] {{ variantClasses.border }}" data-chip-container>
-      {# Selected options as chips #}
-      {% for option in options %}
-        <div 
-          class="inline-flex items-center bg-blue-100 text-blue-800 px-2 py-1 text-sm rounded-md mr-1 mb-1"
-          data-option-value="{{ option.value }}"
-          role="button"
-          tabindex="{% if disabled or option.disabled %}-1{% else %}0{% endif %}"
-          {% if disabled or option.disabled %}aria-disabled="true"{% endif %}
-          data-default-class="bg-blue-100 text-blue-800"
-          data-hover-class="bg-blue-200 text-blue-900"
-          data-focus-class="bg-blue-100 text-blue-800 ring-2 ring-blue-400"
-          data-disabled-class="bg-gray-100 text-gray-400 opacity-60"
-          data-state="default"
-        >
-          <span class="chip-label">{{ option.label }}</span>
-          <button type="button" 
-            class="chip-remove ml-1 text-blue-500 hover:text-blue-700"
-            aria-label="Remove {{ option.label }}"
-            {% if disabled or option.disabled %}disabled{% endif %}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
-              <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-            </svg>
+{% macro renderMultiSelect(name, selectedItems) %}
+  <!-- Wrapper for the multi-select component -->
+  <div class="relative w-full">
+    <!-- Main container for selected items (chips) -->
+    <div id="{{ name }}" class="flex flex-wrap gap-2 p-2 border border-gray-300 rounded-lg">
+      {% for item in selectedItems %}
+        <!-- Chip element with a remove button -->
+        <span class="chip flex items-center bg-blue-500 text-white px-3 py-1 rounded-full">
+          {{ item }}
+          <button type="button" class="ml-2 text-white hover:text-red-400 remove-chip" data-value="{{ item }}">
+            ✕
           </button>
-        </div>
+        </span>
       {% endfor %}
-      
-      {# The input field within the same container - read-only to prevent adding new options #}
+      <!-- Input field for adding new items -->
       <input 
         type="text" 
         id="{{ name }}-input"
-        placeholder="{{ placeholder }}"
-        class="flex-grow min-w-[120px] border-none focus:ring-0 focus:outline-none bg-transparent {{ variantClasses.input }}"
-        {% if disabled %}disabled{% endif %}
-        readonly
-        data-multi-select-input
+        class="border-none focus:ring-0 focus:outline-none p-1"
+        placeholder="Add an item..."
       />
-      
-      {# Dropdown icon #}
-      <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-        </svg>
-      </div>
     </div>
-    
-    {# Hidden input for form submission #}
-    <input type="hidden" name="{{ name }}_values" id="{{ name }}-values" data-multi-select-values />
+
+    <!-- Hidden input to store selected values as a comma-separated string -->
+    <input type="hidden" name="{{ name }}" id="{{ name }}-hidden" value="{{ selectedItems | join(',') }}">
+
+    <!-- Load the JavaScript script -->
+    <script src="/js/multiSelect.js" defer></script>
   </div>
 {% endmacro %}
+
+
 
 <!-- ========================= -->
 <!-- HOW TO USE THIS COMPONENT -->
@@ -84,8 +41,8 @@
 
 <!--
   Complete documentation in Storybook
-  Basic usage: {% from "03-atoms/input-multi-select.njk" import renderInputMultiSelect %}
-              {{ renderInputMultiSelect(input_multi_selects.data.programming_languages) }}
+  Basic usage: {% from "03-atoms/input-multi-select.njk" import renderMultiSelect %}
+              {{ renderMultiSelect("tags", ["Development", "Design", "SEO"]) }}
   
   Features:
   - Input field and chips in a single container
