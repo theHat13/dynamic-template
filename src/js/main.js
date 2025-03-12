@@ -1,13 +1,12 @@
 // src/js/main.js
 
-// Import atom level components
-import { initializeChipMultiSelect } from './atoms/chip-multi-select.js';
-import { initializeInputMultiSelect } from './atoms/input-multi-select.js';
+// Import the multi-select initialization function
+import { initializeMultiSelect } from './atoms/multiSelect.js';
 
 // Main application logic
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Application initialized');
-  
-  // Initialize components
-  initializeChipMultiSelect();
+
+  // Initialize the multi-select component
+  initializeMultiSelect();
 });
