@@ -16,7 +16,7 @@
   {% endif %}
 {% endmacro %} #}
 
-{%- macro renderLink(link) -%}
+{# {%- macro renderLink(link) -%}
     {%- set styles = {
         "default": "text-gray-800 hover:text-gray-600 transition-colors duration-200",
         "primary": "text-blue-600 hover:text-blue-800 underline transition-colors duration-200",
@@ -28,7 +28,25 @@
     {% else %}
         <a href="{{ link.href }}" class="{{ styles.default }}">{{ link.text }}</a>
     {% endif %}
-{%- endmacro %}
+{%- endmacro %} #}
+
+{% macro renderLink(options) %}
+  {% set linkData = options.datas.links | selectattr('name', 'equalto', options.name) | first %}
+  {% set globalStyle = options.datas.globalStyle %}
+  {% set variantStyle = options.datas.variants[linkData.style] %}
+  
+  {% if linkData %}
+    <a 
+      href="{{ linkData.href }}" 
+      class="{{ globalStyle }} {{ variantStyle }}"
+    >
+      {{ linkData.text }}
+    </a>
+  {% else %}
+    <span class="text-red-500">Link not found</span>
+  {% endif %}
+{% endmacro %}
+
 
 <!-- ============================ -->
 <!-- Summon HAT Components Wisely -->
@@ -38,10 +56,10 @@
 {# {% from "03-atoms/link.njk" import renderLink %} #}
 
 <!-- 2. Call a specific link by its ID -->
-{# {{ renderLink(contents.atoms.links[0]) }} #}
+{# {{ renderLink(atoms.links[0]) }} #}
 
 <!-- 3. Call a specific link by its name -->
-{# {% set link_by_name = contents.atoms.links | selectattr('name', 'equalto', 'tavern_quest') | first %} #}
+{# {% set link_by_name = atoms.links | selectattr('name', 'equalto', 'tavern_quest') | first %} #}
 {# {{ renderLink(link_by_name) }} #}
 
 <!-- 4. Adding a new link -->

@@ -99,12 +99,12 @@ export const Usage = () => {
       
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Call a specific link by its index:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink(contents.atoms.links[0]) }}</code></pre>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink(atoms.links[0]) }}</code></pre>
       </div>
       
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Call a specific link by its name:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% set link_by_name = contents.atoms.links | selectattr('name', 'equalto', 'tavern_quest') | first %}
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% set link_by_name = atoms.links | selectattr('name', 'equalto', 'tavern_quest') | first %}
 {{ renderLink(link_by_name) }}</code></pre>
       </div>
       
