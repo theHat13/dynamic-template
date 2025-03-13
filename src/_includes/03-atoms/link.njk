@@ -25,31 +25,31 @@
 <!-- ============================ -->
 
 <!-- 1. Import the macro at the top of your page -->
-{% from "03-atoms/link.njk" import renderLink %}
+{# {% from "03-atoms/link.njk" import renderLink %} #}
 
 <!-- 2. Call a specific link by its name -->
-{{ renderLink({ 
+{# {{ renderLink({ 
     name: "tavern_quest", 
     datas: atoms.links 
-}) }}
+}) }} #}
 
 <!-- 3. Call multiple links from the data -->
-{% for link in atoms.links.links %}
+{# {% for link in atoms.links.links %}
     {{ renderLink({ 
         name: link.name, 
         datas: atoms.links 
     }) }}
-{% endfor %}
+{% endfor %} #}
 
 <!-- 4. Direct link creation -->
-{{ renderLink({
+{# {{ renderLink({
     href: "/new-page", 
     text: "Custom Link", 
     style: "primary"
-}) }}
+}) }} #}
 
 <!-- 5. Adding a new link to links.json -->
-{
+{# {
   "links": [
     {
       "name": "new_link_name",
@@ -58,7 +58,6 @@
       "style": "primary"
     }
   ]
-}
-
+} #}
 
 <!-- May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨ -->
