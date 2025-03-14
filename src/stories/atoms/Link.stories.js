@@ -135,12 +135,12 @@ export const SecondaryStyle = {
   }
 };
 
-// Usage guide 
+// Usage guide
 export const Usage = () => {
   const usageGuide = document.createElement('div');
   usageGuide.className = 'bg-gray-50 p-6 rounded-lg max-w-4xl mx-auto';
   usageGuide.innerHTML = `
-    <h2 class="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">How to Use This Component</h2>
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">Summon HAT Components Wisely</h2>
     
     <div class="space-y-6">
       <div>
@@ -159,10 +159,10 @@ export const Usage = () => {
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Call multiple links from the data:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% for link in atoms.links.links %}
-  {{ renderLink({ 
-      name: link.name, 
-      datas: atoms.links 
-  }) }}
+    {{ renderLink({ 
+        name: link.name, 
+        datas: atoms.links 
+    }) }}
 {% endfor %}</code></pre>
       </div>
       
@@ -171,22 +171,12 @@ export const Usage = () => {
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink({
   href: "/new-page", 
   text: "Custom Link", 
-  style: "primary",
-  datas: atoms.links
+  style: "primary"
 }) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Available styles:</h3>
-        <ul class="list-disc pl-6 space-y-2 text-gray-600">
-          ${Object.entries(linksData.variants).map(([style, className]) => `
-            <li><code>${style}</code>: ${className}</li>
-          `).join('')}
-        </ul>
-      </div>
-      
-      <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Adding a new link to links.json:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Adding a new link to links.json:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
   "links": [
     {
@@ -199,6 +189,7 @@ export const Usage = () => {
 }</code></pre>
       </div>
     </div>
+    <p class="mt-6 text-gray-600 italic">May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨</p>
   `;
   
   return usageGuide;
