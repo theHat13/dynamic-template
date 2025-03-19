@@ -2,7 +2,7 @@
   "globalStyle": "label",
   "variants": {
     "info": "text-blue-500",
-    "success": "text-green-500",  
+    "success": "text-green-500",
     "warning": "text-yellow-500",
     "error": "text-red-500"
   },
@@ -10,26 +10,26 @@
     {
       "name": "info_label",
       "text": "Label",
-      "icon": "/assets/icons/info.svg",
+      "icon": "info",
       "style": "info"
     },
     {
       "name": "success_label",
       "text": "Label",
-      "icon": "/assets/icons/success.svg",
+      "icon": "success",
       "style": "success"
     },
     {
       "name": "warning_label",
       "text": "Label",
-      "icon": "/assets/icons/warning.svg",
+      "icon": "warning",
       "style": "warning"
     },
     {
       "name": "error_label",
       "text": "Label",
-      "icon": "/assets/icons/critical.svg",
-      "style": "error"  
+      "icon": "error",
+      "style": "error"
     }
   ]
 }

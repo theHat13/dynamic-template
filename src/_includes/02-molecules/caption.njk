@@ -5,12 +5,11 @@
 #}
 
 {% macro renderCaption(options) %}
-  {# Check if required data is provided, show error if not #}
-  {% if not options or not options.datas or not options.datas.captions %}
-    <span class="text-red-500">Error: No caption data provided</span>
+  {# Check if required data is provided #}
+  {% if not options or not options.datas or not options.datas.captions or not options.icons %}
+    <span class="text-red-500">Error: Missing required data</span>
   {% else %}
     {% set globalStyle = options.datas.globalStyle | default('') %}
-    
     {% set captionData = null %}
     
     {# Find the caption by name if provided #}
@@ -35,9 +34,19 @@
         {% set captionClasses = captionClasses ~ " " ~ captionStyle %}
       {% endif %}
 
+      {# Find the corresponding icon in icons.json #}
+      {% set iconData = null %}
+      {% if captionData.icon %}
+        {% for icon in options.icons.icons %}
+          {% if icon.name == captionData.icon %}
+            {% set iconData = icon %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
       <div class="{{ captionClasses }}">
-        {% if captionData.icon %}
-          <img src="{{ captionData.icon }}" alt="" class="inline-flex items-center justify-center mr-2 w-4 h-4">
+        {% if iconData %}
+          <img src="{{ iconData.path }}" alt="{{ iconData.alt | default('') }}" class="inline-flex items-center justify-center mr-2 w-4 h-4">
         {% endif %}
         
         <span class="caption-text">{{ captionData.text }}</span>
@@ -58,12 +67,14 @@ Invoke Caption Macro Wisely
 2. Render a specific caption by name (text + icon)
 {{ renderCaption({
      name: "warning", 
-     datas: molecules.captions
+     datas: molecules.captions,
+     icons: atoms.icons
 }) }}
 
 3. Custom configuration options
 - name: The name of the specific caption to render (required)
 - datas: Caption component data from molecules.captions
+- icons: Icon component data from atoms.icons
 
-Captions, now with icons! 📝🖼️
+Ancient magic grants captions their rightful icons ✨🛡️
 #}
