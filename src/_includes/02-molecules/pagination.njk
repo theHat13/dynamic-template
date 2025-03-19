@@ -183,27 +183,10 @@
                 >
                   
                   {% if page.label.slice(-4) == '.svg' %}
-                    {# Handle SVG icons - Use direct SVG content instead of img tag #}
-                    {% if svgContents is defined %}
-                      <span class="inline-flex items-center justify-center w-5 h-5">
-                        {{ svgContents(page.label) }}
-                      </span>
-                    {% else %}
-                      {# Fallback - Use predefined SVG icon with currentColor to inherit styles #}
-                      <span class="inline-flex items-center justify-center w-5 h-5">
-                        {% if page.label.indexOf('first') > -1 %}
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
-                        {% elif page.label.indexOf('last') > -1 %}
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 17 5-5-5-5"/><path d="m6 17 5-5-5-5"/></svg>
-                        {% elif page.label.indexOf('next') > -1 %}
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                        {% elif page.label.indexOf('prev') > -1 %}
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                        {% else %}
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
-                        {% endif %}
-                      </span>
-                    {% endif %}
+                    {# Harmonized SVG handling - using data-svg-src attribute for dynamic loading #}
+                    <span data-svg-src="{{ page.label }}" class="inline-flex items-center justify-center w-5 h-5">
+                      <!-- SVG will be loaded here -->
+                    </span>
                   {% else %}
                     {{ page.label }}
                   {% endif %}
@@ -279,6 +262,12 @@ Summon HAT Components Wisely
 - labelSuffix: Text to display after the number (default: "per page")
 - buttonData: Button component data from atoms.buttons 
 - selectData: Select component data from atoms.selects
+
+5. Using SVG icons in pagination
+- For navigation icons, use SVG paths in the page.label (e.g., "/assets/icons/arrow-left.svg")
+- The SVG loader will automatically replace the placeholder span with the actual SVG content
+- Make sure your SVGs use fill="currentColor" to inherit the text color from the parent element
+- Add the script svg-loader.js to your base template or include it directly in your page
 
 May the winds favor your sails and not your enemies'! ⛵🌬️
 #}
