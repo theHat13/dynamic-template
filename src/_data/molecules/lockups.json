@@ -75,6 +75,78 @@
         "text": "A fearless mage, wielder of ancient spells and master of the sacred arts of enchantment and illusion.",
         "style": "secondary"
       }
+    },
+    {
+      "name": "potion_price",
+      "type": "label-value",
+      "label": {
+        "text": "Health Potion Cost:",
+        "style": "default"
+      },
+      "value": {
+        "text": "50 gold coins, or one embarrassing secret",
+        "style": "highlight"
+      }
+    },
+    {
+      "name": "inventory_weight",
+      "type": "label-value",
+      "label": {
+        "text": "Inventory Burden:",
+        "style": "default"
+      },
+      "value": {
+        "text": "Too heavy, but you refuse to drop anything",
+        "style": "highlight"
+      }
+    },
+    {
+      "name": "armor_durability",
+      "type": "label-value",
+      "label": {
+        "text": "Armor Durability:",
+        "style": "default"
+      },
+      "value": {
+        "text": "Holding together... barely",
+        "style": "highlight"
+      }
+    },
+    {
+      "name": "quest_reward",
+      "type": "label-value",
+      "label": {
+        "text": "Quest Reward:",
+        "style": "default"
+      },
+      "value": {
+        "text": "500 gold coins and a slightly cursed sword",
+        "style": "highlight"
+      }
+    },
+    {
+      "name": "merchant_price",
+      "type": "label-value",
+      "label": {
+        "text": "Suspicious Merchant's Price:",
+        "style": "default"
+      },
+      "value": {
+        "text": "A handful of gold... and maybe your soul",
+        "style": "highlight"
+      }
+    },
+    {
+      "name": "healer_fee",
+      "type": "label-value",
+      "label": {
+        "text": "Healing Fee:",
+        "style": "default"
+      },
+      "value": {
+        "text": "10 gold coins or a really good story",
+        "style": "highlight"
+      }
     }
   ]
 }
