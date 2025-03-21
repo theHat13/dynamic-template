@@ -1,9 +1,3 @@
---- 
-title: Component Playground 
-description: Interactive exploration of Link Components 
-layout: '00-organisms-global/base.njk' 
----
-
 {# Import required atom macros #}
 {% from "03-atoms/link.njk" import renderLink %}
 {% from "03-atoms/chip-notification.njk" import renderChipNotification %}
@@ -51,7 +45,7 @@ layout: '00-organisms-global/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing link component #}
-            {{ renderLink({ name: "tavern_quest", datas: atoms.links }) }}
+            {{ renderLink({ name: "camp", datas: atoms.links }) }}
         </div>
     </div>
 
