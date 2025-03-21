@@ -138,6 +138,18 @@
       "level": 4,
       "text": "Bard for Hire",
       "style": "default"
+    },
+    {
+      "name": "quest_log",
+      "level": 4,
+      "text": "Quest Log",
+      "style": "default"
+    },
+    {
+      "name": "ancient_scrolls",
+      "level": 4,
+      "text": "Ancient Scrolls",
+      "style": "default"
     }
   ]
 }

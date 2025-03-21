@@ -1,0 +1,64 @@
+{
+  "globalStyle": "flex flex-col space-y-4 menu-container",
+  "variants": {
+    "default": "text-gray-800",
+    "hover": "text-gray-600",
+    "focus": "text-gray-800 outline-2 outline-blue-500 outline-offset-2 rounded-md",
+    "active": "text-blue-600 font-bold"
+  },
+"menus": [
+  {
+    "name": "main_navigation",
+    "heading": "quest_log",
+    "menuStyle": "flex flex-col space-y-2",
+    "headingStyle": "text-lg font-semibold text-gray-900 mb-2",
+    "links": [
+      {
+        "name": "tavern"
+      },
+      {
+        "name": "lore"
+      },
+      {
+        "name": "guild_services"
+      },
+      {
+        "name": "hall_of_legends"
+      },
+      {
+        "name": "bard_tales"
+      },
+      {
+        "name": "send_a_raven"
+      }
+    ]
+  },
+  {
+    "name": "footer_navigation",
+    "heading": "ancient_scrolls",
+    "menuStyle": "flex flex-col space-y-1",
+    "headingStyle": "text-base font-medium text-gray-700 mb-3",
+    "links": [
+      {
+        "name": "sacred_decrees"
+      },
+      {
+        "name": "laws_of_the_realm"
+      },
+      {
+        "name": "magic_biscuits"
+      },
+      {
+        "name": "map_of_the_kingdom"
+      },
+      {
+        "name": "guild_recruitment"
+      },
+      {
+        "name": "oracle_whispers"
+      }
+    ]
+  }
+]
+
+}
