@@ -55,13 +55,13 @@
 
     {# Header organism call #}
     {% from "01-organisms/header.njk" import renderHeader %}
-        {{ renderHeader({ 
-            name: "main",
-            datas: organisms.headers,
-            vectors: atoms.vectors,
-            links: atoms.links 
-        }) }}
-
+      {{ renderHeader({ 
+          name: "main",
+          datas: organisms.headers,
+          vectors: atoms.vectors,
+          links: atoms.links,
+          icons: atoms.icons
+      }) }}
     <main class="flex-grow">
         {{ content | safe }}
     </main>
