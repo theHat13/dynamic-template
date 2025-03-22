@@ -6,59 +6,104 @@
     "focus": "text-gray-800 outline-2 outline-blue-500 outline-offset-2 rounded-md",
     "active": "text-blue-600 font-bold"
   },
-"menus": [
-  {
-    "name": "main_navigation",
-    "heading": "quest_log",
-    "menuStyle": "flex flex-col space-y-2",
-    "headingStyle": "text-lg font-semibold text-gray-900 mb-2",
-    "links": [
-      {
-        "name": "tavern"
-      },
-      {
-        "name": "lore"
-      },
-      {
-        "name": "guild_services"
-      },
-      {
-        "name": "hall_of_legends"
-      },
-      {
-        "name": "bard_tales"
-      },
-      {
-        "name": "send_a_raven"
-      }
-    ]
-  },
-  {
-    "name": "footer_navigation",
-    "heading": "ancient_scrolls",
-    "menuStyle": "flex flex-col space-y-1",
-    "headingStyle": "text-base font-medium text-gray-700 mb-3",
-    "links": [
-      {
-        "name": "sacred_decrees"
-      },
-      {
-        "name": "laws_of_the_realm"
-      },
-      {
-        "name": "magic_biscuits"
-      },
-      {
-        "name": "map_of_the_kingdom"
-      },
-      {
-        "name": "guild_recruitment"
-      },
-      {
-        "name": "oracle_whispers"
-      }
-    ]
-  }
-]
-
+  "menus": [
+    {
+      "name": "main_navigation",
+      "heading": "quest_log",
+      "menuStyle": "flex flex-col space-y-1",
+      "headingStyle": "text-lg font-semibold text-gray-900 mb-2",
+      "links": [
+        {
+          "name": "tavern"
+        },
+        {
+          "name": "lore"
+        },
+        {
+          "name": "guild_services"
+        },
+        {
+          "name": "hall_of_legends"
+        },
+        {
+          "name": "bard_tales"
+        },
+        {
+          "name": "send_a_raven"
+        }
+      ]
+    },
+    {
+      "name": "footer_navigation",
+      "heading": "ancient_scrolls",
+      "menuStyle": "flex flex-col space-y-1",
+      "headingStyle": "text-lg font-semibold text-gray-900 mb-2",
+      "links": [
+        {
+          "name": "sacred_decrees"
+        },
+        {
+          "name": "laws_of_the_realm"
+        },
+        {
+          "name": "magic_biscuits"
+        },
+        {
+          "name": "map_of_the_kingdom"
+        },
+        {
+          "name": "guild_recruitment"
+        },
+        {
+          "name": "oracle_whispers"
+        }
+      ]
+    },
+    {
+      "name": "royal_services",
+      "heading": "kingdom_services",
+      "menuStyle": "flex flex-col space-y-1",
+      "headingStyle": "text-lg font-semibold text-gray-900 mb-2",
+      "links": [
+        {
+          "name": "blacksmith_forge"
+        },
+        {
+          "name": "potion_brewing"
+        },
+        {
+          "name": "spell_enchantments"
+        },
+        {
+          "name": "royal_courier"
+        },
+        {
+          "name": "dragon_rentals"
+        },
+        {
+          "name": "bard_entertainment"
+        }
+      ]
+    },
+    {
+      "name": "socials",
+      "heading": "socials",
+      "menuStyle": "flex flex-col space-y-1",
+      "headingStyle": "text-lg font-semibold text-gray-900 mb-2",
+      "links": [
+        {
+          "name": "scroll_of_faces"
+        },
+        {
+          "name": "chirping_birds"
+        },
+        {
+          "name": "illusion_mirror"
+        },
+        {
+          "name": "guild_registry"
+        }
+      ]
+    }
+  ]
 }
