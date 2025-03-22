@@ -23,7 +23,7 @@
       {% set navigationData = options.datas.navigations[0] %}
     {% endif %}
     
-    <nav class="{{ globalStyle }} {{ options.class | default('') }}">
+    <nav class="{{ globalStyle }} {{ options.class | default('') }}" data-nav-container>
       {% for linkName in navigationData.links %}
         {{ renderLink({ name: linkName, datas: options.links, dataNavLink: true }) }}
       {% endfor %}
