@@ -1,0 +1,60 @@
+<!-- ========================= -->
+<!--          NAVIGATION-SECONDARY -->
+<!-- ========================= -->
+
+{% macro rendernavigation-secondary(options) %}
+  {% set navigation-secondaryData = options.datas.navigation-secondarys | selectattr('name', 'equalto', options.name) | first %}
+  {% set globalStyle = options.datas.globalStyle %}
+  {% set variantStyle = options.datas.variants[navigation-secondaryData.style] %}
+  
+  {% if navigation-secondaryData %}
+    <div 
+      class="{{ globalStyle }} {{ variantStyle }}"
+    >
+      {{ navigation-secondaryData.text }}
+    </div>
+  {% else %}
+    <span class="text-red-500">navigation-secondary not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+<!-- ============================ -->
+<!-- Summon HAT Components Wisely -->
+<!-- ============================ -->
+
+<!-- 1. Import the macro at the top of your page -->
+{# {% from "01-organisms/navigation-secondary.njk" import rendernavigation-secondary %} #}
+
+<!-- 2. Call a specific navigation-secondary by its name -->
+{# {{ rendernavigation-secondary({ 
+    name: "example_navigation-secondary", 
+    datas: organisms.navigation-secondarys 
+}) }} #}
+
+<!-- 3. Call multiple navigation-secondarys from the data -->
+{# {% for navigation-secondary in organisms.navigation-secondarys.navigation-secondarys %}
+    {{ rendernavigation-secondary({ 
+        name: navigation-secondary.name, 
+        datas: organisms.navigation-secondarys 
+    }) }}
+{% endfor %} #}
+
+<!-- 4. Direct navigation-secondary creation -->
+{# {{ rendernavigation-secondary({
+    text: "Custom navigation-secondary", 
+    style: "primary"
+}) }} #}
+
+<!-- 5. Adding a new navigation-secondary to navigation-secondarys.json -->
+{# {
+  "navigation-secondarys": [
+    {
+      "name": "new_navigation-secondary_name",
+      "text": "Your navigation-secondary Text",
+      "style": "primary"
+    }
+  ]
+} #}
+
+<!-- May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨ -->
