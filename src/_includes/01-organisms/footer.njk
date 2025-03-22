@@ -69,8 +69,41 @@
                           {% if options.links and options.links.links %}
                             {% for linkData in options.links.links %}
                               {% if linkData.name == linkItem.name %}
-                                {# Utilisation de renderLink au lieu de créer manuellement le lien #}
-                                {{ renderLink({ name: linkData.name, datas: options.links }) }}
+                                {% if menuData.name == "socials" and options.icons %}
+                                  {# Traitement spécial pour les liens sociaux avec icônes #}
+                                  <a href="{{ linkData.href }}" 
+                                     class="{{ stateClasses.default }} flex items-center gap-2"
+                                     onmouseover="this.className='{{ stateClasses.hover }} flex items-center gap-2'" 
+                                     onmouseout="this.className='{{ stateClasses.default }} flex items-center gap-2'"
+                                     onfocus="this.className='{{ stateClasses.focus }} flex items-center gap-2'"
+                                     onblur="this.className='{{ stateClasses.default }} flex items-center gap-2'"
+                                     aria-label="{{ linkData.text }}">
+                                    
+                                    {# Recherche l'icône correspondante #}
+                                    {% set iconData = null %}
+                                    {% if options.icons and options.icons.icons %}
+                                      {% for icon in options.icons.icons %}
+                                        {% if icon.name == linkData.name %}
+                                          {% set iconData = icon %}
+                                        {% endif %}
+                                      {% endfor %}
+                                    {% endif %}
+                                    
+                                    {% if iconData and iconData.path %}
+                                      {# Ajout de la classe spéciale pour le script JS qui charge les SVG #}
+                                      <span 
+                                        data-svg-src="{{ iconData.path }}" 
+                                        class="icon w-4 h-4 mr-2"
+                                        aria-hidden="true"
+                                      ></span>
+                                    {% endif %}
+                                    
+                                    <span>{{ linkData.text }}</span>
+                                  </a>
+                                {% else %}
+                                  {# Utilisation de renderLink pour les liens standard #}
+                                  {{ renderLink({ name: linkData.name, datas: options.links }) }}
+                                {% endif %}
                               {% endif %}
                             {% endfor %}
                           {% else %}
@@ -211,6 +244,7 @@
     <span class="text-red-500">Footer data not found</span>
   {% endif %}
 {% endmacro %}
+
 
 {#
 ============================
