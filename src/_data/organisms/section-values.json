@@ -1,0 +1,180 @@
+{
+  "globalStyle": "py-12 px-4 md:px-8",
+  "containerStyle": "max-w-7xl mx-auto",
+  "headingContainerStyle": "mb-10 text-center",
+  "cardsContainerStyle": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8",
+  "variants": {
+    "default": "bg-white",
+    "primary": "bg-blue-50",
+    "secondary": "bg-gray-50",
+    "accent": "bg-purple-50"
+  },
+  "sectionValues": [
+    {
+      "name": "core_values",
+      "heading": {
+        "name": "section_title",
+        "text": "Our Core Values",
+        "style": "hero"
+      },
+      "description": "What drives us every day to deliver exceptional results for our clients.",
+      "cards": [
+        {
+          "name": "innovation",
+          "heading": {
+            "name": "component_title",
+            "text": "Innovation",
+            "style": "primary"
+          },
+          "content": {
+            "text": "We constantly seek new ways to solve complex problems and stay ahead of industry trends.",
+            "style": "default"
+          },
+          "button": {
+            "name": "card"
+          }
+        },
+        {
+          "name": "integrity",
+          "heading": {
+            "name": "component_title",
+            "text": "Integrity",
+            "style": "primary"
+          },
+          "content": {
+            "text": "We build trust through honesty, transparency, and delivering on our promises every time.",
+            "style": "default"
+          },
+          "button": {
+            "name": "card"
+          }
+        },
+        {
+          "name": "collaboration",
+          "heading": {
+            "name": "component_title",
+            "text": "Collaboration",
+            "style": "primary"
+          },
+          "content": {
+            "text": "We believe great ideas emerge from diverse teams working together toward common goals.",
+            "style": "default"
+          },
+          "button": {
+            "name": "card"
+          }
+        }
+      ]
+    },
+    {
+      "name": "user_benefits",
+      "heading": {
+        "name": "section_title",
+        "text": "Why Choose Us",
+        "style": "hero"
+      },
+      "description": "Benefits that set our services apart from the competition.",
+      "cards": [
+        {
+          "name": "expertise",
+          "heading": {
+            "name": "component_title",
+            "text": "Expert Knowledge",
+            "style": "primary"
+          },
+          "content": {
+            "text": "Our team brings years of specialized experience to every project we undertake.",
+            "style": "default"
+          },
+          "button": {
+            "name": "card"
+          }
+        },
+        {
+          "name": "customization",
+          "heading": {
+            "name": "component_title",
+            "text": "Tailored Solutions",
+            "style": "primary"
+          },
+          "content": {
+            "text": "We create custom strategies designed specifically for your unique business needs.",
+            "style": "default"
+          },
+          "button": {
+            "name": "card"
+          }
+        },
+        {
+          "name": "support",
+          "heading": {
+            "name": "component_title",
+            "text": "Ongoing Support",
+            "style": "primary"
+          },
+          "content": {
+            "text": "We provide continuous assistance and expertise long after project completion.",
+            "style": "default"
+          },
+          "button": {
+            "name": "card"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kingdom_services",
+      "heading": {
+        "name": "kingdom_services",
+        "style": "hero"
+      },
+      "description": "Essential services for adventurers across the realm.",
+      "cards": [
+        {
+          "name": "blacksmith",
+          "heading": {
+            "name": "component_title",
+            "text": "Blacksmith",
+            "style": "primary"
+          },
+          "content": {
+            "text": "Expert weapon and armor crafting by the finest smiths in the kingdom.",
+            "style": "default"
+          },
+          "button": {
+            "name": "card"
+          }
+        },
+        {
+          "name": "apothecary",
+          "heading": {
+            "name": "component_title",
+            "text": "Apothecary",
+            "style": "primary"
+          },
+          "content": {
+            "text": "Healing potions and elixirs brewed from rare herbs across the realm.",
+            "style": "default"
+          },
+          "button": {
+            "name": "card"
+          }
+        },
+        {
+          "name": "magic_scrolls",
+          "heading": {
+            "name": "ancient_scrolls",
+            "style": "primary"
+          },
+          "content": {
+            "text": "Arcane knowledge and spells inscribed by master wizards of the academy.",
+            "style": "default"
+          },
+          "button": {
+            "name": "card"
+          }
+        }
+      ]
+    }
+  ]
+}
