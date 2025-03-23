@@ -1,5 +1,5 @@
 {
-  "globalStyle": "py-12 px-4 md:px-8",
+  "globalStyle": "section-value py-12 px-4 md:px-8",
   "containerStyle": "max-w-7xl mx-auto",
   "headingContainerStyle": "mb-10 text-center max-w-xs md:max-w-sm mx-auto",
   "cardsContainerStyle": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 justify-items-center",

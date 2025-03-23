@@ -1,5 +1,5 @@
 {
-  "globalStyle": "section-about py-8 md:py-12",
+  "globalStyle": "section-about py-12 px-4 md:px-8",
   "variants": {
     "default": "bg-white",
     "dark": "bg-gray-800 text-white",
