@@ -13,8 +13,8 @@
     {% set containerStyle = options.datas.containerStyle %}
     {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
     {% set textContainerStyle = options.datas.textContainerStyle %}
-    {% set buttonsContainerStyle = options.datas.buttonsContainerStyle %}
-    {% set imageContainerStyle = options.datas.imageContainerStyle %}
+    {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center md:justify-start" %}
+    {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
     
     <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
       <div class="{{ containerStyle }}">
@@ -145,5 +145,5 @@ Summon HAT Components Wisely
 The section-hero component uses the renderButton macro from "03-atoms/button.njk".
 This ensures consistent button styling and behavior across all components.
 
-Every epic tale starts with a hero ⚔️📜
+Every journey begins with a hero section! 🏰🛡️
 #}
