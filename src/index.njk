@@ -25,5 +25,12 @@ layout: '00-core/base.njk'
         cards: molecules.cards
     }) }}
 
-{# Include about section #}
-{% include '01-organisms-sections/section-about.njk' %}
+{# Include section-about #}
+{% from "01-organisms/section-about.njk" import renderSectionAbout %}
+
+    {{ renderSectionAbout({ 
+        name: "about_us", 
+        datas: organisms["section-abouts"], 
+        headings: atoms.headings, 
+        buttons: atoms.buttons 
+    }) }}

@@ -34,13 +34,40 @@
       <div class="{{ containerStyle }}">
         {# Heading section #}
         <div class="{{ headingContainerStyle }}">
-          {% if sectionData.heading %}
-            {{ renderHeading({
-              name: sectionData.heading.name,
-              datas: options.headings,
-              text: sectionData.heading.text,
-              class: sectionData.heading.style | default('default')
-            }) }}
+          {# SuperHeading #}
+          {% if sectionData.superHeading and options.headings %}
+            {% set superHeading = null %}
+            {% for heading in options.headings.headings %}
+              {% if heading.name == sectionData.superHeading %}
+                {% set superHeading = heading %}
+              {% endif %}
+            {% endfor %}
+            
+            {% if superHeading %}
+              <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}">
+                {{ superHeading.text }}
+              </{{ "h" + superHeading.level }}>
+            {% endif %}
+          {% endif %}
+          
+          {# Main Heading #}
+          {% if sectionData.heading and options.headings %}
+            {% set mainHeading = null %}
+            {% for heading in options.headings.headings %}
+              {% if heading.name == sectionData.heading %}
+                {% set mainHeading = heading %}
+              {% endif %}
+            {% endfor %}
+            
+            {% if mainHeading %}
+              <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }}">
+                {{ mainHeading.text }}
+              </{{ "h" + mainHeading.level }}>
+            {% else %}
+              <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }}">
+                {{ sectionData.heading }}
+              </h2>
+            {% endif %}
           {% endif %}
           
           {% if sectionData.description %}
