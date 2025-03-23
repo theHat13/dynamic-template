@@ -37,14 +37,25 @@ layout: '00-core/base.njk'
 
 {# Include section-listing #}
 {% from "01-organisms/section-listing.njk" import renderSectionListing %}
-{{ renderSectionListing({ 
-    name: "adventure_quests",
-    datas: organisms["section-listings"],
-    headings: atoms.headings,
-    cards: molecules.cards,
-    paginations: molecules.paginations,
-    buttons: atoms.buttons,
-    icons: atoms.icons,
-    selects: atoms.selects,
-    images: atoms.images
-}) }}
+
+    {{ renderSectionListing({ 
+        name: "adventure_quests",
+        datas: organisms["section-listings"],
+        headings: atoms.headings,
+        cards: molecules.cards,
+        paginations: molecules.paginations,
+        buttons: atoms.buttons,
+        icons: atoms.icons,
+        selects: atoms.selects,
+        images: atoms.images
+    }) }}
+
+{# Include section-listing #}
+{% from "01-organisms/section-article-hero.njk" import renderSectionArticleHero %}
+
+    {{ renderSectionArticleHero({ 
+        name: "article_hero_secondary", 
+        datas: organisms["section-article-heros"],
+        headings: atoms.headings,
+        images: atoms.images
+    }) }}
