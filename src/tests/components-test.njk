@@ -1,0 +1,488 @@
+--- 
+title: HAT Pixel Components Test 
+layout: 00-core/base.njk 
+permalink: /tests/components/ 
+---
+
+{# Import all components #}
+{% from "03-atoms/link.njk" import linkComponent %}
+{% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
+{# Add other component imports as needed #}
+
+{# Ceci est le contenu de la page, qui ne sera pas affecté par le style global #}
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+    /* Styles pour la page de test uniquement - complètement isolés */
+    .hat-test-page {
+        min-height: 100vh;
+        background-image: url("/assets/images/forest.png");
+        background-repeat: repeat;
+        background-size: auto;
+        background-position: top left;
+        color: #f5f5dc;
+        /* beige au lieu de blanc */
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hat-test-page::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 0;
+    }
+
+    .hat-test-page > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hat-test-page h1,
+    .hat-test-page h2,
+    .hat-test-page h3,
+    .hat-test-page h4,
+    .hat-test-page h5 {
+        font-family: 'Press Start 2P', 'Courier New', monospace;
+        color: #27ae60;
+    }
+
+    .hat-test-page .container {
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    .hat-test-page .header {
+        background-color: #5d4037;
+        border: 1px solid #5d4037;
+        margin-bottom: 20px;
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    .hat-test-page .header::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border: 1px solid #ccc;
+        pointer-events: none;
+    }
+
+    .hat-test-page .header-title {
+        color: #f5f5dc;
+        padding: 12px 20px;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        border-bottom: 2px solid #f5f5dc;
+        margin: 0;
+        font-size: 1.4rem;
+    }
+
+    .hat-test-page .header-content {
+        padding: 16px;
+        background-color: #3e2723;
+    }
+
+    .hat-test-page .nav-button {
+        background-color: #f39c12;
+        color: #f5f5dc;
+        padding: 8px 16px;
+        border: 1px solid #f5f5dc;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.1s;
+        text-decoration: none;
+        display: inline-block;
+        margin: 5px;
+        font-family: 'Press Start 2P', 'Courier New', monospace;
+        font-size: 0.9em;
+    }
+
+    .hat-test-page .nav-button:hover {
+        transform: translate(-1px, -1px);
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .hat-test-page .nav-button:active {
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .hat-test-page .section {
+        border: 1px solid #5d4037;
+        margin-bottom: 24px;
+        position: relative;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .hat-test-page .section::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border: 1px solid #444;
+        pointer-events: none;
+    }
+
+    .hat-test-page .section-header {
+        background-color: #27ae60;
+        color: #f5f5dc;
+        padding: 10px 16px;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        border-bottom: 2px solid #f5f5dc;
+        margin: 0;
+        font-family: 'Press Start 2P', 'Courier New', monospace;
+        font-size: 1.1rem;
+    }
+
+    .hat-test-page .section-content {
+        padding: 16px;
+        background-color: #5d4037;
+    }
+
+    .hat-test-page .component {
+        background-color: #3e2723;
+        border: 1px solid #5d4037;
+        margin-bottom: 16px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .hat-test-page .component-header {
+        background-color: #f39c12;
+        color: #f5f5dc;
+        padding: 8px 12px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        border-bottom: 2px solid #f5f5dc;
+        font-family: 'Press Start 2P', 'Courier New', monospace;
+        font-size: 0.9em;
+        margin: 0;
+    }
+
+    .hat-test-page .component-content {
+        padding: 12px;
+        background-color: #3e2723;
+    }
+
+    .hat-test-page .example-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 12px;
+    }
+
+    .hat-test-page .example-item {
+        background: #5d4037;
+        border: 1px solid #444;
+        padding: 12px;
+    }
+
+    .hat-test-page .example-title {
+        color: #27ae60;
+        font-size: 0.9em;
+        font-family: 'Press Start 2P', 'Courier New', monospace;
+        margin: 0 0 8px;
+    }
+
+    .hat-test-page .display-area {
+        background-color: #f5f5dc;
+        color: #5d4037;
+        padding: 12px;
+        border: 1px dashed #f39c12;
+    }
+
+    .hat-test-page .code-block {
+        background-color: #2e2e2e;
+        color: #27ae60;
+        padding: 12px;
+        border: 1px solid #27ae60;
+        margin-top: 10px;
+        overflow-x: auto;
+        font-family: 'Courier New', monospace;
+    }
+
+    .hat-test-page .quick-nav {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background-color: #5d4037;
+        border: 1px solid #444;
+        padding: 12px;
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+    }
+
+    .hat-test-page .quick-nav-title {
+        font-family: 'Press Start 2P', 'Courier New', monospace;
+        color: #27ae60;
+        font-size: 0.9em;
+        margin-bottom: 8px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .hat-test-page .quick-nav-item {
+        color: #f5f5dc;
+        font-size: 0.9em;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .hat-test-page .loading-bar {
+        width: 80%;
+        height: 24px;
+        background-color: #555;
+        border: 1px solid #444;
+        margin: 20px auto;
+        position: relative;
+    }
+
+    .hat-test-page .loading-progress {
+        width: 40%;
+        height: 100%;
+        background-color: #27ae60;
+    }
+
+    .hat-test-page .viewport-indicator {
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        background-color: #2e2e2e;
+        color: #27ae60;
+        padding: 6px 12px;
+        font-size: 12px;
+        border: 1px solid #27ae60;
+        z-index: 1000;
+        font-family: 'Courier New', monospace;
+    }
+</style>
+
+<div class="hat-test-page">
+    <div class="container">
+        <header class="header">
+            <h1 class="header-title">HAT PIXEL COMPONENT TESTER v1.0</h1>
+            <div class="header-content">
+                <p>Welcome to the HAT Component Testing Interface! Select a component category to begin...</p>
+
+                <!-- Component Navigation -->
+                <div>
+                    <a href="#atoms" class="nav-button">ATOMS</a>
+                    <a href="#molecules" class="nav-button">MOLECULES</a>
+                    <a href="#organisms" class="nav-button">ORGANISMS</a>
+                    <a href="#sandbox" class="nav-button">SANDBOX</a>
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <a href="#link" class="nav-button" style="background-color: #27ae60;">LINK</a>
+                    <a href="#breadcrumb" class="nav-button" style="background-color: #27ae60;">BREADCRUMB</a>
+                    <!-- Add more component links as needed -->
+                </div>
+            </div>
+        </header>
+
+        <!-- ATOMS -->
+        <section id="atoms" class="section">
+            <h2 class="section-header">ATOMS</h2>
+            <div class="section-content">
+                <p style="margin-bottom: 16px;">Basic building blocks for your interface. Simple, standalone components.</p>
+
+                <!-- Link Component -->
+                <article id="link" class="component">
+                    <h3 class="component-header">LINK COMPONENT</h3>
+                    <div class="component-content">
+                        <p style="margin-bottom: 16px;">Portal connectors to different locations in your application.</p>
+
+                        <div class="example-grid">
+                            <div class="example-item">
+                                <h4 class="example-title">DEFAULT LINK</h4>
+                                <div class="display-area">
+                                    {{ linkComponent({ name: "dungeon_map", datas: atoms.links }) }}
+                                </div>
+                            </div>
+
+                            <div class="example-item">
+                                <h4 class="example-title">PRIMARY LINK</h4>
+                                <div class="display-area">
+                                    {{ linkComponent({ name: "magic_shop", datas: atoms.links }) }}
+                                </div>
+                            </div>
+
+                            <div class="example-item">
+                                <h4 class="example-title">SECONDARY LINK</h4>
+                                <div class="display-area">
+                                    {{ linkComponent({ name: "guild_hall", datas: atoms.links }) }}
+                                </div>
+                            </div>
+
+                            <div class="example-item">
+                                <h4 class="example-title">NAVIGATION LINK</h4>
+                                <div class="display-area">
+                                    {{ linkComponent({ name: "camp", datas: atoms.links }) }}
+                                </div>
+                            </div>
+
+                            <div class="example-item">
+                                <h4 class="example-title">NAV SECONDARY</h4>
+                                <div class="display-area">
+                                    {{ linkComponent({ name: "tavern", datas: atoms.links }) }}
+                                </div>
+                            </div>
+
+                            <div class="example-item">
+                                <h4 class="example-title">FOOTER LINK</h4>
+                                <div class="display-area">
+                                    {{ linkComponent({ name: "accessibility", datas: atoms.links }) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block">
+                            <code>
+                                {% raw %}{% from "01-atoms/link.njk" import linkComponent %}
+
+                                    {{ linkComponent({ 
+    name: "magic_shop", 
+    datas: atoms.links 
+}) }}
+                                {% endraw %}
+                            </code>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Add more Atom components here as needed -->
+            </div>
+        </section>
+
+        <!-- MOLECULES -->
+        <section id="molecules" class="section">
+            <h2 class="section-header">MOLECULES</h2>
+            <div class="section-content">
+                <p style="margin-bottom: 16px;">Combined atomic elements forming more complex components.</p>
+
+                <!-- Breadcrumb Component -->
+                <article id="breadcrumb" class="component">
+                    <h3 class="component-header">BREADCRUMB COMPONENT</h3>
+                    <div class="component-content">
+                        <p style="margin-bottom: 16px;">Navigation path tracker to show current location and history.</p>
+
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <div class="example-item">
+                                <h4 class="example-title">ADVENTURE BREADCRUMB</h4>
+                                <div class="display-area">
+                                    {{ renderBreadcrumb({ 
+                      name: "adventure",
+                      datas: molecules.breadcrumbs,
+                      links: atoms.links 
+                  }) }}
+                                </div>
+                            </div>
+
+                            <div class="example-item">
+                                <h4 class="example-title">EXPLORATION BREADCRUMB</h4>
+                                <div class="display-area">
+                                    {{ renderBreadcrumb({ 
+                      name: "exploration",
+                      datas: molecules.breadcrumbs,
+                      links: atoms.links 
+                  }) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block">
+                            <code>
+                                {% raw %}{% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
+
+                                    {{ renderBreadcrumb({ 
+    name: "adventure",
+    datas: molecules.breadcrumbs,
+    links: atoms.links 
+}) }}
+                                {% endraw %}
+                            </code>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Add more Molecule components here as needed -->
+            </div>
+        </section>
+
+        <!-- ORGANISMS -->
+        <section id="organisms" class="section">
+            <h2 class="section-header">ORGANISMS</h2>
+            <div class="section-content">
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-family: 'Press Start 2P', 'Courier New', monospace; font-size: 1.2em; color: #ff6b6b; margin-bottom: 12px;">LOADING...</div>
+                    <div class="loading-bar">
+                        <div class="loading-progress"></div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <p>No organisms have been discovered yet! Check back later...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sandbox Area -->
+        <section id="sandbox" class="section">
+            <h2 class="section-header">DEVELOPMENT SANDBOX</h2>
+            <div class="section-content">
+                <p style="margin-bottom: 16px;">Quick testing area for component experiments.</p>
+
+                <div style="background-color: #3e2723; border: 3px solid #27ae60; padding: 16px;">
+                    <h3 style="color: #27ae60; font-family: 'Press Start 2P', 'Courier New', monospace; font-size: 0.9em; margin-bottom: 12px;">CURRENT TEST:</h3>
+
+                    <div class="display-area">
+                        <!-- Example: Testing a link with a specific name -->
+                        {{ linkComponent({ name: "creator", datas: atoms.links }) }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Navigation -->
+        <div class="quick-nav">
+            <div class="quick-nav-title">QUICK NAV</div>
+            <a href="#atoms" class="quick-nav-item">Atoms</a>
+            <a href="#molecules" class="quick-nav-item">Molecules</a>
+            <a href="#organisms" class="quick-nav-item">Organisms</a>
+            <a href="#sandbox" class="quick-nav-item">Sandbox</a>
+        </div>
+
+        <!-- Viewport Indicator -->
+        <div id="viewport-size" class="viewport-indicator"></div>
+    </div>
+</div>
+
+<script>
+    // Viewport size indicator script
+    document.addEventListener('DOMContentLoaded', function () {
+        const viewportIndicator = document.getElementById('viewport-size');
+
+        function updateViewportSize() {
+            const width = window.innerWidth;
+            let breakpoint = 'xs';
+
+            if (width >= 1280) 
+                breakpoint = '2xl (1280px+)';
+            else if (width >= 1024) 
+                breakpoint = 'xl (1024px+)';
+            else if (width >= 768) 
+                breakpoint = 'lg (768px+)';
+            else if (width >= 640) 
+                breakpoint = 'md (640px+)';
+            else if (width >= 480) 
+                breakpoint = 'sm (480px+)';
+            
+            viewportIndicator.textContent = `${width}px (${breakpoint})`;
+        }
+
+        window.addEventListener('resize', updateViewportSize);
+        updateViewportSize();
+    });
+</script>
