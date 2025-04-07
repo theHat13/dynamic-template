@@ -4,7 +4,7 @@
 =======================
 #}
 
-{% from "03-atoms/link.njk" import renderLink %}
+{% from "03-atoms/link.njk" import linkComponent %}
 {% from "03-atoms/heading.njk" import renderHeading %}
 {% from "03-atoms/icon.njk" import renderIcon %}
 {% from "03-atoms/vector.njk" import renderVector %}
@@ -114,9 +114,9 @@
                                     <span>{{ linkData.text }}</span>
                                   </a>
                                 {% else %}
-                                  {# Use renderLink for standard links with dataNavLink parameter set to true #}
+                                  {# Use linkComponent for standard links with dataNavLink parameter set to true #}
                                   <div class="mb-2">
-                                    {{ renderLink({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
+                                    {{ linkComponent({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
                                   </div>
                                 {% endif %}
                               {% endif %}
@@ -157,7 +157,7 @@
                       {% for linkData in options.links.links %}
                         {% if linkData.name == linkConfig.name %}
                           {% set linkFound = true %}
-                          {{ renderLink({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
+                          {{ linkComponent({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
                         {% endif %}
                       {% endfor %}
                     {% endif %}
@@ -226,7 +226,7 @@
                       {% for linkData in options.links.links %}
                         {% if linkData.name == linkConfig.name %}
                           {% set linkFound = true %}
-                          {{ renderLink({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
+                          {{ linkComponent({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
                         {% endif %}
                       {% endfor %}
                     {% endif %}

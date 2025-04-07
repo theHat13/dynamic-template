@@ -2,22 +2,30 @@
 =========================
     CHIP NOTIFICATION
 =========================
+Component that renders notification chips with consistent styling based on content length
 #}
 
 {% macro renderChipNotification(options) %}
+  {# Verify that required data structures are provided #}
   {% if options and options.datas and options.datas["chip-notifications"] %}
 
+    {# Initialize chipData as null before searching #}
     {% set chipData = null %}
+    
+    {# Find the notification chip matching the requested name in the data collection #}
     {% for notification in options.datas["chip-notifications"] %}
       {% if notification.name == options.name %}
         {% set chipData = notification %}
       {% endif %}
     {% endfor %}
     
+    {# Render chip if data was found #}
     {% if chipData %}
+      {# Get global style and variant-specific style #}
       {% set globalStyle = options.datas.globalStyle %}
       {% set variantStyle = options.datas.variants[chipData.style] %}
       
+      {# Determine size class based on content length #}
       {% set contentLength = chipData.text | string | length %}
       {% set sizeClass = "h-6 w-6 text-xs" %}
       
@@ -31,9 +39,11 @@
         {{ chipData.text }}
       </span>
     {% else %}
+      {# Display error message if notification not found #}
       <span class="text-red-500">Notification '{{ options.name }}' not found</span>
     {% endif %}
   {% else %}
+    {# Display error message if invalid data structure provided #}
     <span class="text-red-500">Invalid data structure</span>
   {% endif %}
 {% endmacro %}
@@ -49,31 +59,15 @@ Summon HAT Components Wisely
 2. Call a specific chip notification by its name
 {{ renderChipNotification({ name: "notification_count", datas: atoms.chipNotifications }) }}
 
-3. Call multiple chip notifications from the data
-{% for chipNotification in atoms.chipNotifications.list %}
-    {{ renderChipNotification({ 
-        name: chipNotification.name, 
-        datas: atoms.chipNotifications 
-    }) }}
-{% endfor %}
-
-4. Direct chip notification creation
-{{ renderChipNotification({
-    text: "42", 
-    style: "success"
-}) }}
-
-5. Adding a new chip notification to chip-notifications.json
+3. Adding a new chip notification to chip-notifications.json
 {
-  "chipNotifications": {
-    "list": [
-      {
-        "name": "new_notification_count",
-        "text": "99+",
-        "style": "warning"
-      }
-    ]
-  }
+  "chip-notifications": [
+    {
+      "name": "new_notification_count",
+      "text": "99+",
+      "style": "warning"
+    }
+  ]
 }
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨

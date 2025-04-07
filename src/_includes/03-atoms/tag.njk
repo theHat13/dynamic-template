@@ -2,26 +2,33 @@
 =========================
           TAG           
 =========================
+Component that renders tag elements with consistent styling
 #}
 
 {% macro renderTag(options) %}
+  {# Initialize tagData as null before searching #}
   {% set tagData = null %}
   
+  {# Find the tag matching the requested name in the data collection #}
   {% for tag in options.datas.tags %}
     {% if tag.name == options.name %}
       {% set tagData = tag %}
     {% endif %}
   {% endfor %}
 
+  {# Get global style that applies to all tags #}
   {% set globalStyle = options.datas.globalStyle %}
 
+  {# Render tag if data was found #}
   {% if tagData %}
+    {# Get variant-specific style or default to empty string if not found #}
     {% set variantStyle = options.datas.variants[tagData.variant] | default('') %}
     
     <span class="{{ globalStyle }} {{ variantStyle }}">
       {{ tagData.text }}
     </span>
   {% else %}
+    {# Display error message if tag not found #}
     <span class="text-red-500">Tag not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
@@ -38,21 +45,7 @@ Summon HAT Components Wisely
 2. Call a specific tag by its name
 {{ renderTag({ name: "adventure", datas: atoms.tags }) }}
 
-3. Call multiple tags from the data
-{% for tag in atoms.tags.tags %}
-    {{ renderTag({ 
-        name: tag.name, 
-        datas: atoms.tags 
-    }) }}
-{% endfor %}
-
-4. Direct tag creation
-{{ renderTag({
-    text: "New Tag",
-    variant: "success"
-}) }}
-
-5. Adding a new tag to tags.json
+3. Adding a new tag to tags.json
 {
   "tags": [
     {

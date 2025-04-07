@@ -5,7 +5,7 @@ layout: '00-core/base.njk'
 ---
 
 {# Import required atom macros #}
-{% from "03-atoms/link.njk" import renderLink %}
+{% from "03-atoms/link.njk" import linkComponent %}
 {% from "03-atoms/chip-notification.njk" import renderChipNotification %}
 {% from "03-atoms/tag.njk" import renderTag %}
 {% from "03-atoms/tooltip.njk" import renderTooltip %}
@@ -62,7 +62,7 @@ layout: '00-core/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing link component #}
-            {{ renderLink({ name: "camp", datas: atoms.links }) }}
+            {{ linkComponent({ name: "camp", datas: atoms.links }) }}
         </div>
     </div>
 

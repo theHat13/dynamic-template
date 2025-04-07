@@ -2,11 +2,14 @@
 =========================
          VECTOR           
 =========================
+Component that renders vector images with consistent styling
 #}
 
 {% macro renderVector(options) %}
+  {# Initialize vectorData as null before searching #}
   {% set vectorData = null %}
   
+  {# If a name is provided, find the vector in the data collection #}
   {% if options.name %}
     {% for vector in options.datas.vectors %}
       {% if vector.name == options.name %}
@@ -14,9 +17,12 @@
       {% endif %}
     {% endfor %}
 
+    {# Get global style that applies to all vectors #}
     {% set globalStyle = options.datas.globalStyle %}
 
+    {# Render vector if data was found #}
     {% if vectorData %}
+      {# Get size-specific style or default to empty string if not found #}
       {% set sizeStyle = options.datas.sizes[vectorData.size] | default('') %}
       
       <img 
@@ -25,9 +31,11 @@
         class="{{ globalStyle }} {{ sizeStyle }}"
       />
     {% else %}
+      {# Display error message if vector not found #}
       <span class="text-red-500">Vector not found: {{ options.name }}</span>
     {% endif %}
   {% else %}
+    {# Direct vector creation path when name is not provided #}
     {% set globalStyle = options.datas.globalStyle %}
     {% set sizeStyle = options.datas.sizes[options.size] | default('') %}
     
@@ -52,22 +60,7 @@ Summon HAT Components Wisely
 2. Call a specific vector by its name
 {{ renderVector({ name: "logo_full", datas: atoms.vectors }) }}
 
-3. Call multiple vectors from the data
-{% for vector in atoms.vectors.vectors %}
-    {{ renderVector({ 
-        name: vector.name, 
-        datas: atoms.vectors 
-    }) }}
-{% endfor %}
-
-4. Direct vector creation
-{{ renderVector({
-    src: "/assets/logos/custom-logo.svg", 
-    alt: "Custom Logo", 
-    size: "large"
-}) }}
-
-5. Adding a new vector to vectors.json
+3. Adding a new vector to vectors.json
 {
   "vectors": [
     {
@@ -79,5 +72,5 @@ Summon HAT Components Wisely
   ]
 }
 
-May your designs defy the sands of time. ⏳⚡
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

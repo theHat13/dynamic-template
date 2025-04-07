@@ -2,20 +2,26 @@
 =========================
         TOOLTIP          
 =========================
+Component that renders tooltip elements with consistent styling
 #}
 
 {% macro renderTooltip(options) %}
+  {# Initialize tooltipData as null before searching #}
   {% set tooltipData = null %}
 
+  {# Find the tooltip matching the requested name in the data collection #}
   {% for tooltip in options.datas.tooltips %}
     {% if tooltip.name == options.name %}
       {% set tooltipData = tooltip %}
     {% endif %}
   {% endfor %}
 
+  {# Get global style that applies to all tooltips #}
   {% set globalStyle = options.datas.globalStyle %}
 
+  {# Render tooltip if data was found #}
   {% if tooltipData %}
+    {# Get variant-specific style or default to empty string if not found #}
     {% set variantStyle = options.datas.variants[tooltipData.variant] | default('') %}
     
     <div class="tooltip-container">
@@ -27,6 +33,7 @@
       </div>
     </div>
   {% else %}
+    {# Display error message if tooltip not found #}
     <span class="text-red-500">Tooltip not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
@@ -42,21 +49,7 @@ Summon HAT Components Wisely
 2. Call a specific tooltip by its name
 {{ renderTooltip({ name: "info_tip", datas: atoms.tooltips }) }}
 
-3. Call multiple tooltips from the data
-{% for tooltip in atoms.tooltips.tooltips %}
-    {{ renderTooltip({ 
-        name: tooltip.name, 
-        datas: atoms.tooltips 
-    }) }}
-{% endfor %}
-
-4. Direct tooltip creation
-{{ renderTooltip({
-    text: "Beware, adventurer!", 
-    style: "warning"
-}) }}
-
-5. Adding a new tooltip to tooltips.json
+3. Adding a new tooltip to tooltips.json
 {
   "tooltips": [
     {
@@ -67,5 +60,5 @@ Summon HAT Components Wisely
   ]
 }
 
-May your tooltips always appear when needed, and never block your path. 🧙‍♂️✨
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

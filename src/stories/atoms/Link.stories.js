@@ -4,7 +4,7 @@ import linksData from '../../_data/atoms/links.json';
 
 // Template for rendering links based on our macro
 const linkTemplate = `
-  {% macro renderLink(options) %}
+  {% macro linkComponent(options) %}
     {% if options.name %}
       {% set linkData = null %}
       {% for link in datas.links %}
@@ -40,7 +40,7 @@ const linkTemplate = `
     {% endif %}
   {% endmacro %}
   
-  {{ renderLink(options) }}
+  {{ linkComponent(options) }}
 `;
 
 export default {
@@ -145,12 +145,12 @@ export const Usage = () => {
     <div class="space-y-6">
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">1. Import the macro at the top of your page:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "03-atoms/link.njk" import renderLink %}</code></pre>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "03-atoms/link.njk" import linkComponent %}</code></pre>
       </div>
       
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Call a specific link by its name:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink({ 
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ linkComponent({ 
   name: "tavern_quest", 
   datas: atoms.links 
 }) }}</code></pre>
@@ -159,7 +159,7 @@ export const Usage = () => {
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Call multiple links from the data:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% for link in atoms.links.links %}
-    {{ renderLink({ 
+    {{ linkComponent({ 
         name: link.name, 
         datas: atoms.links 
     }) }}
@@ -168,7 +168,7 @@ export const Usage = () => {
       
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Direct link creation:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink({
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ linkComponent({
   href: "/new-page", 
   text: "Custom Link", 
   style: "primary"

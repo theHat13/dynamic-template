@@ -2,13 +2,16 @@
 =========================
           BOX            
 =========================
+Component that renders box elements with consistent styling
 #}
 
 {% macro renderBox(options) %}
+  {# Initialize default values for styling classes #}
   {% set globalStyle = options.datas.globalStyle | default('') %}
   {% set fieldsetClasses = options.datas.fieldsetClasses | default('box-group') %}
   {% set groupContainerClasses = options.datas.groupContainerClasses | default('space-y-2') %}
   
+  {# Check if rendering as a group or individual box #}
   {% if options.group %}
     <fieldset class="{{ fieldsetClasses }}">
       <div class="{{ groupContainerClasses }}">
@@ -18,14 +21,17 @@
       </div>
     </fieldset>
   {% else %}
+    {# Initialize boxData as null before searching #}
     {% set boxData = null %}
     
+    {# Find the box matching the requested ID in the data collection #}
     {% for box in options.datas.boxes %}
       {% if box.id == options.id %}
         {% set boxData = box %}
       {% endif %}
     {% endfor %}
     
+    {# Render box if data was found, otherwise show error #}
     {% if boxData %}
       {{ renderSingleBox(boxData, options.datas) }}
     {% else %}
@@ -35,9 +41,11 @@
 {% endmacro %}
 
 {% macro renderSingleBox(box, datas) %}
+  {# Initialize style classes for the box and its components #}
   {% set boxContainerClasses = datas.boxContainerClasses | default('flex items-center') %}
   {% set baseClasses = datas.baseClasses | default('size-4 rounded-sm') %}
   
+  {# Define state classes for different visual states #}
   {% set stateClasses = {
     'default': datas.variants.default | default('border-gray-300'),
     'hover': datas.variants.hover | default('border-gray-600'),
@@ -47,6 +55,7 @@
     'disabledChecked': datas.variants.disabledChecked | default('bg-gray-300 border-gray-300 cursor-not-allowed')
   } %}
   
+  {# Combine base classes with default state #}
   {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
   
   <div class="{{ boxContainerClasses }}">
@@ -78,20 +87,21 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "03-atoms/box.njk" import renderBox %}
 
-2. Render a single box by ID
+2. Call a specific box by its name
 {{ renderBox({ id: "box1", datas: atoms.boxs }) }}
 
-3. Render an entire box group
-{{ renderBox({ group: true, datas: atoms.boxs }) }}
-
-4. Available options for each box:
+3. Adding a new box to boxs.json
 {
-  "id": "unique_id",            // Unique identifier 
-  "value": "submission_value",  // Value for form submission
-  "checked": true,              // Pre-checked state (optional)
-  "disabled": false,            // Disabled state (optional)
-  "ariaLabel": "Accessible label for screen readers" // (optional)
+  "boxes": [
+    {
+      "id": "unique_id",
+      "value": "submission_value",
+      "checked": true,
+      "disabled": false,
+      "ariaLabel": "Accessible label for screen readers"
+    }
+  ]
 }
 
-May your validation never fail. 🐉🔥
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

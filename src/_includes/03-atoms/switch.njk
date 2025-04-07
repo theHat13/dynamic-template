@@ -2,14 +2,17 @@
 =========================
          SWITCH          
 =========================
+Component that renders switch controls with consistent styling
 #}
 
 {% macro renderSwitch(options) %}
+  {# Initialize default values for styling classes #}
   {% set globalStyle = options.datas.globalStyle | default('') %}
   {% set fieldsetClasses = options.datas.fieldsetClasses | default('switch-group') %}
   {% set legendClasses = options.datas.legendClasses | default('font-medium text-gray-700 mb-3') %}
   {% set groupContainerClasses = options.datas.groupContainerClasses | default('flex space-x-4') %}
   
+  {# Check if rendering as a group or individual switch #}
   {% if options.group %}
     <fieldset class="{{ fieldsetClasses }}">
       {% if options.groupLabel %}
@@ -25,14 +28,17 @@
       </div>
     </fieldset>
   {% else %}
+    {# Initialize switchData as null before searching #}
     {% set switchData = null %}
     
+    {# Find the switch matching the requested ID in the data collection #}
     {% for switch in options.datas.switchs %}
       {% if switch.id == options.id %}
         {% set switchData = switch %}
       {% endif %}
     {% endfor %}
     
+    {# Render switch if data was found, otherwise show error #}
     {% if switchData %}
       {{ renderSingleSwitch(switchData, options.datas) }}
     {% else %}
@@ -42,7 +48,7 @@
 {% endmacro %}
 
 {% macro renderSingleSwitch(switch, datas) %}
-  {# Determine variant, default to 'default' if not specified #}
+  {# Determine variant and size, set defaults if not specified #}
   {% set variant = switch.variant | default('default') %}
   {% set size = switch.size | default('medium') %}
   
@@ -62,7 +68,7 @@
   {# Retrieve thumb classes for the current variant #}
   {% set thumbBaseClasses = datas.variants.thumb[variant].base | default('bg-white') %}
   
-  {# Get size classes #}
+  {# Get size classes from the data #}
   {% set containerSizeClasses = datas.variants.sizes[size].container %}
   {% set thumbSizeClasses = datas.variants.sizes[size].thumb %}
   
@@ -107,28 +113,22 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "03-atoms/switch.njk" import renderSwitch %}
 
-2. Render a single switch by ID
+2. Call a specific switch by its name
 {{ renderSwitch({ id: "torch", datas: atoms.switchs }) }}
 
-3. Render a switch group
-{{ renderSwitch({ 
-    group: true, 
-    groupLabel: "Device Controls",
-    groupSrOnly: false, 
-    datas: atoms.switchs 
-}) }}
-
-4. Available sizes: small, medium, large
-
-5. Available options for each switch:
+3. Adding a new switch to switchs.json
 {
-  "id": "unique_id",            // Unique identifier
-  "value": "submission_value",  // Value for form submission
-  "checked": true,              // Pre-checked state (optional)
-  "disabled": false,            // Disabled state (optional)
-  "variant": "default",         // Visual variant (optional)
-  "size": "medium",             // Size variant (optional)
-  "ariaLabel": "Accessible description" // (required for accessibility)
+  "switchs": [
+    {
+      "id": "unique_id",
+      "value": "submission_value",
+      "checked": true,
+      "disabled": false,
+      "variant": "default",
+      "size": "medium",
+      "ariaLabel": "Accessible description"
+    }
+  ]
 }
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨

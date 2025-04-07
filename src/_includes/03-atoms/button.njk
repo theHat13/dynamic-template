@@ -2,19 +2,19 @@
 ========================
          BUTTON           
 ========================
-Flexible button component with variant and state support
+Component that renders button elements with consistent styling, icon support and state management
 #}
 
 {% macro renderButton(option) %}
-  {# Check if datas is provided #}
+  {# Verify that required data structures are provided #}
   {% if not option.datas %}
     <span class="text-red-500">Error: No button configuration provided</span>
   {% else %}
-    {# Retrieve button configuration #}
+    {# Retrieve button configuration from data #}
     {% set buttonsConfig = option.datas %}
     {% set buttonName = option.name %}
     
-    {# Find the specific button by name #}
+    {# Find the specific button by name in the data collection #}
     {% set buttonData = null %}
     {% for button in buttonsConfig.buttons %}
       {% if button.name == buttonName %}
@@ -22,19 +22,19 @@ Flexible button component with variant and state support
       {% endif %}
     {% endfor %}
 
-    {# Fallback if button not found #}
+    {# Render button if data was found, otherwise show error #}
     {% if not buttonData %}
       <span class="text-red-500">Button not found: {{ buttonName }}</span>
     {% else %}
-      {# Determine variant configuration #}
+      {# Determine variant configuration based on style or default from button data #}
       {% set variant = option.style | default(buttonData.style) %}
       {% set variantConfig = buttonsConfig.variants[variant] %}
       
-      {# Determine all classes #}
+      {# Get global and size-specific classes #}
       {% set globalClasses = buttonsConfig.globalStyle %}
       {% set sizeClasses = buttonsConfig.sizes[buttonData.size | default('button')] %}
       
-      {# Set base classes and state classes #}
+      {# Set up base classes and state classes for the button #}
       {% set baseClasses = globalClasses ~ ' ' ~ sizeClasses %}
       {% set stateClasses = {
         'default': variantConfig.default,
@@ -47,7 +47,7 @@ Flexible button component with variant and state support
       {# Combine all default classes for initial state #}
       {% set combinedClasses = baseClasses ~ ' ' ~ stateClasses.default %}
       
-      {# Render the button #}
+      {# Render the button with event handlers for state management #}
       <button 
         type="{{ option.type | default('button') }}"
         class="{{ combinedClasses }} flex items-center justify-center"
@@ -62,8 +62,9 @@ Flexible button component with variant and state support
           class="{{ baseClasses }} {{ stateClasses.disabled }} flex items-center justify-center"
         {% endif %}
       >
+        {# Render content based on button variant type #}
         {% if variant == 'icon' %}
-          {# Icon-only button #}
+          {# Icon-only button rendering #}
           {% if buttonData.iconBefore %}
             {% if buttonData.iconBefore.endsWith('.svg') %}
               <span data-svg-src="{{ buttonData.iconBefore }}" class="inline-flex items-center justify-center w-5 h-5">
@@ -93,9 +94,9 @@ Flexible button component with variant and state support
           {# Fixed button - display only number #}
           <span>{{ option.number | default(buttonData.number) }}</span>
         {% else %}
-          {# Standard button with optional icons + text #}
+          {# Standard button with optional icons and text #}
           
-          {# Before icon #}
+          {# Render icon before text if provided #}
           {% if buttonData.iconBefore %}
             {% if buttonData.iconBefore.endsWith('.svg') %}
               <span data-svg-src="{{ buttonData.iconBefore }}" class="inline-flex items-center justify-center mr-2 w-4 h-4">
@@ -122,10 +123,10 @@ Flexible button component with variant and state support
             {% endif %}
           {% endif %}
           
-          {# Button text with override capability #}
+          {# Button text with override capability from options #}
           <span>{{ option.text | default(buttonData.text) }}</span>
           
-          {# After icon #}
+          {# Render icon after text if provided #}
           {% if buttonData.iconAfter %}
             {% if buttonData.iconAfter.endsWith('.svg') %}
               <span data-svg-src="{{ buttonData.iconAfter }}" class="inline-flex items-center justify-center ml-2 w-4 h-4">
@@ -145,47 +146,32 @@ Flexible button component with variant and state support
   {% endif %}
 {% endmacro %}
 
-{# 
+{#
 ============================
-Summon HAT Button Wisely
+Summon HAT Components Wisely
 ============================
 
-Usage examples:
+1. Import the macro at the top of your page
+{% from "03-atoms/button.njk" import renderButton %}
 
-1. Use predefined button from buttons.json
+2. Call a specific button by its name
 {{ renderButton({ 
     name: "submit_quest",
     datas: atoms.buttons 
 }) }}
 
-2. Override button text
-{{ renderButton({ 
-    name: "submit_quest", 
-    text: "Custom Button Text",
-    datas: atoms.buttons 
-}) }}
+3. Adding a new button to buttons.json
+{
+  "buttons": [
+    {
+      "name": "new_button_name",
+      "text": "Button Text",
+      "style": "primary",
+      "size": "medium",
+      "icon": "/path/to/icon.svg" 
+    }
+  ]
+}
 
-3. Change button style 
-{{ renderButton({
-    name: "submit_quest", 
-    style: "secondary",
-    datas: atoms.buttons 
-}) }}
-
-4. Disable a button
-{{ renderButton({
-    name: "submit_quest", 
-    disabled: true,
-    datas: atoms.buttons 
-}) }}
-
-5. Using SVG icons that inherit button text color
-   - Store your SVG files in a location like `/assets/icons/`
-   - In your SVG files, remove any hardcoded fill or stroke attributes
-   - Add `fill="currentColor"` to your SVG elements
-   - Reference icons in buttons.json like:
-     "iconBefore": "/assets/icons/arrow-left.svg",
-     "iconAfter": "/assets/icons/arrow-right.svg"
-
-May your buttons never miss their saving throw! 🎲🎯
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

@@ -2,14 +2,17 @@
 =========================
         CHECKBOX         
 =========================
+Component that renders checkbox inputs with consistent styling
 #}
 
 {% macro renderCheckbox(options) %}
+  {# Initialize default values for styling classes #}
   {% set globalStyle = options.datas.globalStyle | default('') %}
   {% set fieldsetClasses = options.datas.fieldsetClasses | default('checkbox-group') %}
   {% set legendClasses = options.datas.legendClasses | default('font-medium text-gray-700 mb-3') %}
   {% set groupContainerClasses = options.datas.groupContainerClasses | default('space-y-2') %}
   
+  {# Check if rendering as a group or individual checkbox #}
   {% if options.group %}
     <fieldset class="{{ fieldsetClasses }}">
       {% if options.groupLabel %}
@@ -25,14 +28,17 @@
       </div>
     </fieldset>
   {% else %}
+    {# Initialize checkboxData as null before searching #}
     {% set checkboxData = null %}
     
+    {# Find the checkbox matching the requested ID in the data collection #}
     {% for checkbox in options.datas.checkboxes %}
       {% if checkbox.id == options.id %}
         {% set checkboxData = checkbox %}
       {% endif %}
     {% endfor %}
     
+    {# Render checkbox if data was found, otherwise show error #}
     {% if checkboxData %}
       {{ renderSingleCheckbox(checkboxData, options.datas) }}
     {% else %}
@@ -42,12 +48,14 @@
 {% endmacro %}
 
 {% macro renderSingleCheckbox(checkbox, datas) %}
+  {# Initialize style classes for the checkbox and its components #}
   {% set labelClasses = datas.labelClasses | default('flex cursor-pointer items-start gap-4') %}
   {% set checkboxContainerClasses = datas.checkboxContainerClasses | default('flex items-center') %}
   {% set baseClasses = datas.baseClasses | default('size-4 rounded-sm') %}
   {% set labelTextClasses = datas.labelTextClasses | default('font-medium text-gray-900') %}
   {% set descriptionClasses = datas.descriptionClasses | default('text-sm text-gray-500') %}
   
+  {# Define state classes for different visual states #}
   {% set stateClasses = {
     'default': datas.variants.default | default('border-gray-300'),
     'hover': datas.variants.hover | default('border-gray-600'),
@@ -57,6 +65,7 @@
     'disabledChecked': datas.variants.disabledChecked | default('bg-gray-300 border-gray-300 cursor-not-allowed')
   } %}
   
+  {# Combine base classes with default state #}
   {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
   
   <label for="{{ checkbox.id }}" class="{{ labelClasses }}">
@@ -100,44 +109,23 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "03-atoms/checkbox.njk" import renderCheckbox %}
 
-2. Render a single checkbox by ID
+2. Call a specific checkbox by its name
 {{ renderCheckbox({ id: "option1", datas: atoms.checkboxs }) }}
 
-3. Render an entire checkbox group
-{{ renderCheckbox({ 
-    group: true, 
-    groupLabel: "RPG Player Habits",
-    groupSrOnly: false,
-    datas: atoms.checkboxs 
-}) }}
-
-4. Render a subset of checkboxes
-{% set rpgOptions = [
-    { "id": "option1", "label": "I put all my skill points in charisma.", "value": "charisma" },
-    { "id": "option2", "label": "I loot everything... even useless junk.", "value": "loot-hoarder" }
-] %}
-{{ renderCheckbox({ 
-    group: true, 
-    groupLabel: "Custom Group", 
-    checkboxes: rpgOptions, 
-    datas: { 
-      globalStyle: atoms.checkboxs.globalStyle, 
-      variants: atoms.checkboxs.variants,
-      baseClasses: atoms.checkboxs.baseClasses,
-      labelClasses: atoms.checkboxs.labelClasses
-    } 
-}) }}
-
-5. Available options for each checkbox:
+3. Adding a new checkbox to checkboxs.json
 {
-  "id": "unique_id",            // Unique identifier
-  "label": "Checkbox Label",    // Visible text
-  "value": "submission_value",  // Value for form submission
-  "checked": true,              // Pre-checked state (optional)
-  "disabled": false,            // Disabled state (optional)
-  "description": "Additional details about the option" // (optional)
-  "ariaLabel": "Accessible label for screen readers" // (optional)
+  "checkboxes": [
+    {
+      "id": "unique_id",
+      "label": "Checkbox Label",
+      "value": "submission_value",
+      "checked": true,
+      "disabled": false,
+      "description": "Additional details about the option",
+      "ariaLabel": "Accessible label for screen readers"
+    }
+  ]
 }
 
-May your validation never fail. 🐉🔥
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

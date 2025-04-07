@@ -2,17 +2,21 @@
 =========================
         HEADING           
 =========================
+Component that renders heading elements (h1-h6) with consistent styling
 #}
 
 {% macro renderHeading(options) %}
+  {# Initialize headingData as null before searching #}
   {% set headingData = null %}
   
+  {# If a name is provided, find the heading in the data collection #}
   {% if options.name %}
     {% for heading in options.datas.headings %}
       {% if heading.name == options.name %}
         {% set headingData = heading %}
       {% endif %}
     {% endfor %}
+  {# Otherwise, create heading data from provided options #}
   {% else %}
     {% set headingData = {
       "level": options.level | default(2),
@@ -21,14 +25,18 @@
     } %}
   {% endif %}
 
+  {# Get global style that applies to all headings #}
   {% set globalStyle = options.datas.globalStyle | default("") %}
   
+  {# Render heading if data was found or created #}
   {% if headingData %}
+    {# Get heading level, variant style, and size style #}
     {% set level = headingData.level | default(2) %}
     {% set variantStyle = options.datas.variants[headingData.style] | default('') %}
     {% set sizeStyle = options.datas.sizeStyles["h" + level] | default('') %}
     {% set iconStyle = options.datas.iconStyles.default | default('') %}
     
+    {# Render the appropriate heading level with styles and optional icon #}
     {% if level == 1 %}
       <h1 class="{{ globalStyle }} {{ sizeStyle }} {{ variantStyle }}">{% if options.icon %}<span class="{{ iconStyle }}">{{ options.icon }}</span>{% endif %}{{ headingData.text }}</h1>
     {% elif level == 2 %}
@@ -43,6 +51,7 @@
       <h6 class="{{ globalStyle }} {{ sizeStyle }} {{ variantStyle }}">{% if options.icon %}<span class="{{ iconStyle }}">{{ options.icon }}</span>{% endif %}{{ headingData.text }}</h6>
     {% endif %}
   {% else %}
+    {# Display error message if heading not found #}
     <span class="text-red-500">Heading not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
@@ -51,7 +60,7 @@
 
 {#
 ============================
-Summon HAT Heading Component Wisely
+Summon HAT Components Wisely
 ============================
 
 1. Import the macro at the top of your page
@@ -60,23 +69,7 @@ Summon HAT Heading Component Wisely
 2. Call a specific heading by its name
 {{ renderHeading({ name: "page_title", datas: atoms.headings }) }}
 
-3. Call multiple headings from the data
-{% for heading in atoms.headings.headings %}
-    {{ renderHeading({ 
-        name: heading.name, 
-        datas: atoms.headings 
-    }) }}
-{% endfor %}
-
-4. Direct heading creation
-{{ renderHeading({
-    level: 2, 
-    text: "Custom Heading", 
-    style: "primary",
-    datas: atoms.headings
-}) }}
-
-5. Adding a new heading to headings.json
+3. Adding a new heading to headings.json
 {
   "headings": [
     {
@@ -88,14 +81,5 @@ Summon HAT Heading Component Wisely
   ]
 }
 
-6. Using with an icon (optional)
-{{ renderHeading({
-    level: 3, 
-    text: "Heading with Icon", 
-    style: "secondary",
-    icon: "♦",
-    datas: atoms.headings
-}) }}
-
-A true hero's tale begins with a proper H1. 🏆📖
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

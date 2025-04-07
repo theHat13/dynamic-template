@@ -2,13 +2,16 @@
 =========================
          RADIO         
 =========================
+Component that renders radio button inputs with consistent styling
 #}
 
 {% macro renderRadio(options) %}
+  {# Initialize default values for styling classes #}
   {% set globalStyle = options.datas.globalStyle | default('') %}
   {% set fieldsetClasses = options.datas.fieldsetClasses | default('radio-group') %}
   {% set groupContainerClasses = options.datas.groupContainerClasses | default('flex space-x-4') %}
   
+  {# Check if rendering as a group or individual radio #}
   {% if options.group %}
     <fieldset class="{{ fieldsetClasses }}">
       {% if options.groupLabel %}
@@ -24,14 +27,17 @@
       </div>
     </fieldset>
   {% else %}
+    {# Initialize radioData as null before searching #}
     {% set radioData = null %}
     
+    {# Find the radio matching the requested ID in the data collection #}
     {% for radio in options.datas.radios %}
       {% if radio.id == options.id %}
         {% set radioData = radio %}
       {% endif %}
     {% endfor %}
     
+    {# Render radio if data was found, otherwise show error #}
     {% if radioData %}
       {{ renderSingleRadio(radioData, options.datas) }}
     {% else %}
@@ -41,9 +47,11 @@
 {% endmacro %}
 
 {% macro renderSingleRadio(radio, datas) %}
+  {# Initialize style classes for the radio and its components #}
   {% set radioContainerClasses = datas.radioContainerClasses | default('flex items-center') %}
   {% set baseClasses = datas.baseClasses | default('size-4 rounded-full') %}
   
+  {# Define state classes for different visual states #}
   {% set stateClasses = {
     'default': datas.variants.default | default('border-gray-300'),
     'hover': datas.variants.hover | default('border-gray-600'),
@@ -53,6 +61,7 @@
     'disabledChecked': datas.variants.disabledChecked | default('bg-gray-300 border-gray-300 cursor-not-allowed')
   } %}
   
+  {# Combine base classes with default state #}
   {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
   
   <div class="{{ radioContainerClasses }}">
@@ -85,43 +94,22 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "03-atoms/radio.njk" import renderRadio %}
 
-2. Render a single radio by ID
+2. Call a specific radio by its name
 {{ renderRadio({ id: "radio1", datas: atoms.radios }) }}
 
-3. Render an entire radio group
-{{ renderRadio({ 
-    group: true, 
-    groupLabel: "Combat Style",
-    groupSrOnly: false,
-    datas: atoms.radios 
-}) }}
-
-4. Render a subset of radios
-{% set combatStyles = [
-    { "id": "option1", "name": "combat_style", "value": "fist-fighter", "ariaLabel": "Only fight barehanded" },
-    { "id": "option2", "name": "combat_style", "value": "damage-tank", "ariaLabel": "Block with face" }
-] %}
-{{ renderRadio({ 
-    group: true, 
-    groupLabel: "Custom Group", 
-    radios: combatStyles, 
-    datas: { 
-      globalStyle: atoms.radios.globalStyle, 
-      variants: atoms.radios.variants,
-      baseClasses: atoms.radios.baseClasses,
-      radioContainerClasses: atoms.radios.radioContainerClasses
-    } 
-}) }}
-
-5. Available options for each radio:
+3. Adding a new radio to radios.json
 {
-  "id": "unique_id",            // Unique identifier
-  "name": "group_name",         // Name for the group (same across related radios)
-  "value": "submission_value",  // Value for form submission
-  "checked": true,              // Pre-checked state (optional)
-  "disabled": false,            // Disabled state (optional)
-  "ariaLabel": "Accessible label for screen readers" // (required for accessibility)
+  "radios": [
+    {
+      "id": "unique_id",
+      "name": "group_name",
+      "value": "submission_value",
+      "checked": true,
+      "disabled": false,
+      "ariaLabel": "Accessible label for screen readers"
+    }
+  ]
 }
 
-May your validation never fail. 🐉🔥
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

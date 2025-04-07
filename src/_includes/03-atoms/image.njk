@@ -2,9 +2,11 @@
 =========================
          IMAGE           
 =========================
+Component that renders image elements with consistent styling
 #}
 
 {% macro renderImage(options) %}
+  {# If a name is provided, find the image in the data collection #}
   {% if options.name %}
     {% set imageData = null %}
     
@@ -14,9 +16,12 @@
       {% endif %}
     {% endfor %}
 
+    {# Get global style that applies to all images #}
     {% set globalStyle = options.datas.globalStyle %}
 
+    {# Render image if data was found #}
     {% if imageData %}
+      {# Get variant-specific style or default to empty string if not found #}
       {% set variantStyle = options.datas.variants[imageData.size] | default('') %}
       
       <img 
@@ -28,17 +33,21 @@
         {% if options.height %}height="{{ options.height }}"{% endif %}
       />
     {% else %}
+      {# Display error message if image not found #}
       <span class="text-red-500">Image not found: {{ options.name }}</span>
     {% endif %}
+  {# If a group is provided, render all images in that group #}
   {% elseif options.group %}
     {% set groupImages = [] %}
     
+    {# Find all images belonging to the specified group #}
     {% for image in options.datas.images %}
       {% if image.group == options.group %}
         {% set groupImages = (groupImages.push(image), groupImages) %}
       {% endif %}
     {% endfor %}
     
+    {# Render the group of images if any were found #}
     {% if groupImages.length > 0 %}
       <div class="image-group {% if options.groupClass %}{{ options.groupClass }}{% endif %}">
         {% for image in groupImages %}
@@ -54,8 +63,10 @@
         {% endfor %}
       </div>
     {% else %}
+      {# Display error message if no images found in the group #}
       <span class="text-red-500">No images found in group: {{ options.group }}</span>
     {% endif %}
+  {# Direct image creation path when neither name nor group is provided #}
   {% else %}
     {% set globalStyle = options.datas.globalStyle %}
     {% set variantStyle = options.datas.variants[options.size] | default('') %}
@@ -75,7 +86,7 @@
 
 {#
 ============================
-Image Component Usage Guide
+Summon HAT Components Wisely
 ============================
 
 1. Import the macro at the top of your page
@@ -84,32 +95,7 @@ Image Component Usage Guide
 2. Call a specific image by its name
 {{ renderImage({ name: "placeholder_medium", datas: atoms.images }) }}
 
-3. Render multiple images from the data
-{% for image in atoms.images.images %}
-    {{ renderImage({ 
-        name: image.name, 
-        datas: atoms.images 
-    }) }}
-{% endfor %}
-
-4. Render a group of images
-{{ renderImage({ 
-    group: "block-media-small", 
-    datas: atoms.images,
-    groupClass: "flex gap-2 flex-wrap",
-    imageClass: "m-1" 
-}) }}
-
-5. Direct image creation with custom attributes
-{{ renderImage({
-    src: "/assets/images/custom.jpg", 
-    alt: "Custom image", 
-    size: "medium",
-    loading: "lazy",
-    datas: atoms.images
-}) }}
-
-6. Adding a new image to images.json
+3. Adding a new image to images.json
 {
   "images": [
     {
@@ -122,5 +108,5 @@ Image Component Usage Guide
   ]
 }
 
-A hero engraves alt text runes so the sages may perceive the unseen. 🔮📖
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

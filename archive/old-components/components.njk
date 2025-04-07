@@ -5,7 +5,7 @@ layout: '00-core/base.njk'
 ---
 
 <!-- Import macros for components -->
-{% from "../_includes/03-atoms-navigation/link.njk" import renderLink %}
+{% from "../_includes/03-atoms-navigation/link.njk" import linkComponent %}
 {% from "../_includes/03-atoms-form/select.njk" import renderSelect %}
 {% from "../_includes/03-atoms-form/input-select.njk" import renderInput %}
 {% from "../_includes/03-atoms-form/input-text.njk" import renderInputText %}
@@ -60,7 +60,7 @@ layout: '00-core/base.njk'
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">Examples</h3>
             <div class="p-4 bg-gray-50 rounded mb-4 flex gap-4">
-                {{ renderLink(links.link_data.link_home) }}
+                {{ linkComponent(links.link_data.link_home) }}
             </div>
         </div>
 
@@ -92,8 +92,8 @@ layout: '00-core/base.njk'
         <!-- Code Example -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-3">Usage</h3>
-            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}{% from "03-atoms-navigation/link.njk" import renderlink %}
-{{ renderlink(links.link_home) }}{% endraw %}</code></pre>
+            <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto"><code>{% raw %}{% from "03-atoms-navigation/link.njk" import linkComponent %}
+{{ linkComponent(links.link_home) }}{% endraw %}</code></pre>
         </div>
 
         <!-- Tips -->

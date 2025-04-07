@@ -2,30 +2,38 @@
 =========================
          INPUT            
 =========================
+Component that renders various input types with consistent styling
 #}
 
 {% macro renderInput(options) %}
+  {# Initialize inputData as null before searching #}
   {% set inputData = null %}
   
+  {# Find the input matching the requested name in the data collection #}
   {% for input in options.datas.inputs %}
     {% if input.name == options.name %}
       {% set inputData = input %}
     {% endif %}
   {% endfor %}
 
+  {# Get global style and default width for inputs #}
   {% set globalStyle = options.datas.globalStyle %}
   {% set inputWidth = options.datas.inputWidth | default('w-64') %} 
 
+  {# Render input if data was found #}
   {% if inputData %}
+    {# Get variant-specific style or default to empty string if not found #}
     {% set variantStyle = options.datas.variants[inputData.style] | default('') %}
     
     <div class="flex flex-col gap-1 {{ globalStyle }} {{ variantStyle }}">
+      {# Render label if provided #}
       {% if inputData.label %}
         <label for="{{ inputData.id }}" class="font-medium text-gray-700">
           {{ inputData.label }}{% if inputData.required %} *{% endif %}
         </label>
       {% endif %}
 
+      {# Set up base classes and state classes for the input #}
       {% set baseClasses = "border rounded-md px-3 py-2 focus:outline-none " ~ inputWidth %}
       {% set stateClasses = {
         'default': options.datas.variants.default | default('border-gray-300'),
@@ -37,8 +45,10 @@
         'critical': options.datas.variants.critical | default('border-red-500')
       } %}
       
+      {# Combine base classes with default state #}
       {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
       
+      {# Render different input types based on the inputData.type #}
       {% if inputData.type in ["text", "phone"] %}
         <input 
           type="{{ inputData.type }}" 
@@ -91,6 +101,7 @@
         />
       {% endif %}
 
+      {# Display error message if input has critical state #}
       {% if inputData.state == 'critical' and inputData.errorMessage %}
         <p class="text-red-500 text-sm mt-1">{{ inputData.errorMessage }}</p>
       {% endif %}
@@ -113,25 +124,7 @@ Summon HAT Components Wisely
 2. Call a specific input by its name
 {{ renderInput({ name: "example_input1", datas: atoms.inputs }) }}
 
-3. Call multiple inputs from the data
-{% for input in atoms.inputs.inputs %}
-    {{ renderInput({ 
-        name: input.name, 
-        datas: atoms.inputs 
-    }) }}
-{% endfor %}
-
-4. Direct input creation
-{{ renderInput({
-    id: "custom-input", 
-    name: "custom_input", 
-    label: "Custom Input", 
-    placeholder: "Enter something...", 
-    type: "text", 
-    style: "primary"
-}) }}
-
-5. Adding a new input to inputs.json
+3. Adding a new input to inputs.json
 {
   "inputs": [
     {
@@ -145,5 +138,5 @@ Summon HAT Components Wisely
   ]
 }
 
-May your bugs be forever exiled to the shadow realm. ✨
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

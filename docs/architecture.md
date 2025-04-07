@@ -121,7 +121,7 @@ Each component has its own JSON file containing both the component structure and
 Templates use Nunjucks macros for reusability and reference the specific component data file.
 
 ```njk
-{% macro renderLink(link) %}
+{% macro linkComponent(link) %}
 <a href="{{ link.url }}" class="{{ link.variants[link.variant] }}">
   {{ link.label }}
 </a>

@@ -57,7 +57,7 @@ This file contains the component macro that defines its HTML structure.
 **Example** (`src/_includes/03-atoms/link.njk`):
 
 ```njk
-{% macro renderLink(link) %}
+{% macro linkComponent(link) %}
 <a href="{{ link.url }}" class="{{ link.variants[link.variant] }}">
   {{ link.label }}
 </a>
@@ -183,13 +183,13 @@ The newly generated component data file should follow this structure:
 To use a component in a template, import the Nunjucks macro and pass the instance data:
 
 ```njk
-{% from "03-atoms/link.njk" import renderLink %}
+{% from "03-atoms/link.njk" import linkComponent %}
 
 <!-- Use a specific instance -->
-{{ renderLink(link.instances[0]) }}
+{{ linkComponent(link.instances[0]) }}
 
 <!-- Or create a custom instance -->
-{{ renderLink({
+{{ linkComponent({
   label: "Custom Link",
   url: "/custom",
   variant: "secondary"

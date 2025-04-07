@@ -2,25 +2,31 @@
 =========================
          ICON           
 =========================
+Component that renders icon elements with consistent sizing and styling
 #}
 
 {% macro renderIcon(options) %}
-  {# Find the icon in the data #}
+  {# Initialize iconData as null before searching #}
   {% set iconData = null %}
+  
+  {# Find the icon matching the requested name in the data collection #}
   {% for icon in options.datas.icons %}
     {% if icon.name == options.name %}
       {% set iconData = icon %}
     {% endif %}
   {% endfor %}
 
+  {# Render icon if data was found #}
   {% if iconData %}
-    {# Get size dimensions #}
+    {# Get size dimensions based on provided size or default from icon data #}
     {% set size = options.size | default(iconData.defaultSize) %}
     {% set dimensions = options.datas.sizes[size] | default(options.datas.sizes.md) %}
+    
+    {# Split dimensions into width and height values #}
     {% set width = dimensions.split('x')[0] %}
     {% set height = dimensions.split('x')[1] %}
 
-    {# Render icon with appropriate classes #}
+    {# Render icon with appropriate path, dimensions and classes #}
     <img
       src="{{ iconData.path }}"
       alt="{{ iconData.alt }}"
@@ -29,13 +35,14 @@
       class="{{ options.datas.globalClass }} {{ options.class | default('') }}"
     >
   {% else %}
+    {# Display error message if icon not found #}
     <span class="text-red-500">Icon not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
 
 {#
 ============================
-Summon Icon Components Wisely
+Summon HAT Components Wisely
 ============================
 
 1. Import the macro at the top of your page
@@ -48,24 +55,7 @@ Summon Icon Components Wisely
     datas: atoms.icons 
 }) }}
 
-3. Call multiple icons from the data with different sizes
-{% for size in ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] %}
-    {{ renderIcon({ 
-        name: "brand", 
-        size: size,
-        datas: atoms.icons 
-    }) }}
-{% endfor %}
-
-4. Direct icon usage with custom path
-{{ renderIcon({
-    path: "/assets/icons/custom-icon.svg", 
-    alt: "Custom Icon",
-    size: "md",
-    datas: atoms.icons
-}) }}
-
-5. Adding a new icon to icons.json
+3. Adding a new icon to icons.json
 {
   "icons": [
     {
@@ -77,5 +67,5 @@ Summon Icon Components Wisely
   ]
 }
 
-May your designs defy the sands of time. ⏳⚡
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}
