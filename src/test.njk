@@ -13,7 +13,7 @@ layout: '00-core/base.njk'
 {% from "03-atoms/input.njk" import renderInput %}
 {% from "03-atoms/chip-multiselect.njk" import renderChipMultiselect %}
 {% from "03-atoms/checkbox.njk" import renderCheckbox %}
-{% from "03-atoms/box.njk" import renderBox %}
+{% from "03-atoms/box.njk" import boxComponent %}
 {% from "03-atoms/radio-button.njk" import renderRadioButton %}
 {% from "03-atoms/radio.njk" import renderRadio %}
 {% from "03-atoms/toggle.njk" import renderToggle %}
@@ -124,7 +124,7 @@ layout: '00-core/base.njk'
                 group: true, 
                 groupLabel: "RPG Player Habits",
                 groupSrOnly: false,
-                datas: atoms.checkboxs 
+                datas: atoms.checkboxes 
             }) }}
         </div>
     </div>
@@ -134,7 +134,7 @@ layout: '00-core/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing box component #}
-            {{ renderBox({ id: "box1", datas: atoms.boxs }) }}
+            {{ boxComponent({ id: "box1", datas: atoms.boxes }) }}
         </div>
     </div>
 

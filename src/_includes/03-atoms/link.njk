@@ -24,6 +24,10 @@ Component that renders link elements with consistent styling
     {# Get variant-specific style or default to empty string if not found #}
     {% set variantStyle = options.datas.variants[linkData.style] | default('') %}
     
+    {# Store aria-label and hreflang values for easier access #}
+    {% set ariaLabel = linkData["aria-label"] %}
+    {% set hrefLang = linkData.hreflang %}
+    
     {# -- External link -- #}
     {% if linkData.type == 'external' %}
       <a 
@@ -32,6 +36,8 @@ Component that renders link elements with consistent styling
         target="_blank"
         rel="noopener noreferrer"
         {% if options.dataNavLink %}data-nav-link="true"{% endif %}
+        {% if ariaLabel %}aria-label="{{ ariaLabel }}"{% endif %}
+        {% if hrefLang %}hreflang="{{ hrefLang }}"{% endif %}
       >
         {{ linkData.text }}
       </a>
@@ -42,6 +48,8 @@ Component that renders link elements with consistent styling
         href="{{ linkData.href }}" 
         class="{{ globalStyle }} {{ variantStyle }}"
         {% if options.dataNavLink %}data-nav-link="true"{% endif %}
+        {% if ariaLabel %}aria-label="{{ ariaLabel }}"{% endif %}
+        {% if hrefLang %}hreflang="{{ hrefLang }}"{% endif %}
       >
         {{ linkData.text }}
       </a>
@@ -74,7 +82,9 @@ Summon HAT Components Wisely
       "href": "/your-link",
       "text": "Your Link Text",
       "style": "primary",
-      "type": "external"  // Optional: use "external" for external links
+      "type": "internal",  // Optional: use "external" for external links
+      "aria-label": "Description for accessibility", // Optional: for accessibility
+      "hreflang": "fr"  // Optional: language code for hreflang attribute
     }
   ]
 }

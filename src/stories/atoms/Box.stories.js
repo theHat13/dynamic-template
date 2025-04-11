@@ -1,5 +1,5 @@
 import nunjucks from 'nunjucks';
-import boxData from '../../_data/atoms/boxs.json';
+import boxData from '../../_data/atoms/boxes.json';
 
 const boxTemplate = `
   {% macro renderSingleBox(box, datas) %}
@@ -36,7 +36,7 @@ const boxTemplate = `
 
 // For group rendering
 const boxGroupTemplate = `
-  {% macro renderBoxGroup(options) %}
+  {% macro boxComponentGroup(options) %}
     {% set fieldsetClasses = datas.fieldsetClasses | default('box-group') %}
     {% set groupContainerClasses = datas.groupContainerClasses | default('space-y-2') %}
     
@@ -74,7 +74,7 @@ const boxGroupTemplate = `
     </fieldset>
   {% endmacro %}
   
-  {{ renderBoxGroup({}) }}
+  {{ boxComponentGroup({}) }}
 `;
 
 export default {
@@ -216,17 +216,17 @@ export const Usage = () => {
     <div class="space-y-6">
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">1. Import the macro at the top of your page:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "03-atoms/box.njk" import renderBox %}</code></pre>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% from "03-atoms/box.njk" import boxComponent %}</code></pre>
       </div>
       
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Render a single box by ID:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderBox({ id: "option1", datas: atoms.boxes }) }}</code></pre>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ boxComponent({ id: "option1", datas: atoms.boxes }) }}</code></pre>
       </div>
       
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Render an entire box group:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderBox({ 
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ boxComponent({ 
   group: true,
   datas: atoms.boxes 
 }) }}</code></pre>
