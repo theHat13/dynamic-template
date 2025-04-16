@@ -120,12 +120,7 @@ layout: '00-core/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing checkbox component #}
-            {{ renderCheckbox({ 
-                group: true, 
-                groupLabel: "RPG Player Habits",
-                groupSrOnly: false,
-                datas: atoms.checkboxes 
-            }) }}
+            {{ renderCheckbox({ id: "option1", datas: atoms.checkboxes }) }}
         </div>
     </div>
 

@@ -55,8 +55,6 @@ Component that renders link elements with consistent styling
       </a>
     {% endif %}
     
-    {# Include JS for active state detection #}
-    <script src="/js/atoms/current-link.js"></script>
   {% else %}
     {# -- Display error message if link not found -- #}
     <span class="text-red-500">Link not found: {{ options.name }}</span>
