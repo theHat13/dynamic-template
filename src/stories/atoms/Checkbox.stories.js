@@ -1,5 +1,5 @@
 import nunjucks from 'nunjucks';
-import checkboxData from '../../_data/atoms/checkboxs.json';
+import checkboxData from '../../_data/atoms/checkboxes.json';
 
 const checkboxTemplate = `
   {% macro renderSingleCheckbox(checkbox, datas) %}
@@ -287,7 +287,7 @@ export const Usage = () => {
       
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Render a single checkbox by ID:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderCheckbox({ id: "option1", datas: atoms.checkboxs }) }}</code></pre>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderCheckbox({ id: "option1", datas: atoms.checkboxes }) }}</code></pre>
       </div>
       
       <div>
@@ -296,7 +296,7 @@ export const Usage = () => {
   group: true, 
   groupLabel: "RPG Player Habits",
   groupSrOnly: false,
-  datas: atoms.checkboxs 
+  datas: atoms.checkboxes 
 }) }}</code></pre>
       </div>
       
@@ -311,10 +311,10 @@ export const Usage = () => {
   groupLabel: "Custom Group", 
   checkboxes: rpgOptions, 
   datas: { 
-    globalStyle: atoms.checkboxs.globalStyle, 
-    variants: atoms.checkboxs.variants,
-    baseClasses: atoms.checkboxs.baseClasses,
-    labelClasses: atoms.checkboxs.labelClasses
+    globalStyle: atoms.checkboxes.globalStyle, 
+    variants: atoms.checkboxes.variants,
+    baseClasses: atoms.checkboxes.baseClasses,
+    labelClasses: atoms.checkboxes.labelClasses
   } 
 }) }}</code></pre>
       </div>

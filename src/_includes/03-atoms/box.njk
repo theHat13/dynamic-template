@@ -5,7 +5,7 @@
 Component that renders box elements with consistent styling
 #}
 
-{% macro renderBox(options) %}
+{% macro boxComponent(options) %}
   {# Initialize default values for styling classes #}
   {% set globalStyle = options.datas.globalStyle | default('') %}
   {% set fieldsetClasses = options.datas.fieldsetClasses | default('box-group') %}
@@ -85,12 +85,12 @@ Summon HAT Components Wisely
 ============================
 
 1. Import the macro at the top of your page
-{% from "03-atoms/box.njk" import renderBox %}
+{% from "03-atoms/box.njk" import boxComponent %}
 
 2. Call a specific box by its name
-{{ renderBox({ id: "box1", datas: atoms.boxs }) }}
+{{ boxComponent({ id: "box1", datas: atoms.boxes }) }}
 
-3. Adding a new box to boxs.json
+3. Adding a new box to boxes.json
 {
   "boxes": [
     {

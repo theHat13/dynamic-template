@@ -5,6 +5,8 @@
 Component that renders checkbox inputs with consistent styling
 #}
 
+{% from "03-atoms/box.njk" import renderSingleBox, boxComponent %}
+
 {% macro renderCheckbox(options) %}
   {# Initialize default values for styling classes #}
   {% set globalStyle = options.datas.globalStyle | default('') %}
@@ -50,44 +52,22 @@ Component that renders checkbox inputs with consistent styling
 {% macro renderSingleCheckbox(checkbox, datas) %}
   {# Initialize style classes for the checkbox and its components #}
   {% set labelClasses = datas.labelClasses | default('flex cursor-pointer items-start gap-4') %}
-  {% set checkboxContainerClasses = datas.checkboxContainerClasses | default('flex items-center') %}
-  {% set baseClasses = datas.baseClasses | default('size-4 rounded-sm') %}
   {% set labelTextClasses = datas.labelTextClasses | default('font-medium text-gray-900') %}
   {% set descriptionClasses = datas.descriptionClasses | default('text-sm text-gray-500') %}
   
-  {# Define state classes for different visual states #}
-  {% set stateClasses = {
-    'default': datas.variants.default | default('border-gray-300'),
-    'hover': datas.variants.hover | default('border-gray-600'),
-    'checked': datas.variants.checked | default('bg-gray-500 border-gray-500 text-white'),
-    'focus': datas.variants.focus | default('border-blue-500 outline-none ring-2 ring-blue-300'),
-    'disabled': datas.variants.disabled | default('bg-gray-100 border-gray-300 cursor-not-allowed'),
-    'disabledChecked': datas.variants.disabledChecked | default('bg-gray-300 border-gray-300 cursor-not-allowed')
+  {# Create box data for the checkbox #}
+  {% set boxData = {
+    "id": checkbox.id,
+    "value": checkbox.value,
+    "checked": checkbox.checked,
+    "disabled": checkbox.disabled,
+    "ariaLabel": checkbox.ariaLabel
   } %}
   
-  {# Combine base classes with default state #}
-  {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
-  
   <label for="{{ checkbox.id }}" class="{{ labelClasses }}">
-    <div class="{{ checkboxContainerClasses }}">
-      <input 
-        type="checkbox" 
-        id="{{ checkbox.id }}" 
-        name="{{ checkbox.id }}"
-        value="{{ checkbox.value }}"
-        class="{{ inputClasses }}"
-        onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
-        onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'"
-        onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
-        onclick="this.checked ? this.className='{{ baseClasses }} {{ stateClasses.checked }}' : this.className='{{ baseClasses }} {{ stateClasses.default }}'"
-        {% if checkbox.disabled %}
-          disabled 
-          class="{{ baseClasses }} {% if checkbox.checked %}{{ stateClasses.disabledChecked }}{% else %}{{ stateClasses.disabled }}{% endif %}"
-        {% endif %}
-        {% if checkbox.checked %}checked{% endif %}
-        {% if checkbox.ariaLabel %}aria-label="{{ checkbox.ariaLabel }}"{% endif %}
-      />
-    </div>
+    {# Use renderSingleBox from box.njk to render the actual checkbox #}
+    {{ renderSingleBox(boxData, datas) }}
+    
     <div>
       <strong class="{{ labelTextClasses }}">
         {{ checkbox.label }}
@@ -99,8 +79,6 @@ Component that renders checkbox inputs with consistent styling
   </label>
 {% endmacro %}
 
-
-
 {#
 ============================
 Summon HAT Components Wisely
@@ -110,9 +88,9 @@ Summon HAT Components Wisely
 {% from "03-atoms/checkbox.njk" import renderCheckbox %}
 
 2. Call a specific checkbox by its name
-{{ renderCheckbox({ id: "option1", datas: atoms.checkboxs }) }}
+{{ renderCheckbox({ id: "option1", datas: atoms.checkboxes }) }}
 
-3. Adding a new checkbox to checkboxs.json
+3. Adding a new checkbox to checkboxes.json
 {
   "checkboxes": [
     {
