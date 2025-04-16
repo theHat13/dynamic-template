@@ -3,7 +3,7 @@
   "fieldsetClasses": "box-group",
   "groupContainerClasses": "space-y-2",
   "boxContainerClasses": "flex items-center",
-  "baseClasses": "size-4 rounded-sm",
+  "baseClasses": "size-4 rounded-sm cursor-pointer",
   "errorClasses": "text-red-500",
   "variants": {
     "default": "bg-white border border-gray-400 text-gray-900",
@@ -20,24 +20,12 @@
     },
     {
       "id": "box2",
-      "value": "box2"
-    },
-    {
-      "id": "box3",
-      "value": "box3"
-    },
-    {
-      "id": "box4",
-      "value": "box4"
-    },
-    {
-      "id": "box5",
-      "value": "box5",
+      "value": "box2",
       "checked": true
     },
     {
-      "id": "box6",
-      "value": "box6",
+      "id": "box3",
+      "value": "box3",
       "disabled": true
     }
   ]
