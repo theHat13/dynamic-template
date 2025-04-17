@@ -14,9 +14,10 @@ IMPORTANT NOTES:
 ACCESSIBILITY:
 - Properly associates labels with inputs using for/id
 - Includes fieldset/legend for checkbox groups
-- Supports screen-reader-only group labels
+- Supports screen-reader-only group labels and descriptions
 - Provides description text for additional context
 - Includes aria-label support for improved screen reader experience
+- Supports required state and disabled state properties
 #}
 
 {% from "03-atoms/box.njk" import renderSingleBox %}
@@ -77,7 +78,7 @@ ACCESSIBILITY:
     {% if targetCheckbox %}
       {{ renderSingleCheckbox(targetCheckbox, checkboxData, boxStyles) }}
     {% else %}
-      <span class="text-red-500">Checkbox not found: {{ options.id }}</span>
+      <span class="{{ checkboxData.errorClasses | default('text-red-500') }}">Checkbox not found: {{ options.id }}</span>
     {% endif %}
   {% endif %}
 {% endmacro %}
@@ -91,11 +92,16 @@ ACCESSIBILITY:
   <fieldset 
     class="{{ fieldsetClasses }}" 
     data-checkbox-group
+    {% if groupConfig.ariaGroupLabel %}aria-label="{{ groupConfig.ariaGroupLabel }}"{% endif %}
   >
     {% if groupLabel %}
       <legend class="{{ legendClasses }} {% if groupSrOnly %}sr-only{% endif %}">
         {{ groupLabel }}
       </legend>
+    {% endif %}
+    
+    {% if groupConfig.groupDescription %}
+      <p class="text-sm text-gray-500 mb-3">{{ groupConfig.groupDescription }}</p>
     {% endif %}
     
     <div class="{{ groupContainerClasses }}">
@@ -107,33 +113,41 @@ ACCESSIBILITY:
 {% endmacro %}
 
 {% macro renderSingleCheckbox(checkbox, checkboxOptions, boxStyles) %}
-  {# Existing single checkbox rendering logic #}
-  {% set labelClasses = checkboxOptions.labelClasses | default('flex items-start gap-4 cursor-pointer') %}
+  {# Modified for better vertical alignment and accessibility #}
+  {% set labelClasses = checkboxOptions.labelClasses | default('flex items-center gap-4 cursor-pointer') %}
   {% set labelTextClasses = checkboxOptions.labelTextClasses | default('font-medium text-gray-900 cursor-pointer') %}
   {% set descriptionClasses = checkboxOptions.descriptionClasses | default('text-sm text-gray-500 cursor-pointer') %}
   
   {% set boxData = {
     "id": checkbox.id,
     "value": checkbox.value,
-    "checked": checkbox.checked,
-    "disabled": checkbox.disabled,
-    "ariaLabel": checkbox.ariaLabel
+    "checked": checkbox.checked | default(false),
+    "disabled": checkbox.disabled | default(false),
+    "ariaLabel": checkbox.ariaLabel | default(checkbox.label),
+    "required": checkbox.required | default(false)
   } %}
   
   <label 
     for="{{ checkbox.id }}" 
-    class="{{ labelClasses }}{% if checkbox.disabled %} cursor-not-allowed{% endif %}" 
+    class="{{ labelClasses }}{% if checkbox.disabled %} cursor-not-allowed opacity-70{% endif %}" 
     data-checkbox-label 
     style="cursor: pointer;"
   >
-    {{ renderSingleBox(boxData, boxStyles) }}
+    {# Wrapper div to control vertical alignment #}
+    <div class="flex-shrink-0">
+      {{ renderSingleBox(boxData, boxStyles) }}
+    </div>
     
-    <div {% if not checkbox.disabled %}style="cursor: pointer;"{% endif %}>
+    <div class="{% if checkbox.description %}flex flex-col justify-center{% endif %}" {% if not checkbox.disabled %}style="cursor: pointer;"{% endif %}>
       <strong class="{{ labelTextClasses }}">
         {{ checkbox.label }}
+        {% if checkbox.required %}
+          <span class="text-red-500 ml-1" aria-hidden="true">*</span>
+          <span class="sr-only">(required)</span>
+        {% endif %}
       </strong>
       {% if checkbox.description %}
-        <p class="{{ descriptionClasses }}">{{ checkbox.description }}</p>
+        <p class="{{ descriptionClasses }}" id="{{ checkbox.id }}-description">{{ checkbox.description }}</p>
       {% endif %}
     </div>
   </label>
@@ -173,12 +187,17 @@ Summon HAT Components Wisely
 {
   "newGameOptions": {
     "groupLabel": "New Game Features",
+    "groupDescription": "Optional features to enhance your gameplay",
+    "ariaGroupLabel": "Additional game features options",
     "checkboxes": [
       {
         "id": "difficulty_mode",
         "label": "Advanced Difficulty Mode",
         "value": "advanced_difficulty",
-        "description": "Unlock extreme challenge settings"
+        "description": "Unlock extreme challenge settings",
+        "ariaLabel": "Enable advanced difficulty settings",
+        "required": false,
+        "disabled": false
       }
     ]
   }
