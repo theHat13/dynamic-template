@@ -77,7 +77,7 @@ layout: '00-core/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing tag component #}
-            {{ renderTag({ name: "adventure", datas: atoms.tags }) }}
+            {{ renderTag({ name: "magic", datas: atoms.tags }) }}
         </div>
     </div>
 
@@ -211,7 +211,11 @@ layout: '00-core/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing button component #}
-            {{ renderButton({ name: "submit_quest", datas: atoms.buttons }) }}
+            {{ renderButton({ 
+                name: "submit_quest",
+                datas: atoms.buttons,
+                icons: atoms.icons
+            }) }}
         </div>
     </div>
 
